@@ -1,0 +1,725 @@
+Ejercicio 1:
+
+
+
+Ejercicio 2: 
+
+/*
+proposito: poner un rectángulo sólido de 5 celdas de ancho y 3 celdas de alto. Desde la celda actual hacia el este y hacia el norte.
+precondiciones: Hay al menos 4 celdas al este y 2 celdas al norte de la celda actual. Las celdas contenidas en el rectángulo de 5x3 desde la celda actual hacia el este y hacia el norte están vacias.
+*/
+
+program {
+    DibujarRectanguloRojoYNegroDe5x3()
+}
+
+/*
+proposito: poner un rectángulo sólido de 5 celdas de ancho y 3 celdas de alto. Desde la celda actual hacia el este y hacia el norte.
+precondicion: Hay al menos 4 celdas al este y 2 celdas al norte de la celda actual. Las celdas contenidas en el rectángulo de 5x3 desde la celda actual hacia el este y hacia el norte están vacias.
+*/
+
+procedure DibujarRectanguloRojoYNegroDe5x3(){
+    DibujarLineaRojaYNegraDeTamaño5HaciaElEste()
+    IrASiguienteFila()
+    DibujarLineaRojaYNegraDeTamaño5HaciaElEste()
+    IrASiguienteFila()
+    DibujarLineaRojaYNegraDeTamaño5HaciaElEste()
+}
+
+/*
+proposito:poner una linea de bolitas rojas y negras horizontal hacia el este, la linea será de 5 celdas de largo.
+precondicion:deben existir 4 celdas más hacia el este de la celda actual. Las 4 celdas hacia el este de la celda inicial y la celda actual deben estar vacias.
+*/
+
+procedure DibujarLineaRojaYNegraDeTamaño5HaciaElEste(){
+PonerUnaNegraYUnaRoja()
+Mover(Este)
+PonerUnaNegraYUnaRoja()
+Mover(Este)
+PonerUnaNegraYUnaRoja()
+Mover(Este)
+PonerUnaNegraYUnaRoja()
+Mover(Este)
+PonerUnaNegraYUnaRoja()
+}
+
+/*
+proposito: Mover el cabezal hacia la siguiente fila al norte.
+precondicion: Deben existir 4 celdas hacia el oeste de la celda inicial y 1 celda hacia el norte de la celda inicial.
+*/
+
+procedure IrASiguienteFila(){
+    Mover(Norte)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+/*
+proposito: Poner una bolita negra y una bolita roja en la celda actual.
+precondicion: La celda actual debe estar vacia.
+*/
+
+procedure PonerUnaNegraYUnaRoja(){
+    Poner(Negro)
+    Poner(Rojo)
+}
+
+
+Ejercicio 3: 
+
+/*
+proposito:Dibujar un cuadrado sólido de 4x4 celdas, en el cual cada celda tenga una bolita de cada color. El cabezal debe finalizar en la celda inicial.
+precondicion:Deben existir 3 celdas más hacia el este de la celda inicial y 3 celdas más hacia el norte de la celda inicial.
+*/
+
+program {
+    DibujarCuadradoMulticolorDeLado4()
+}
+
+/*
+proposito: Dibujar un cuadrado sólido de 4x4 celdas, en el cual cada celda tenga una bolita de cada color. El cabezal debe finalizar en la celda inicial.
+precondicion: Deben existir 3 celdas más hacia el este de la celda inicial y 3 celdas más hacia el norte de la celda inicial.
+*/
+
+procedure DibujarCuadradoMulticolorDeLado4(){
+    DibujarLineaMulticolorDeLargo4()
+    Mover(Norte)
+    DibujarLineaMulticolorDeLargo4()
+    Mover(Norte)
+    DibujarLineaMulticolorDeLargo4()
+    Mover(Norte)
+    DibujarLineaMulticolorDeLargo4()
+    Mover(Sur)
+    Mover(Sur)
+    Mover(Sur)
+}
+
+/*
+proposito: Dibujar una linea multicolor horizontal hacia el este. El cabezal debe finalizar en la celda inicial.
+precondicion: Deben existir 3 celdas más hacia el este de la celda actual
+*/
+
+procedure DibujarLineaMulticolorDeLargo4(){
+    PonerUnaDeCada()
+    Mover(Este)
+    PonerUnaDeCada()
+    Mover(Este)
+    PonerUnaDeCada()
+    Mover(Este)
+    PonerUnaDeCada()
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+/*
+proposito:Mover el cabezal 3 casillas hacia el oeste de la celda actual.
+precondicion: Deben existir 3 celdas hacia el oeste de la celda inicial.
+*/
+
+procedure Mover3VecesAlOeste(){
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+/*
+proposito: Poner una bolita de cada color en la celda actual
+precondicion: La celda actual debe eestar vacia.
+*/
+
+procedure PonerUnaDeCada(){
+    Poner(Rojo)
+    Poner(Azul)
+    Poner(Negro)
+    Poner(Verde)
+}
+
+
+Ejercicio 4: 
+
+/*
+proposito: Dibujar una guarda de 5 azulejos hacia el este, no es necesario que el cabezal termine en la celda inicial.
+precondicion: Deben de existir 4 celdas más hacia el este de la celda inicial.
+*/
+program {
+    PonerGuardaDe5Azulejos()
+}
+
+/*
+proposito: Dibujar una guarda de 5 azulejos en horizontal hacia el este, no es necesario que el cabezal termine en la celda inicial.
+precondicion:Deben existir 4 celdas más hacia el este de la celda inicial.
+*/
+
+procedure PonerGuardaDe5Azulejos(){
+    PonerAzulejo()
+    Mover (Este)
+    PonerAzulejo()
+    Mover (Este)
+    PonerAzulejo()
+    Mover (Este)
+    PonerAzulejo()
+    Mover (Este)
+    PonerAzulejo()
+}
+
+/*
+proposito: Dibujar un azulejo en la celda inicial, el azulejo consta de 1 bolita verde, 5 negras y 9 rojas.
+precondicion: Ninguna
+*/
+
+procedure PonerAzulejo(){
+    Poner (Verde)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+}
+
+
+Actividad 5:
+
+
+/*
+proposito: Representar una fecha con bolitas de diferentes colores, el cabezal debe finalizar en la celda inicial.
+precondicion: Deben existir 2 celdas más hacia el este de la celda inicial.
+*/
+
+program {
+    RegistrarElDiaDeLaMemoria()
+}
+
+/*
+proposito: Representar la fecha del día de la memoria con bolitas de colores.Representando el día con bolitas azules, el mes con bolitas rojas y el año con bolitas verdes.
+precondicion: Deben existir dos celdas más hacia el este de la celda inicial.
+*/
+
+procedure RegistrarElDiaDeLaMemoria(){
+    PonerDia()
+    Mover (Este)
+    PonerMes()
+    Mover(Este)
+    PonerAño()
+    Mover (Oeste)
+    Mover (Oeste)
+}
+
+/*
+proposito:Poner 24 bolitas de color azul en la celda inicial.
+precondicion: Ninguna
+*/
+
+procedure PonerDia(){
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+    Poner (Azul)
+}
+
+/*
+proposito: Poner 3 bolitas de color rojo en la celda inicial.
+precondicion:Ninguna.
+*/
+
+procedure PonerMes(){
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+}
+
+/*
+proposito: Poner 1976 bolitas de color verde en la celda inicial.
+precondicion: Ninguna.
+*/
+
+procedure PonerAño(){
+    repeat (1976) {
+        Poner (Verde)
+    }
+}
+
+
+Actividad 6: 
+
+
+/*
+proposito: Dibujar una guarda en forma de "L" de azulejos, el cabezal debe finalizar en la celda inicial.
+precondicion: Deben existir 2 celdas más hacia el norte de la celda inicial y dos celdas más hacia el este de la celda inicial.
+*/
+
+program {
+    PonerGuardaEnL()
+}
+
+/*
+proposito: Dibujar una guarda en forma de "L" de azulejos, el cabezal debe finalizar en la celda inicial.
+precondicion: Deben existir 2 celdas más hacia el norte de la celda inicial y dos celdas más hacia el este de la celda inicial.
+*/
+
+procedure PonerGuardaEnL(){
+    PonerAzulejo()
+    Mover (Este)
+    PonerAzulejo()
+    Mover (Este)
+    PonerAzulejo()
+    Mover (Norte)
+    Mover (Oeste)
+    Mover (Oeste)
+    PonerAzulejo()
+    Mover (Norte)
+    PonerAzulejo()
+    Mover (Sur)
+    Mover (Sur)
+}
+
+/*
+proposito: Dibujar un azulejo en la celda inicial, el azulejo consta de 1 bolita verde, 5 negras y 9 rojas.
+precondicion: Ninguna
+*/
+
+procedure PonerAzulejo(){
+    Poner (Verde)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Negro)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+    Poner (Rojo)
+}
+
+
+Actividad 7: 
+
+a. 
+
+/*
+proposito:Dibujar una piramide que posea una base de 5 celdas de largo hacia el este de la celda inicial, tres celdas de medio y 1 celda de punta. 
+precondicion: Deben existir 4 celdas más hacia el este de la celda inicial y 2 celdas más hacia el norte de la celda inicial. Nignuna de esas celdas debe de contener algún tipo de bolitas.
+*/
+
+program {
+    DibujarPiramide()    
+}
+
+
+/*
+proposito:Dibujar una piramide que posea una base de 5 celdas de largo hacia el este de la celda inicial, tres celdas de medio y 1 celda de punta. 
+precondicion:Deben existir 4 celdas más hacia el este de la celda inicial y 2 celdas más hacia el norte de la celda inicial. Nignuna de esas celdas debe de contener algún tipo de bolitas.
+*/
+
+procedure DibujarPiramide(){
+    DibujarBase()
+    IrAMedio()
+    DibujarMedio()
+    IrAPunta()
+    DibujarPunta()
+}
+
+/*
+proposito:Dirigir el cabezal hacia la punta de la pirámide.
+precondicion: Deben existir 1 celda más hacia el Norte y una celda más hacia el Oeste de la celda actual.
+*/
+
+procedure IrAPunta(){
+    Mover(Norte)
+    Mover(Oeste)
+}
+
+/*
+proposito: Dirigir el cabezal a la celda más al Oeste del medio de la pirámide. 
+precondicion:Deben de existir una celda más hacia el Norte de la celda actual y una celda más hacia el Oeste de la celda actual.
+*/
+
+procedure IrAMedio(){
+    Mover(Norte)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+
+/*
+proposito: Dibujar una punta de pirámide
+precondicion:La celda actual debe estar vacía.
+*/
+
+procedure DibujarPunta(){
+    Poner(Negro)
+}
+
+/*
+proposito: Dibuja un sector del medio de la pirámide de 3 celdas de lado.
+precondicion: La celda actual debe estar vacía y deben haber dos celdas vacías hacia el este de la celda actual.
+*/
+
+procedure DibujarMedio(){
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+}
+
+/*
+proposito:Dibuja una base de pirámide de 5 celdas de lado.
+precondicion: La celda actual debe estar vacía y deben haber 4 celdas vacías hacia el este de la celda actual.
+*/
+
+procedure DibujarBase(){
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+}
+
+
+b. 
+
+/*
+proposito:Dibujar una piramide que posea una base de 5 celdas de largo hacia el este de la celda inicial, tres celdas de medio y 1 celda de punta. 
+precondicion: Deben existir al menos 2 celdas hacia el sur de la celda actual y 4 celdas hacia el este de la celda actual.
+*/
+
+program {
+    DibujarPiramideInvertida()    
+}
+
+/*
+proposito:
+precondicion:
+*/
+
+procedure DibujarPiramideInvertida(){
+    DibujarBase()
+    IrAMedio()
+    DibujarMedio()
+    IrAPunta()
+    DibujarPunta()
+}
+
+/*
+proposito: Dirigir el cabezal hacia la celda más al Oeste del medio de la píramide.
+precondicion: Deben de existir al menos 1 celda hacia el sur de la celda actual y al menos una celda hacia el este de la celda actual.
+*/
+
+procedure IrAMedio(){
+    Mover(Sur)
+    Mover(Este)
+}
+
+/*
+proposito: Dirigir el cabezal hacia la punta de la piramide.
+precondicion:Debe de haber al menos una celda hacia el sur de la celda actual y al menos una celda hacia el este de la celda actual.
+*/
+
+procedure IrAPunta(){
+    Mover(Sur)
+    Mover(Este)
+}
+
+/*
+proposito: Dibujar una punta de pirámide
+precondicion:La celda actual debe estar vacía.
+*/
+
+procedure DibujarPunta(){
+    Poner(Negro)
+}
+
+/*
+proposito: Dibuja un sector del medio de la pirámide de 3 celdas de lado.
+precondicion: La celda actual debe estar vacía y deben haber dos celdas vacías hacia el este de la celda actual.
+*/
+
+procedure DibujarMedio(){
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+/*
+proposito:Dibuja una base de pirámide de 5 celdas de lado.
+precondicion: La celda actual debe estar vacía y deben haber 4 celdas vacías hacia el este de la celda actual.
+*/
+
+procedure DibujarBase(){
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Este)
+    Poner(Negro)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+
+c. 
+
+
+Ejercicio 8:
+
+    /*
+    proposito: Poner una semilla en la celda acutal. La semilla se verá representada como una bolita de color rojo.
+    precondicion: Ninguna.
+    */
+
+procedure PonerUnaSemilla(){
+    Poner(Rojo)
+}
+
+    /*
+    proposito: Poner un arbol en la celda actual, el arbol se verá representado con una bolita de color verde. 
+    precondicion: Ninguna.
+    */
+
+procedure PonerUnArbol(){
+    Poner(Verde)
+}
+
+    /*
+    proposito: Poner una bomba en la celda actual, la bomba se verá representada con una bolita de color negro.
+    precondicion: Ninguna.
+    */
+    
+procedure PonerUnaBomba(){
+    Poner(Negro)
+}
+
+    /*
+    proposito: Poner un nutriente en la celda actual, el nutriente se verá representado como una bolita de color azul.
+    precondicion: Ninguna.
+    */
+    
+procedure PonerUnNutriente(){
+    Poner(Azul)
+}
+    
+    /*
+    proposito: Sacar una semilla de la celda actual. La semilla se verá representada como una bolita roja.
+    precondicion: Debe haber una bolita roja en la celda actual.
+    */
+    
+procedure SacarUnaSemilla(){
+    Sacar(Rojo)
+}
+    
+    /*
+    proposito: Sacar un arbol de la celda actual. El arbol se verá representado como una bolita de color verde.
+    precondicion: Debe haber una bolita de color verde en la celda actual.
+    */
+    
+procedure SacarUnArbol(){
+    Sacar(Verde)
+}
+    
+    /*
+    proposito: Sacar una bomba de la celda actual. La bomba se verá representada como una bolita de color negro.
+    precondicion: Debe haber una bolita de color negro en la celda actual.
+    */
+    
+procedure SacarUnaBomba(){
+    Sacar(Negro)
+}
+    
+    /*
+    proposito: Sacar un nutriente de la celda actual. El nutriente se verá representado como una bolita de color azul.
+    precondicion: Debe haber una bolita de color azul en la celda actual.
+    */
+    
+procedure SacarUnNutriente(){
+    Sacar(Azul)
+}
+
+Ejercicio 9:
+
+    /*
+    proposito: Dibujar un reloj analógico simplificado de 2 celdas de radio, poniendo las números 3, 6, 9 y 12 representados con bolitas de color rojo. El cabezal debe finalizar en la celda inicial.
+    precondicion: Deben de existir al menos dos celdas hacia el este de la celda inicial, al menos dos celdas hacia el oeste de la celda inicial, al menos dos celdas hacia el norte de la celda inicial y al menos dos celdas hacia el sur de la celda inicial.
+    */
+
+program {
+    DibujarRelojAnalogicoSimplificado()
+}
+
+    /*
+    proposito: Dibujar un reloj analógico simplificado de 2 celdas de radio, poniendo las números 3, 6, 9 y 12 representados con bolitas de color rojo. El cabezal debe finalizar en la celda inicial.
+    precondicion:Deben de existir al menos dos celdas hacia el este de la celda inicial, al menos dos celdas hacia el oeste de la celda inicial, al menos dos celdas hacia el norte de la celda inicial y al menos dos celdas hacia el sur de la celda inicial.
+    */
+    
+procedure DibujarRelojAnalogicoSimplificado(){
+    IrYDibujarLas3()
+    IrYDibujarLas6()
+    IrYDibujarLas9()
+    IrYDibujarLas12()
+}     
+
+    /*
+    proposito: Dirigir el cabezal hacia dos celdas hacia el este y poner 3 bolitas de color rojo. El cabezal finaliza en la celda inicial.
+    precondicion: Deben haber al menos dos celdas hacia el este de la celda actual.
+    */
+    
+procedure IrYDibujarLas3(){
+    Mover(Este)
+    Mover(Este)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+    /*
+    proposito: Dirigir el cabezal dos celdas hacia el sur y poner 6 bolitas de color rojo. El cabezal debe finalizar en la celda inicial.
+    precondicion:Deben haber al menos dos celdas hacia el sur de la celda actual.
+    */
+
+procedure IrYDibujarLas6(){
+    Mover(Sur)
+    Mover(Sur)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Mover(Norte)
+    Mover(Norte)
+}    
+
+    /*
+    proposito:Dirigir el cabezal dos celdas hacia el oeste y poner 9 bolitas de color rojo. El cabezal debe finalizar en la celda inicial.
+    precondicion:Deben haber al menos dos celdas hacia el oeste de la celda actual.
+    */
+    
+procedure IrYDibujarLas9(){
+    Mover(Oeste)
+    Mover(Oeste)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Mover(Este)
+    Mover(Este)
+}
+    
+    /*
+    proposito: Dirigir el cabezal dos celdas hacia el norte y poner 12 bolitas de color rojo. El cabezal debe finalizar en la celda inicial.
+    precondicion: Deben haber al menos dos celdas hacia el norte de la celda actual.
+    */
+
+procedure IrYDibujarLas12(){
+    Mover(Norte)
+    Mover(Norte)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Poner(Rojo)
+    Mover(Sur)
+    Mover(Sur)
+}    
+
+Ejericio 10:
+
+    /*
+    proposito: Dibujar una escalera azul de 4 escalones. No es necesario que el cabezal finalice en la celda inicial.
+    precondicion: Deben haber al menos 4 celdas hacia el este de la celda inicial y al menos 3 celdas hacia el norte de la celda inicial.
+    */
+    
+program {
+    ContruirEscaleraAzulDe4Escalones()
+}
+    
+    /*
+    proposito: Dibujar una escalera azul de 4 escalones. No es necesario que el cabezal finalice en la celda inicial.
+    precondicion: Deben haber al menos 4 celdas hacia el este de la celda inicial y al menos 3 celdas hacia el norte de la celda inicial.
+    */
+    
+procedure ContruirEscaleraAzulDe4Escalones(){
+    ConstruirEscalon()
+    Mover(Norte)
+    ConstruirEscalon()
+    Mover(Norte)
+    ConstruirEscalon()
+    Mover(Norte)
+    ConstruirEscalon()
+}
+
+    /*
+    proposito: Construir un escalon azul. El cabezal finaliza en la última celda ubicado, no en la celda inicial.
+    precondicion: Debe haber al menos una celda hacia el este de la celda actual. 
+    */
+    
+procedure ConstruirEscalon(){
+    Poner(Azul)
+    Mover(Este)
+    Poner(Azul)
+}
+
