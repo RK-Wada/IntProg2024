@@ -1,0 +1,44 @@
+Ejercicio 1:
+
+
+procedure MoverVehículoVacíoAlNorte(){
+    /*
+    proposito: Mover el vehículo vacío una única posición hacia el norte de la celda actual. No es necesario que el cabezal finalice en la celda inicial.
+    precondicion: Debe haber una única bolita de color negro en la celda actual. El vehículo debe encontrarse vacío. Además, debe haber al menos una celda hacia el norte de la celda actual.
+    */
+    
+    Sacar(Negro)
+    Mover(Norte)
+    Poner(Negro)
+}
+
+Ejercicio 2: 
+
+
+procedure RecogerSolicitanteConId5(){
+    /*
+    proposito: Recoger el solicitante de la celda actual, el cual posee el ID 5, subiendolo al vehículo. En el tablero se podrá apreciar cómo, al subir el pasajero, la bolita negra que representa al vehículo pasan a ser dos bolitas negras (indicando que se encuentra lleno) y, las bolitas azules que representan el ID del solicitante, pasan a ser bolitas verdes. 
+    precondicion: Debe haber una bolita de color negro en la celda actual y 5 bolitas de color azul también ubicadas en la celda actual. 
+    */
+    
+    Poner(Negro)
+    Sacar(Azul)
+    Sacar(Azul)
+    Sacar(Azul)
+    Sacar(Azul)
+    Sacar(Azul)
+    Poner(Verde)
+    Poner(Verde)
+    Poner(Verde)
+    Poner(Verde)
+    Poner(Verde)
+}
+
+
+Ejercicio 3: 
+
+
+
+
+
+
