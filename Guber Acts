@@ -38,7 +38,59 @@ procedure RecogerSolicitanteConId5(){
 Ejercicio 3: 
 
 
+procedure LlevarPasajeroConId5ActualADestinoA5AlNorte(){
+    /*
+    proposito: Llevar el pasajero con el ID 5 a su destino (Que se encuentra 5 celdas al norte de la celda actual). El cabezal no es necesario que retorne a la celda inicial. 
+    precondicion: Deben haber al menos 5 celdas hacia el norte de la celda actual. En la celda actual debe estar el vehículo con el pasajero dentro, es decir, debe haber 2 bolitas negras y 5 bolitas verdes en la celda actual.
+    */    
+    
+    MoverVehículoConPasajeroConId5AlNorte()
+    MoverVehículoConPasajeroConId5AlNorte()
+    MoverVehículoConPasajeroConId5AlNorte()
+    MoverVehículoConPasajeroConId5AlNorte()
+    MoverVehículoConPasajeroConId5AlNorte()
+    BajarPasajero5()
+}
+
+procedure MoverVehículoConPasajeroConId5AlNorte(){
+    /*
+    PROPÓSITO: Mueve el vehículo con el pasajero con el Id dado una
+ubicación en el mapa hacia la dirección dada.
+El cabezal termina sobre el vehículo.
+PRECONDICIONES:
+* El cabezal se encuentra sobre el vehículo.
+* El vehículo tiene al pasajero con el Id dado.
+    */
+    
+    Sacar(Negro)
+    Sacar(Negro)
+    Sacar(Verde)
+    Sacar(Verde)
+    Sacar(Verde)
+    Sacar(Verde)
+    Sacar(Verde)
+    Mover(Norte)
+    Poner(Negro)
+    Poner(Negro)
+    Poner(Verde)
+    Poner(Verde)
+    Poner(Verde)
+    Poner(Verde)
+    Poner(Verde)
+}
 
 
-
+procedure BajarPasajero5(){
+    /*
+    proposito: Bajar al pasajero con ID 5 del vehículo, sacando las bolitas que representa al pasajero y dejando el vehículo vacío (El vehículo indica que está vacío cuando hay una sola bolita negra).
+    precondicion: Deben haber 5 bolitas de color verde y dos bolitas de color negro en la celda actual.
+    */
+    
+    Sacar(Negro)
+    Sacar(Verde)
+    Sacar(Verde)
+    Sacar(Verde)
+    Sacar(Verde)
+    Sacar(Verde)
+}
 
