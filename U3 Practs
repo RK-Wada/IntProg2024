@@ -1,0 +1,137 @@
+Repetición simple básica ejercicios:
+1: 
+
+procedure Mover3VecesAlNorte(){
+    /*
+    Propósito: Mover el cabezal 3 veces hacia el Norte de la celda actual.
+    Precondiciones: Deben haber al menos 3 celdas hacia el norte de la celda actual.
+    */
+    repeat (3){
+        Mover(Norte)
+    }
+}
+
+2: 
+
+procedure Mover3VecesAlEste(){
+    /*
+    Propósito: Mover el cabezal 3 veces hacia el Este de la celda actual.
+    Precondiciones: Deben haber al menos 3 celdas hacia el este de la celda actual.
+    */
+    repeat (3){
+        Mover(Este)
+    }
+}
+
+3: 
+
+procedure Poner6DeColorNegro(){
+    /*
+    Propósito: Poner 6 bolitas de color negro en la celda actual.
+    Precondiciones: Ninguna.
+    */
+    repeat (6){
+        Poner(Negro)
+    }
+}
+
+4:
+
+procedure Poner6DeColorVerde(){
+    /*
+    Propósito: Poner 6 bolitas de color verde en la celda actual.
+    Precondiciones: Ninguna.
+    */
+    repeat (6){
+        Poner(Verde)
+    }
+}
+
+Repetición simple en subtareas:
+5:
+
+program{
+   DibujarRectanguloRojoYNegroDe5x3()
+}
+
+
+procedure DibujarRectanguloRojoYNegroDe5x3(){
+    /*
+    Propósito: Dibujar un rectángulo sólido de 5 celdas de largo y 3 celdas de alto, dicho rectángulo está representado por una bolita de color rojo y una bolita de color negro en cada celda del rectángulo. A su vez, la celda inicial es la esquina inferior izquierda en donde irá el rectángulo. El cabezal no retorna a la celda inicial.
+    Precondiciones: Debe haber al menos 4 celdas hacia el este de la celda actual y al menos 2 celdas hacia el norte de la celda actual.
+    */
+    repeat (2){
+        DibujarFila()
+        IrASiguienteFila()
+    }
+    DibujarFila()
+}
+
+procedure DibujarFila(){
+    /*
+    Propósito: Dibujar una fila horizontal de 5 celdas de largo hacia el este, la fila será representada por una bolita negra y una bolita roja en cada celda correspondiente a la fila. El cabezal inicia en la punta oeste de la fila y no retorna a la celda inicial.
+    Precondición: Debe haber al menos 4 celdas hacia el este de la celda actual. 
+    */
+    repeat (4){
+        Poner(Rojo)
+        Poner(Negro)
+        Mover(Este)
+    }
+    Poner(Rojo)
+    Poner(Negro)
+}
+
+procedure IrASiguienteFila(){
+    /*
+    Propósito: Mover el cabezal a donde irá la siguiente fila. 
+    Precondición: Debe haber al menos 1 celda hacia el norte de la celda actual y al menos 4 celdas hacia el oeste de la celda actual.
+    */
+    Mover(Norte)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+
+6: 
+
+program {
+    PintarElTableroDeAzul()
+}
+
+procedure PintarElTableroDeAzul(){
+    /*
+    Propósito: Pintar todo el tablero de color azul. El cabezal no retorna a la celda inicial.
+    Precondición: Debe haber 9 celdas hacia el este de la celda actual y debe haber 6 celdas hacia el norte de la celda inicial.
+    */
+    repeat (6){
+        PintarFilaAzul()
+        IrASiguienteFila()
+    }
+    PintarFilaAzul()
+}
+
+procedure PintarFilaAzul(){
+    /*
+    Propósito: Pintar una fila horizontal hacia el este de color azul.
+    Precondición: Debe haber 9 celdas hacia el este de la celda actual.
+    */
+    repeat(9){
+        Poner(Azul)
+        Mover(Este)
+    }
+    Poner(Azul)
+}
+
+procedure IrASiguienteFila(){
+    /*
+    Propósito: Mover el cabezal a la siguiente fila. 
+    Precondición: Deben haber 9 celdas hacia el oeste de la celda actual y 1 celda hacia el norte de la celda actual.
+    */
+    repeat(9){
+        Mover(Oeste)
+    }
+    Mover(Norte)
+}
+
