@@ -1,0 +1,47 @@
+Ejercicio 1:
+
+procedure Mover3VecesAl_ (direccionAMover){
+    /*
+    Propósito: Mover el cabezal 3 veces hacia "direccionAMover" a partir de la celda actual. A su vez, el cabezal finaliza 3 celdas hacia "direccionAMover" a partir de la celda actual.
+    Parámetro: Dirección - dirección en la que se mueve el cabezal. 
+    Precondición: Debe haber al menos 3 celdas hacia "direccionAMover" a partir de la celda actual.
+    */    
+    repeat(3){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio 2:
+
+procedure Poner6DeColor_(coloAPoner){
+    /*
+    Propósito: Poner 6 bolitas de "colorAPoner" en la celda actual.
+    Parámetro:
+    - colorAPoner: color - color de las bolitas a poner.
+    Precondición: Ninguna.
+    */
+    repeat(6){
+        Poner(colorAPoner)
+    }
+}
+
+
+Ejercicio 3:
+
+procedure Poner_Al_(ColorAPoner, direccionDondePoner){
+    /*
+    Propósito: Poner una bolita de "colorAPoner" en la celda vecina en "direccionDondePoner" de la celda actual.
+    Parámetros: 
+    - colorAPoner: color - color de las bolitas a poner
+    - direccionDondePoner: dirección - dirección hacia donde se pondrá la bolita.
+    Precondición: Debe haber al menos una celda hacia "direccionAPoner"
+    */
+    Mover(direccionDondePoner)
+    Poner(colorAPoner)
+}
+
+Ejercicio 4:
+
+
+
+
