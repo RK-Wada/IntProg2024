@@ -12,4 +12,47 @@ procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
 }
 ---------------------------------------------------------------------------------------------
 
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+-------------------------------------------------------------------------------------------
+
+procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+    /*
+    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
+    Parámetros: 
+    - cantidadASacar: número / cantidad de bolitas a sacar.
+    - colorASacar: color / color de las bolitas a sacar.
+    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    */
+    repeat(cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+-------------------------------------------------------------------------------------------
+
+procedure IrAEsquinaAl_Y_ (primeraDireccion, segundaDireccion){
+    /*
+    Propósito: Dadas dos direcciones, mover el cabezal hacia la esquina entre dichas direcciones.
+    Parámetros:
+    - primeraDireccion: dirección / Primera dirección hacia la cual mover el cabezal.
+    - segundaDireccion: dirección / Segunda dirección hacia la cual mover el cabezal.
+    Precondiciones:  Ninguna.
+    */    
+    IrAlBorde(primeraDireccion)
+    IrAlBorde(segundaDireccion)
+}
+
+-------------------------------------------------------------------------------------------
 
