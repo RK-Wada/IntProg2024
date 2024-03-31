@@ -42,6 +42,19 @@ procedure Poner_Al_(ColorAPoner, direccionDondePoner){
 
 Ejercicio 4:
 
+procedure ReemplazarUnaDe_Por_ (colorAReemplazar, colorPorElCualReemplazar){
+    /*
+    Propósito: quitar una bolita del color "colorAReemplazar" y color una bolita del color "colorPorElCualReemplazar" en la celda actual.
+    Parámetros:
+    - colorAReemplazar: color - color de la bolita a sacar.
+    - colorPorElCualReemplazar: color - color de la bolita a poner.
+    Precondición: Debe haber una bolita del color "colorAReemplazar".
+    */
+    Sacar(colorAReemplazar)
+    Poner(colorPorElCualReemplazar)
+}
+
+Ejercicio 5: 
 
 
 
