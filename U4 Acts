@@ -56,5 +56,257 @@ procedure ReemplazarUnaDe_Por_ (colorAReemplazar, colorPorElCualReemplazar){
 
 Ejercicio 5: 
 
+procedure Poner_ADistancia3Al_ (color, direccion){
+    /*
+    Propósito: Poner una bolita de color "color" a 3 celdas de distancia de la celda inicial hacia la dirección "direccion". El cabezal no retorna a la celda inicial.
+    Parámetros: 
+        - color: color - color de la bolita a poner.
+        - direccion: direccion - direccion hacia donde poner la bolita.
+    Precondiciones: Debe haber al menos 3 celdas hacia la dirección "direccion". 
+    */
+    Mover3VecesAl_(direccion)
+    Poner(color)
+}
+
+Ejercicio 6:
+
+a:
+procedure Pintar3PuntosAzules(){
+    /*
+    Propósito: Poner 3 bolitas de color Azul hacia el Este (Comenzando en la celda actual), cada bolita se encuentra a 2 celdas de la siguiente bolita. El cabezal retorna a la celda inicial.
+    Precondiciones: Debe haber al menos 6 celdas hacia el Este de la celda actual.
+    */
+    Poner(Azul)
+    Poner_ADistancia3Al_(Azul,Este)
+    Poner_ADistancia3Al_(Azul, Este)
+    Mover3VecesAl_(Oeste)
+    Mover3VecesAl_(Oeste)
+}
+
+c:
+procedure Pintar3Puntos_(colorPunto){
+    /*
+    Propósito: Poner 3 bolitas de color "colorPunto" hacia el Este (Comenzando en la celda actual), cada bolita se encuentra a 2 celdas de la siguiente bolita. El cabezal retorna a la celda inicial.
+    Precondiciones: Debe haber al menos 6 celdas hacia el Este de la celda actual.
+    */
+    Poner(colorPunto)
+    Poner_ADistancia3Al_(colorPunto,Este)
+    Poner_ADistancia3Al_(colorPunto, Este)
+    Mover3VecesAl_(Oeste)
+    Mover3VecesAl_(Oeste)
+}
+
+Ejercicio 7:
+
+procedure PintarArcoIris(){
+    Pintar3Puntos_(Negro)
+    Mover(Este)
+    Pintar3Puntos_(Azul)
+    Mover(Norte)
+    Pintar3Puntos_(Verde)
+    Mover(Este)
+    Mover(Sur)
+    Pintar3Puntos_(Rojo)
+}
+
+
+procedure Pintar3Puntos_(colorPunto){
+    /*
+    Propósito: Poner 3 bolitas de color "colorPunto" hacia el Este (Comenzando en la celda actual), cada bolita se encuentra a 2 celdas de la siguiente bolita. El cabezal retorna a la celda inicial.
+    Precondiciones: Debe haber al menos 6 celdas hacia el Este de la celda actual.
+    */
+    Poner(colorPunto)
+    Poner_ADistancia3Al_(colorPunto,Este)
+    Poner_ADistancia3Al_(colorPunto, Este)
+    Mover3VecesAl_(Oeste)
+    Mover3VecesAl_(Oeste)
+}
+
+procedure Poner_ADistancia3Al_ (color, direccion){
+    /*
+    Propósito: Poner una bolita de color "color" a 3 celdas de distancia de la celda inicial hacia la dirección "direccion". El cabezal no retorna a la celda inicial.
+    Parámetros: 
+        - color: color - color de la bolita a poner.
+        - direccion: direccion - direccion hacia donde poner la bolita.
+    Precondiciones: Debe haber al menos 3 celdas hacia la dirección "direccion". 
+    */
+    Mover3VecesAl_(direccion)
+    Poner(color)
+}
+
+procedure Mover3VecesAl_ (direccionAMover){
+    /*
+    Propósito: Mover el cabezal 3 veces hacia "direccionAMover" a partir de la celda actual. A su vez, el cabezal finaliza 3 celdas hacia "direccionAMover" a partir de la celda actual.
+    Parámetro: Dirección - dirección en la que se mueve el cabezal. 
+    Precondición: Debe haber al menos 3 celdas hacia "direccionAMover" a partir de la celda actual.
+    */    
+    repeat(3){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio 8: 
+
+procedure Poner_DeColorRojo(cantidadAPoner){
+    /*
+    Propósito: Poner tantas bolitas rojas como se indique en "cantidadAPoner" en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(Rojo)
+    }
+}
+
+Ejercicio 9: 
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+Ejercicio 10:
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio 11: 
+
+procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+    /*
+    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
+    Parámetros: 
+    - cantidadASacar: número / cantidad de bolitas a sacar.
+    - colorASacar: color / color de las bolitas a sacar.
+    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    */
+    repeat(cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+Ejercicio 12: 
+
+procedure IrAEsquinaAl_Y_ (primeraDireccion, segundaDireccion){
+    /*
+    Propósito: Dadas dos direcciones, mover el cabezal hacia la esquina entre dichas direcciones.
+    Parámetros:
+    - primeraDireccion: dirección / Primera dirección hacia la cual mover el cabezal.
+    - segundaDireccion: dirección / Segunda dirección hacia la cual mover el cabezal.
+    Precondiciones:  Ninguna.
+    */    
+    IrAlBorde(primeraDireccion)
+    IrAlBorde(segundaDireccion)
+}
+
+Ejercicio 13: 
+
+procedure EscribirFechaConDia_Mes_Año_ (dia, mes, año){
+    /*
+    Propósito: Dado un "dia", "mes" y "año", representar una fecha en específico, ocupando 3 celdas hacia el este (Incluye la primera). La misma tendrá el día en azul, el mes en rojo y el año en verde. No es necesario que el cabezal retorne a la celda inicial.
+    Parámetros: 
+    - dia: Número / número que represente el día.
+    - mes: Número / número que represente el mes.
+    - año: Número / número que represente el año.
+    Precondiciones: 
+    - Debe haber al menos dos celdas hacia el este de la celda actual.
+    - La celda actual y las dos siguientes hacia el este deben de estar vacías.
+    */
+    Poner_DeColor_ (dia, Azul)
+    Mover(Este)
+    Poner_DeColor_ (mes, Rojo)
+    Mover(Este)
+    Poner_DeColor_ (año, Verde)
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+Ejercicio 14: 
+
+program {
+    /*
+    Propósito: Hacer una lista vertical hacia el Sur sobre 5 fechas.
+    Precondición: 
+    - Debe haber al menos 2 celdas más hacia el este de la celda actual 4 celdas más hacia el sur de la celda actual.
+    - las celdas que se encuentren a dos celdas hacia el este y 4 celdas hacia el sur de la celda actual deben estar vacías.
+    */
+    EscribirFechaConDia_Mes_Año_ (15, 5, 1918)
+    Mover(Sur)
+    EscribirFechaConDia_Mes_Año_ (9, 9, 1947)
+    Mover(Sur)
+    EscribirFechaConDia_Mes_Año_ (4, 4, 1886)
+    Mover(Sur)
+    EscribirFechaConDia_Mes_Año_ (3, 12, 2007)
+    Mover(Sur)
+    EscribirFechaConDia_Mes_Año_ (8, 3, 1975)
+}
+
+procedure EscribirFechaConDia_Mes_Año_ (dia, mes, año){
+    /*
+    Propósito: Dado un "dia", "mes" y "año", representar una fecha en específico, ocupando 3 celdas hacia el este (Incluye la primera). La misma tendrá el día en azul, el mes en rojo y el año en verde. El cabezal retorna y finaliza en la celda inicial.
+    Parámetros: 
+    - dia: Número / número que represente el día.
+    - mes: Número / número que represente el mes.
+    - año: Número / número que represente el año.
+    Precondiciones: 
+    - Debe haber al menos dos celdas hacia el este de la celda actual.
+    - La celda actual y las dos siguientes hacia el este deben de estar vacías.
+    */
+    Poner_DeColor_ (dia, Azul)
+    Mover(Este)
+    Poner_DeColor_ (mes, Rojo)
+    Mover(Este)
+    Poner_DeColor_ (año, Verde)
+    Mover(Oeste)
+    Mover(Oeste)
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+Ejercicio 15: 
+
+
+
 
 
