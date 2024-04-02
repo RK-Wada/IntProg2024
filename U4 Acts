@@ -306,6 +306,191 @@ procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
 
 Ejercicio 15: 
 
+program {
+    DibujarRelojAnalogicoSimplificadoDeRadio_ (3)
+}
+
+procedure DibujarRelojAnalogicoSimplificadoDeRadio_ (radio){
+    /*
+    Propósito: Dibujar un reloj analógico simplificado de un radio "radio" de color rojo, con el centro en la celda actual. El cabezal retorna y finaliza en la celda inicial. 
+    Parámetros: 
+    - radio: Número / radio del reloj.
+    Precondiciones: 
+    - Debe haber al menos "radio" celdas hacia el Este, Oeste, Norte y Sur de la celda actual.
+    */    
+    DibujarLas_HaciaEl_VolviendoAl_ConRadio_ (3, Este, Oeste, radio)
+    DibujarLas_HaciaEl_VolviendoAl_ConRadio_ (6, Sur, Norte, radio)
+    DibujarLas_HaciaEl_VolviendoAl_ConRadio_ (9, Oeste, Este, radio)
+    DibujarLas_HaciaEl_VolviendoAl_ConRadio_ (12, Norte, Sur, radio)
+}
+
+procedure DibujarLas_HaciaEl_VolviendoAl_ConRadio_ (hora, primeraDireccion, segundaDireccion, radio){
+    /*
+    Propósito: Dibujar un horario "hora" hacia una dirección "primeraDirección" a una distancia "radio" de color rojo. Luego, volver a la celda inicial con la dirección "segundaDireccion".
+    Parámetros:
+    - hora: Número / Horario a poner.
+    - primeraDireccion: Dirección / Dirección hacia donde mover el cabezal.
+    - segundaDireccion: Dirección / Dirección hacia donde mover el cabezal.
+    - radio: Número / Distancia que recorrerá el cabezal.
+    Precondición:
+    - Debe haber al menos tantas celdas hacia las direcciones "primeraDireccion" y "segundaDireccion" como el número dado en "radio"
+    */
+    Mover_VecesAl_ (radio, primeraDireccion)
+    Poner_DeColor_ (hora, Rojo)
+    Mover_VecesAl_ (radio, segundaDireccion)
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+
+Ejercicio 16: 
+
+program {
+    /*
+    Propósito: Dibujar mis iniciales (GW) en el cuadro.
+    Precondiciones:
+    - Debe haber al menos 10 celdas hacia el norte de la celda actual y al menos 15 celdas hacia el Este de la celda actual.
+    */
+    MisIniciales()
+}
+
+
+procedure MisIniciales(){
+    /*
+    Propósito: Dibujar las iniciales "GW" de color negro. El cabezal no finaliza en la celda inicial.
+    Precondiciones:
+    - Debe haber al menos 10 celdas hacia el norte de la celda actual y al menos 15 celdas hacia el Este de la celda actual.
+    */
+    DibujarLineaHaciaEl_DeLargo_ (Norte, 10)
+    Mover(Este)
+    DibujarLineaHaciaEl_DeLargo_ (Este, 4)
+    Mover_VecesAl_ (10, Sur)
+    Mover_VecesAl_ (4, Oeste)
+    DibujarLineaHaciaEl_DeLargo_ (Este, 5)
+    Mover(Norte)
+    DibujarLineaHaciaEl_DeLargo_ (Norte, 2)
+    Mover(Norte)
+    DibujarLineaHaciaEl_DeLargo_ (Oeste, 2)
+    
+    Mover_VecesAl_ (5, Este)
+    Mover_VecesAl_ (4, Sur)
+    
+    DibujarLineaHaciaEl_DeLargo_ (Norte, 10)
+    Mover_VecesAl_ (10, Sur)
+    Mover(Este)
+    DibujarLineaHaciaEl_DeLargo_ (Este, 5)
+    Mover(Norte)
+    DibujarLineaHaciaEl_DeLargo_ (Norte, 9)
+    Mover_VecesAl_ (10, Sur)
+    Mover_VecesAl_ (3, Oeste)
+    Mover(Norte)
+    DibujarLineaHaciaEl_DeLargo_ (Norte, 2)
+}
+
+
+procedure DibujarLineaHaciaEl_DeLargo_ (direccion, longitud){
+    /*
+    Propósito: Dibujar una línea de color negro hacia la dirección "direccion", con un largo de "longitud" celdas. El cabezal no retorna a la celda inicial.
+    Parámetros:
+    - direccion: Dirección / Dirección hacia donde irá la línea.
+    - longitud: Número / Cantidad de celdas que conformarán la línea.
+    Precondiciones:
+    - Debe haber al menos tantas celdas como "longitud" hacia la dirección "direccion" desde la celda inicial.
+    */    
+    repeat (longitud){
+        Poner(Negro)
+        Mover(direccion)
+    }
+    Poner(Negro)
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio 17: 
+
+procedure DibujarCuadrado_De_ (colorDelCuadrado, tamañoDelCuadrado){
+    /*
+    Propósito: Dibujar un cuadrado sólido de color "colorDelCuadrado" de un tamaño "tamañoDelCuadrado" hacia el este y norte de la celda actual. El cabezal no retorna a la celda inicial.
+    Parámetros:
+    - colorDelCuadrado: Color / Color del cuadrado.
+    - tamañoDelCuadrado: Número / Tamaño del cuadrado.
+    Precondiciones:
+    - Debe haber al menos la misma cantidad de celdas que "tamañoDelCuadrado" -1 hacia el Norte y el Este de la celda actual.
+    */
+    repeat (tamañoDelCuadrado){
+        DibujarLineaHorizontalColor_De_(colorDelCuadrado, tamañoDelCuadrado)
+        Mover(Norte)
+    }
+    DibujarLineaHorizontalColor_De_(colorDelCuadrado, tamañoDelCuadrado)
+}
+
+procedure DibujarLineaHorizontalColor_De_ (colorDeLaLinea, tamañoDeLaLinea){
+    /*
+    Propósito: Dibujar una línea horizontal de color "colorDeLaLinea" de un tamaño "tamañoDeLaLinea" comenzando desde la celda actual. El cabezal debe volver a la celda inicial.
+    Parámetros: 
+    - colorDeLaLinea: color / color de la línea.
+    - tamañoDeLaLinea: Número / tamaño que tendrá la línea.
+    Precondiciones:
+    - Debe haber al menos la misma cantidad de celdas -1 que "tamañoDeLaLinea" hacia el Este de la celda actual.
+    */
+    repeat (tamañoDeLaLinea){
+        Poner(colorDeLaLinea)
+        Mover(Este)
+    }
+    Poner(colorDeLaLinea)
+    Mover_VecesAl_ (tamañoDeLaLinea, Oeste)
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio El Bosque, parte 2:
+
 
 
 
