@@ -489,8 +489,82 @@ procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
     }
 }
 
+
+
 Ejercicio El Bosque, parte 2:
 
+procedure Poner_Semillas(cantidadDeSemillasAPoner){
+    /*
+    Propósito: Poner la cantidad de semillas "cantidadDeSemillasAPoner" en la celda actual. 
+    Parámetros:
+    - cantidadDeSemillasAPoner: Número / Cantidad de semillas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadDeSemillasAPoner){
+        Poner (Rojo)
+    }
+}
+
+procedure Sacar_Semillas(cantidadDeSemillasASacar){
+    /*
+    Propósito: Sacar la cantidad de semillas "cantidadDeSemillasASacar" en la celda actual.
+    Parámetros:
+    - cantidadDeSemillasASacar: Número / Cantidad de semillas a sacar.
+    Precondiciones: Debe haber al menos la misma cantidad de semillas que "cantidadDeSemillasASacar" en la celda actual.
+    */
+    repeat (cantidadDeSemillasASacar){
+        Sacar (Rojo)
+    }
+}
+
+
+procedure Poner_Árboles(cantidadDeÁrbolesAPoner){
+    /*
+    Propósito: Poner la cantidad de árboles "cantidadDeÁrbolesAPoner" en la celda actual.
+    Parámetros:
+    - cantidadDeÁrbolesAPoner: Número / Cantidad de árboles a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadDeÁrbolesAPoner){
+        Poner (Verde)
+    }
+}
+
+procedure Sacar_Árboles(cantidadDeÁrbolesASacar){
+    /*
+    Propósito: Sacar tantos arboles "cantidadDeÁrbolesASacar" en la celda actual.
+    Parámetros:
+    - cantidadDeÁrbolesASacar: Número / Cantidad de árboles a sacar.
+    Precondiciones: Debe haber al menos tantos árboles en la celda actual como se indique en "cantidadDeÁrbolesASacar"
+    */
+    repeat (cantidadDeÁrbolesASacar){
+        Sacar (Verde)
+    }
+}
+
+procedure Poner_Nutrientes(cantidadDeNutrientesAPoner){
+    /*
+    Propósito: Poner la cantidad de nutrientes "cantidadDeNutrientesAPoner" en la celda actual.
+    Parámetros:
+    - cantidadDeNutrientesAPoner: Número / Cantidad de nutrientes a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadDeNutrientesAPoner){
+        Poner (Azul)
+    }
+}
+
+procedure Sacar_Nutrientes(cantidadDeNutrientesASacar){
+    /*
+    Propósito: Sacar la cantidad de nutrientes "cantidadDeNutrientesASacar" de la celda actual.
+    Parámetros:
+    - cantidadDeNutrientesASacar: Número / Cantidad de nutrientes a sacar.
+    Precondiciones: Debe haber al menos tantos nutrientes en la celda actual como "cantidadDeNutrientesASacar"
+    */
+    repeat (cantidadDeNutrientesASacar){
+        Sacar (Azul)
+    }
+}
 
 
 
