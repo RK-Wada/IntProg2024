@@ -212,11 +212,29 @@ procedure IrAEsquinaAl_Y_ (primeraDireccion, segundaDireccion){
     Parámetros:
     - primeraDireccion: dirección / Primera dirección hacia la cual mover el cabezal.
     - segundaDireccion: dirección / Segunda dirección hacia la cual mover el cabezal.
-    Precondiciones:  Ninguna.
+    Precondiciones:  Las direcciones dadas no pueden ser opuestas ni iguales.
     */    
     IrAlBorde(primeraDireccion)
     IrAlBorde(segundaDireccion)
 }
+
+
+Ejercicio 12 (Hecho por Perla):
+
+procedure IrAEsquinaAl_Y_ (primeraDireccion, segundaDireccion){
+/*
+Propósito: Ubicar el cabezal en la esquina de dirección **primeraDireccion** y **segundaDireccion**. 
+Parámetros: 
+- primeraDireccion: es una dirección, una de las direcciones de la esquina en la que se ubica el cabezal.
+- segundaDireccion: es una dirección, la otra de las direcciones de la esquina en la que se ubica el cabezal.
+Precondiciones: 
+- Las direcciones dadas no pueden ser opuestas ni iguales. 
+*/
+    IrAlBorde(primeraDireccion)
+    IrAlBorde(segundaDireccion)
+}
+
+
 
 Ejercicio 13: 
 
