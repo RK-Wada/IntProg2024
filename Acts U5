@@ -1,0 +1,157 @@
+Ejercicio 1:
+
+a - A:
+Valor: 3
+Tipo: Número
+
+a - B: 
+Valor: 8 
+Tipo: Número
+
+a - C: 
+Valor: 0  
+Tipo: Número
+
+b - A:
+Valor: Este 
+Tipo: Dirección
+
+b - B: 
+Valor: Este
+Tipo: Dirección
+
+b - C: 
+Valor: Este
+Tipo: Dirección
+
+c - A: 
+Valor: 0
+Tipo: Número
+
+c - B: 
+Valor: 4 
+Tipo: Número
+
+c - C: 
+Valor: 0 
+Tipo: Número
+
+d - A: 
+Valor: 6
+Tipo: Número
+
+d - B: 
+Valor: 8 
+Tipo: Número
+
+d - C: 
+Valor: 0 
+Tipo: Número
+
+Ejercicio 2: 
+
+procedure Mover_SegunColor_ (direccion, color){
+    /*
+    Propósito: Mover el cabezal hacia la dirección **direccion** tantas celdas como bolitas haya en color **color** en la celda actual.
+    Parámetros:
+    - direccion: Dirección / Es la dirección hacia dónde se moverá el cabezal.
+    - color: Color / Es el color de las bolitas que se tendrán en cuenta en la celda actual.
+    Precondiciones:
+    - Debe haber al menos tantas celdas hacia la dirección **direccion** como la cantidad de bolitas de color **color** en la celda actual.
+    */
+    repeat (nroBolitas(color)){
+        Mover (direccion)
+    }
+}
+
+Ejercicio 3: 
+
+a:
+
+
+procedure Poner_SemillasAl_(cantidadDeSemillas, direccionAPoner){
+    /*
+    Proósito: Poner **cantidadDeSemillas** en la celda lindante hacia la dirección **direccionAPoner**. El cabezal retorna y finaliza en la celda inicial.
+    Parámetros:
+    - cantidadDeSemillas: Número / Cantidad de semillas a poner.
+    - direccionAPoner: Dirección / Dirección hacia dónde dirigir el cabezal.
+    Precondiciones:
+    - Debe haber al menos una celda hacia la dirección **direccionAPoner**.
+    */
+    Mover (direccionAPoner)
+    repeat (cantidadDeSemillas){
+        Poner (Rojo)
+    }
+    Mover (opuesto(direccionAPoner))
+}
+
+b: 
+
+procedure Sacar_ArbolesAl_ (cantidadDeArboles, direccionASacar){
+    /*
+    Propósito: Sacar "cantidadDeArbolesASacar" árboles en la celda lindante hacia la dirección **direccionASacar**. El cabezal retorna y finaliza en la celda inicial.
+    Parámetros:
+    - cantidadDeArbolesASacar: Número / Cantidad de árboles a sacar.
+    - direccionASacar: Dirección / Dirección hacia dónde dirigir el cabezal.
+    Precondiciones: 
+    - Debe haber al menos una celda hacia la dirección **direccionASacar**.
+    - Debe haber al menos **cantidadDeArbolesASacar** árboles en la celda lindante hacia la dirección **direccionASacar**.
+    */
+    Mover (direccionASacar)
+    repeat (cantidadDeArboles){
+        Sacar (Verde)
+    }
+    Mover (opuesto(direccionASacar))
+}
+
+
+c: 
+
+procedure Sacar_SemillasEnDiagonalAl_Y_ (cantidadDeSemillas, primeraDirDiagonal, segundaDirDiagonal){
+    /*
+    Proósito: Poner **cantidadDeSemillas** en la celda diagonal hacia las direcciones **primeraDirDiagonal** y **segundaDirDiagonal** de la celda actual. El cabezal retorna y finaliza en la celda inicial.
+    Parámetros:
+    - cantidadDeSemillas: Número / Cantidad de semillas a poner.
+    - primeraDirDiagonal: Dirección / Dirección hacia dónde mover el cabezal.
+    - segundaDirDiagonal: Dirección / Dirección hacia dónde mover el cabezal. 
+    Precondiciones:
+    - Debe haber al menos una celda hacia la dirección **primeraDirDiagonal**.
+    - Debe haber al menos una celda hacia la dirección **segundaDirDiagonal**.
+    - Debe haber al menos **cantidadDeSemillas** semillas en la celda diagonal hacia las direcciones **primeraDirDiagonal** y **segundaDirDiagonal** de la celda actual.
+    - Las direcciones **primeraDirDiagonal** y **segundaDirDiagonal** no pueden ser iguales ni opuestas.
+    */
+    Mover (primeraDirDiagonal)
+    Mover (segundaDirDiagonal)
+    repeat (cantidadDeSemillas){
+        Sacar (Rojo)
+    }
+    Mover (opuesto (primeraDirDiagonal))
+    Mover (opuesto (segundaDirDiagonal))
+}
+
+d: 
+
+procedure Sacar_ArbolesEnDiagonalHorariaAl_ (cantidadDeArboles, direccionDiagonal){
+    /*
+    Propósito: Sacar **cantidadDeArboles** en la celda diagonal hacia la dirección **direccionDiagonal** y su dirección siguiente de la celda actual. El cabezal retorna y finaliza en la celda inicial.
+    Parámetros:
+    - cantidadDeArboles: Número / Cantidad de árboles a sacar.
+    - direccionDiagonal: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - Debe haber al menos una celda hacia la dirección **direccionDiagonal**.
+    - Debe haber al menos una celda hacia la dirección siguiente de la dirección **direccionDiagonal**.
+    - Debe haber al menos **cantidadDeArboles** árboles en la celda diagonal hacia la dirección **direccionDiagonal** y el la siguiente de la dirección **direccionDiagonal** de la celda actual.
+    */
+    Mover (direccionDiagonal)
+    Mover (siguiente (direccionDiagonal))
+    repeat (cantidadDeArboles){
+        Sacar (Verde)
+    }
+    Mover (opuesto (direccionDiagonal))
+    Mover (previo (direccionDiagonal))
+}
+
+
+
+
+
