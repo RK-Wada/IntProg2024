@@ -151,6 +151,209 @@ procedure Sacar_ArbolesEnDiagonalHorariaAl_ (cantidadDeArboles, direccionDiagona
     Mover (previo (direccionDiagonal))
 }
 
+Ejercicio 4:
+
+procedure DibujarLaBandaGloriosaDeAncho_ (ancho){
+    /*
+    Propósito: Dibujar una banda diagonal hacia el norte y este de la celda actual, la cual será de color rojo, de cuatro celdas de alto y de tantas celdas de largo como se indique en **ancho**. 
+    Parámetros:
+    - ancho: Número / Longitud horizontal que tendrá la banda.
+    Precondiciones: 
+    - Debe haber al menos tantas celdas hacia el este de la celda actual como **ancho**.
+    - Debe haber al menos tantas celdas hacia el Norte de la celda actual como **ancho** + 2.
+    */
+    repeat(ancho-1) {
+        DibujarLineaVerticalDe4Roja()
+        Mover_VecesAl_ (1, Este)
+        Mover_VecesAl_ (1, Norte)
+    }
+    DibujarLineaVerticalDe4Roja()
+}
+
+procedure DibujarLineaVerticalDe4Roja(){
+    /*
+    Propósito: Deibujar una línea vertical de 4 celdas de largo de color rojo hacia el norte de la celda actual, iniciando en la celda actual. El cabezal debe retornar y finalizar en la celda inicial.
+    Precondiciones: Debe haber al menos 3 celdas hacia el norte de la celda actual.
+    */
+    repeat (3){
+        Poner(Rojo)
+        Mover(Norte)
+    }
+    Poner(Rojo)
+    Mover_VecesAl_ (3, Sur)
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+
+Ejercicio 5: 
+
+a) 
+procedure EnviarAliadosParaDuplicarEnemigos(){
+    /*
+    Propósito: Agregar el doble de soldados aliados que de soldados enemigos en la celda actual.
+    Precondiciones:
+    - Debe de haber al menos 1 soldado enemigo en la celda actual.
+    Aclaraciones:
+    - Los soldados aliados son representados como bolitas negras.
+    - Los soldados enemigos son representados como bolitas rojas. 
+    */
+    SacarSoldadosAliadosLugarActual()
+    repeat (nroBolitas(Rojo)){
+        Poner (Negro)
+    }
+}
+
+procedure SacarSoldadosAliadosLugarActual(){
+    /*
+    Propósito: Sacar la cantidad de soldados aliados que se encuentren en la celda actual.
+    Precondiciones: 
+    - Debe haber al menos 1 soldado aliado en la celda actual.
+    */
+    repeat (nroBolitas(Negro)){
+        Sacar (Negro)
+    }
+}
+
+b)
+
+procedure PelearLaBatalla(){
+    /*Proposito: 
+    Simular una batalla estre soldados aliados y soldados enemigos.
+    Precondición: 
+    Hay suficiente cantidad de soldados aliados como para ganar la batalla. 
+    OBSERVACION: 
+    Durante una batalla, 2 soldados enemigos pelean contra 3 soldados aliados y todos mueren.
+    */ 
+
+    Mueren_SoldadosAliadosY_Enemigos ((nroBolitas(Rojo) * 3) div 2, (nroBolitas(Rojo) * 2) div 2)
+}
+procedure Mueren_SoldadosAliadosY_Enemigos(cantidadAliados, cantidadEnemigos){
+    /*PROPOSITO:
+    Simular una batalla y ver cuantos soldados aliados y cuantos soldados enemigos mueren.//OBSERVACION: 
+    PARAMETROS: 
+    cantidadAliados: Número - Cantidad de soldados aliados que mueren. 
+    cantidadEnemigos: Número - Cantidad de soldados enemigos que mueren.
+    Durante una batalla, 2 soldados enemigos pelean contra 3 soldados aliados y todos mueren.
+    PRECONDICION:
+    Hay suficiente cantidad de soldados aliados como para ganar la batalla.
+    */
+
+    Sacar_DeColor_(cantidadAliados, Negro)
+    Sacar_DeColor_(cantidadEnemigos, Rojo)
+}
+
+procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+    /*
+    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
+    Parámetros: 
+    - cantidadASacar: número / cantidad de bolitas a sacar.
+    - colorASacar: color / color de las bolitas a sacar.
+    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    */
+    repeat(cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+Ejercicio 6:
+
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+Ejercicio 7:
+
+procedure VaciarCelda(){
+    /*
+    Propósito: Quitar todas las bolitas de todos los colores de la celda actual.
+    Precondiciones: Ninguna.
+    */
+        SacarTodasLasDeColor_ (Rojo)
+        SacarTodasLasDeColor_ (Verde)
+        SacarTodasLasDeColor_ (Negro)
+        SacarTodasLasDeColor_ (Azul)
+} 
+
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+ejercicio 8:
+
+procedure DibujarBandaDeAlto_YAncho_DeColor_ (alto, color, ancho){
+    /*
+    Propósito: Dibujar una banda diagonal hacia el norte y este de la celda actual, la cual será de color **color**, tendrá **alto** celdas de alto y de tantas celdas de largo como se indique en **ancho**. 
+    Parámetros:
+    - alto: Número / Altura vertical que tendrá la banda.
+    - ancho: Número / Longitud horizontal que tendrá la banda.
+    - color: Color / color que tendrá la banda.
+    Precondiciones: 
+    - Debe haber al menos tantas celdas hacia el este de la celda actual como **ancho**.
+    - Debe haber al menos tantas celdas hacia el Norte de la celda actual como **ancho** + **alto** -1.
+    */
+    repeat(ancho-1) {
+        DibujarLineaVerticalDe_DeColor_(alto, color)
+        Mover_VecesAl_ (1, Este)
+        Mover_VecesAl_ (1, Norte)
+    }
+    DibujarLineaVerticalDe_DeColor_(alto, color)
+}
+
+procedure DibujarLineaVerticalDe_DeColor_(alto, color){
+    /*
+    Propósito: Deibujar una línea vertical de 4 celdas de largo de color rojo hacia el norte de la celda actual, iniciando en la celda actual. El cabezal debe retornar y finalizar en la celda inicial.
+    Precondiciones: Debe haber al menos 3 celdas hacia el norte de la celda actual.
+    */
+    repeat (alto-1){
+        Poner(color)
+        Mover(Norte)
+    }
+    Poner(color)
+    Mover_VecesAl_ (alto-1, Sur)
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
 
 
 
