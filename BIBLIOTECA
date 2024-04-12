@@ -56,3 +56,19 @@ procedure IrAEsquinaAl_Y_ (primeraDireccion, segundaDireccion){
 
 -------------------------------------------------------------------------------------------
 
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+-------------------------------------------------------------------------------------------
+
+
