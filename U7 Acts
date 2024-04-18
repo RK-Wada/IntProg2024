@@ -1,0 +1,88 @@
+Ejercicio 1:
+
+a) 
+
+function totalDeBolitas(){
+    /*
+    Propósito: Indica la cantidad de bolitas total de la celda actual.
+    Precondición: 
+    - Ninguna.
+    Tipo: Número. 
+    */
+    return (nroBolitas(Rojo) + nroBolitas(Verde) + nroBolitas Azul + nroBolitas (Negro))
+}
+
+b) 
+
+function masDe5BolitasTotales(){
+    /*
+    Propósito: Indica si en la celda actual hay más de 5 bolitas en total.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (nroBolitas(Rojo) + nroBolitas(Verde) + nroBolitas Azul + nroBolitas (Negro) > 5)
+}
+
+c) 
+
+function hay5BolitasTotales(){
+    /*
+    Propósito: Indica si en la celda actual hay exactamente 5 bolitas en total.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (nroBolitas(Rojo) + nroBolitas(Verde) + nroBolitas Azul + nroBolitas (Negro) == 5)
+}
+
+d)
+
+function hayAlMenos5BolitasTotales(){
+    /*
+    Propósito: Indica si en la celda actual hay al menos 5 bolitas en total.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (nroBolitas(Rojo) + nroBolitas(Verde) + nroBolitas Azul + nroBolitas (Negro) >= 5)
+}
+
+e) 
+
+function hayTodosLosColoes(){
+    /*
+    Propósito: Indica si en la celda actual hay al menos 1 bolita de cada color.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (hayBolitas(Rojo) && hayBolitas(Verde) && hayBolitas(Negro) && hayBolitas(Azul))
+}
+
+f) 
+
+function estaVacia(){
+    /*
+    Propósito: Indica si la celda actual está vacia.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Negro) && not hayBolitas(Azul))
+}
+
+g)
+
+function faltaAlgunaBolita(){
+    /*
+    Propósito: Indica si a la celda actual le falta algún color de bolitas. 
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (not hayBolitas(Rojo) || not hayBolitas(Verde) || not hayBolitas(Negro) || not hayBolitas(Azul))
+}
+
+
+
