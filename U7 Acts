@@ -308,6 +308,92 @@ function cantidadDeSoldadosDe_(colorDelEjercito){
 
 Ejercicio 4: 
 
+a) 
+
+function sePuedeAterrizarA_Hacia_(distanciaAPlaneta, direccionAPlaneta){
+    /*
+    Propósito: Indica si hay un planeta a **distanciaAPlaneta** en la dirección **direccionAPLaneta** y si el combustible es suficiente para llegar al mismo.
+    Parámetros:
+    - distanciaAPlaneta: Número / distancia hacia el planeta.
+    - direccionAPlaneta: Dirección / Dirección hacia el próximo planeta.
+    Precondición: 
+    - El cabezal se encuentra sobre la nave.
+    - Debe haber al menos **distanciaAPlaneta** celdas en la dirección **direecionAPlaneta**.
+    Tipo: Booleano.
+    */
+    return (hayUnPlanetaA_Hacia_(distancia, dirección) && combustibleRestante()>= distanciaAPlaneta)
+}
+
+b)
+
+function hayUnPlanetaRecto(){
+    /*
+    Propósito: Indica que existe un planeta en cualquiera de las direcciones, a cualquier distancia de la nave.
+    Precondición: 
+    - El cabezal se encuentra sobre la nave y a exactamente 3 celdas de distancia de todos los bordes.
+    Tipo: Booleano.
+    */
+    return (hayUnPlanetaA_Hacia_(distancia, dirección))
+}
+
+Ejercicio 5:
+
+a) 
+
+ARBOL
+
+function arbol(){
+    /*
+    Propósito:
+    - Indica que un árbol es representado con el color verde.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (Verde)
+}
+
+SEMILLA
+
+function semilla(){
+    /*
+    Propósito:
+    - Indica que una semilla es representada con el color rojo.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (Rojo)
+}
+
+BOMBA
+
+function bomba(){
+    /*
+    Propósito:
+    - Indica que una bomba es representada con el color negro.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (Negro)
+}
+
+NUTRIENTE
+
+function nutriente(){
+    /*
+    Propósito:
+    - Indica que un nutriente es representado con el color Azul.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (Azul)
+}
+
+b) 
+
 
 
 
