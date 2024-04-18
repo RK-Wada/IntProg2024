@@ -119,5 +119,44 @@ procedure Mover_Si_ (direccion, condicion){
 
 -------------------------------------------------------------------------------------------
 
+function esCeldaVacia(){
+    /*
+    Propósito: Indica si la celda actual está vacía.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro)
+}
+
+-------------------------------------------------------------------------------------------
+
+function hayAlMenosUnaDeCada(){
+    /*
+    Propósito: Indica si en la celda actual hay al menos 1 bolita de cada color.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (hayBolitas(Rojo) && hayBolitas(Verde) && hayBolitas(Negro) && hayBolitas(Azul))
+}
+
+
+-------------------------------------------------------------------------------------------
+
+function esCeldaConBolitas(){
+    /*
+    Propósito: Indica si la celda actual hay al menos una bolita de cualquier color.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (hayBolitas(Rojo) || hayBolitas(Verde) || hayBolitas(Azul) || hayBolitas(Negro))
+}
+
+-------------------------------------------------------------------------------------------
+
+
+
 
 
