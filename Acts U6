@@ -1,0 +1,457 @@
+Ejercicio 3:
+
+a) 
+
+procedure SacarUnaFicha_SiSePuede(colorDeLaFicha){
+    /*
+    Propósito: Sacar una ficha del color **colorDeLaFicha** de la celda actual. En caso de no haber fichas de ese color, el procedimiento no hará nada. 
+    Parámetros: 
+    - colorDeLaFicha: color / color de la ficha a sacar.
+    Precondiciones: 
+    - Ninguna.
+    */
+    if (hayBolitas(colorDeLaFicha)) then {
+        Sacar(colorDeLaFicha)
+    }
+}
+
+b) 
+
+procedure DesempatarParaElLocal_Contra_(colorDelLocal,colorDelVisitante){
+    /*
+    Propósito: 
+    - Desempatar otorgándole un punto al jugador del equipo local solamente si los equipos tienen la misma cantidad de puntos en la celda actual.
+    Parámetros: 
+    -  colorDelLocal: color / color del equipo local.
+    - colorDelVisitante: color / color del equipo visitante.
+    Precondiciones: 
+    - Debe haber la misma cantidad de puntos en ambos equipos.
+    - Los colores de los dos equipos no pueden ser iguales.
+    */
+    if (nroBolitas (colorDelLocal) == nroBolitas(colorDelVisitante)) then {
+        Poner(colorDelLocal)
+    }
+}
+
+c) 
+
+procedure ExpandirBacteriaDeLaColonia(){
+    /*
+    Propósito: 
+    - Agregar una bacteria más y consumir un nutriente si es que lo hay en la celda actual, sino, el procedimiento no hace nada.
+    Precondiciones: 
+    - Ninguna.
+    Observaciones: 
+    - Las bacterias se ven representadas como bolitas verdes.
+    - Los nutrientes se ven representados como bolitas rojas.
+    */
+    if (hayBolitas(Rojo)) then {
+        Poner (Verde)
+        Sacar (Rojo)
+    }
+}
+
+d) 
+
+procedure PonerFlecha_AlNorteSiCorresponde(colorDeLaFlecha){
+    /*
+    Propósito: 
+    - Poner una flecha del color **colorDeLaFlecha** hacia la celda lindante al norte de la celda actual si es que es posible. El cabezal no retorna ni finaliza en la celda inicial. 
+    Precondiciones: 
+    - colorDeLaFlecha: color / color de la flecha a representar.
+    Observaciones: 
+    - Las flechas serán representadas con una bolita del color dado.
+    */
+    if (puedeMover(Norte)) then {
+        Mover (Norte)
+        Poner (colorDeLaFlecha)
+    }
+}
+
+Ejercicio 4:
+
+a) 
+
+procedure Poner_Si_ (color, condicion){
+    /*
+    Propósito: Poner una bolita de color **color** en la celda actual si la condición es verdadera.
+    Parámetros:
+    - color: color / color de la bolita a poner.
+    - condicion: Booleano / condición para determinar si se pone o no la bolita.
+    Precondición:
+    - Ninguna.
+    */
+    if (condicion) then {
+        Poner (color)
+    }
+}
+
+b) 
+
+procedure Sacar_Si_ (color, condicion){
+    /*
+    Propósito: Saca una bolita de color **color** en la celda actual si la condición es verdadera.
+    Parámetros:
+    - color: color / color de la bolita a Sacar.
+    - condicion: Booleano / condición para determinar si se saca o no la bolita.
+    Precondición:
+    - Ninguna.
+    */
+    if (condicion) then {
+        Sacar (color)
+    }
+}
+
+c) 
+
+procedure Mover_Si_ (direccion, condicion){
+    /*
+    Propósito: Mueve el cabezal hacia la dirección **direccion** si la condición es verdadera.
+    Parámetros:
+    - direccion: dirección / dirección hacia dónde mover el cabezal.
+    - condicion: Booleano / condición para determinar si se saca o no la bolita.
+    Precondición:
+    - Ninguna.
+    */
+    if (condicion) then {
+        Mover (direccion)
+    }
+}
+
+Ejercicio 5:
+
+b) 
+
+procedure SacarExactamente_BolitasDeColor_(cantidadASacar, colorASacar){
+    /*
+    Propósito: 
+    - Sacar exactamente **cantidadASacar** bolitas de color **colorASacar** de la celda actual.
+    Parámetros:
+    - cantidadASacar: Número / cantidad de bolitas a sacar.
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondición:
+    - Debe haber al menos **cantidadASacar** de bolitas a sacar de color **colorASacar** en la celda actual.
+    */
+    repeat (cantidadASacar) {
+        Sacar (colorASacar)
+    }
+}
+
+Ejercicio 6:
+
+a) 
+
+procedure Depositar_EnMoneda_ComoPesos(cantidadADepositar, moneda){
+    /*
+    Propósito: Depositar en la cuenta actual la cantidad de pesos correspondientes a **cantidadADepositar** y **moneda**, teniendo en cuenta la conversión a pesos correspondiente.
+    Parámetros: 
+    - cantidadADepositar: Número / cantidad de dinero a depositar en la cuenta.
+    - moneda: Color / color que indica el tipo de moneda a depositar.
+    Precondiciones: 
+    - Ninguna.
+    Observaciones: 
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los dólares estadounidenses se ven representados como bolitas verdes y, cada dólar, vale 80 pesos argentinos.
+    - bLos euros se ven representados como bolitas azules y, cada euro, vale 90 pesos argentinos.
+    - Los yuanes chinos se ven representados como bolitas de color rojo y, cada yuan, vale 12 pesos argentinos.
+    */
+    if (moneda == Verde) then {
+        Depositar_EnMoneda_ (cantidadADepositar * 80, Negro)
+}
+        elseif (moneda == Azul) then {
+            Depositar_EnMoneda_ (cantidadADepositar * 90, Negro)
+        }
+            elseif (moneda == Rojo) then {
+                Depositar_EnMoneda_ (cantidadADepositar * 12, Negro)
+            }
+                elseif (moneda == Negro) then {
+                    Depositar_EnMoneda_ (cantidadADepositar, Negro)
+                }
+} 
+
+procedure Depositar_EnMoneda_ (cantidadADepositar, moneda){
+    /*
+    Propósito: Depositar en la cuenta actual la cantidad **cantidadADepositar** de **moneda**.
+    Parámetros: 
+    - cantidadADepositar: Número / cantidad de dinero a depositar en la cuenta.
+    - moneda: Color / tipo de moneda a depositar en la cuenta.
+    Precondiciones:
+    - Ninguna.
+    */
+    Poner_DeColor_(cantidadADepositar, moneda)
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+b) 
+
+procedure ExtraerHasta_EnMoneda_(cantidadAExtraer, moneda){
+    /*
+    Propósito: Extraer **cantidadAExtraer** en **moneda** de la cuenta actual. En caso de no haber la cantidad **cantidadAExtraer** en la cuenta actual, se extrae todo lo que haya.
+    Parámetros:
+    - cantidadAExtraer: Número / cantidad de **moneda** a extraer de la cuenta actual.
+    - moneda: Color / dinero a extraer de la cuenta actual.
+    Precondición:
+    - Ninguna.
+    Observaciones:
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los dólares estadounidenses se ven representados como bolitas verdes y, cada dólar, vale 80 pesos argentinos.
+    - bLos euros se ven representados como bolitas azules y, cada euro, vale 90 pesos argentinos.
+    - Los yuanes chinos se ven representados como bolitas de color rojo y, cada yuan, vale 12 pesos argentinos.
+    */
+    if (nroBolitas(moneda)>= cantidadAExtraer) then {
+        Extraer_EnMoneda_ (cantidadAExtraer, Verde)
+    }
+            else {
+                SacarTodasLasDeColor_ (moneda)
+            }
+}
+
+procedure Extraer_EnMoneda_ (cantidadAExtraer, moneda){
+    /*
+     Propósito: Extraer **cantidadAExtraer** en **moneda** de la cuenta actual. En caso de no haber la cantidad **cantidadAExtraer** en la cuenta actual, se extrae todo lo que haya.
+    Parámetros:
+    - cantidadAExtraer: Número / cantidad de **moneda** a extraer de la cuenta actual.
+    - moneda: Color / dinero a extraer de la cuenta actual.
+    Precondición:
+    - Ninguna.
+    Observaciones:
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los dólares estadounidenses se ven representados como bolitas verdes.
+    - bLos euros se ven representados como bolitas azules.
+    - Los yuanes chinos se ven representados como bolitas de color rojo.
+    */
+    Sacar_DeColor_ (cantidadAExtraer, moneda)
+}
+
+procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+    /*
+    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
+    Parámetros: 
+    - cantidadASacar: número / cantidad de bolitas a sacar.
+    - colorASacar: color / color de las bolitas a sacar.
+    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    */
+    repeat(cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+c) 
+
+procedure ConvertirHasta_PesosA_(pesosAConvertir, moneda){
+    /*
+    Propósito: Convertir la cantidad **pesosAConvertir** al tipo de moneda **moneda**. Removiendo la cantidad de pesos de la cuenta actual y agregando la cantidad de **moneda** correspondiente. 
+    Parámetros:
+    - pesosAConvertir: Número / cantidad de pesos a convertir a **moneda** en la cuenta actual.
+    - moneda: Color / tipo de moneda a la que convertir los pesos.
+    Precondición:
+    - Ninguna.
+    Observaciones:
+    - Si en la cuenta hubiera menos pesos de lo solicitado, se convierte todo lo que haya. 
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los dólares estadounidenses se ven representados como bolitas verdes y, cada dólar, vale 100 pesos argentinos.
+    - bLos euros se ven representados como bolitas azules y, cada euro, vale 115 pesos argentinos.
+    - Los yuanes chinos se ven representados como bolitas de color rojo y, cada yuan, vale 17 pesos argentinos.
+    */
+    if (moneda == Verde) then {
+        CantidadDePesos_ADolares(pesosAConvertir)
+    }
+        elseif (moneda == Azul) then {
+            CantidadDePesos_AEuros(pesosAConvertir)
+        }
+            else {
+                CantidadDePesos_AYuanes(pesosAConvertir)
+            }
+}
+
+procedure CantidadDePesos_ADolares(pesosAConvertir){
+    /*
+    Propósito: Convertir los pesos de la cuenta actual a dólares. 
+    Parámetros:
+    - pesosAConvertir: Número / cantidad de pesos a convertir a **moneda** en la cuenta actual.
+    Precondiciones: Ninguna.
+    Observaciones:
+    - Si en la cuenta hubiera menos pesos de lo solicitado, se convierte todo lo que haya.
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los dólares estadounidenses se ven representados como bolitas verdes y, cada dólar, vale 100 pesos argentinos.
+    */
+    if (pesosAConvertir > nroBolitas(Negro)) then {
+        Poner_DeColor_ (nroBolitas(Negro) div 100, Verde)
+        SacarTodasLasDeColor_(Negro)
+    }
+        elseif (pesosAConvertir <= nroBolitas(Negro)) then {
+            Poner_DeColor_ (pesosAConvertir div 100, Verde)
+            Sacar_DeColor_(pesosAConvertir, Negro)
+        }
+}
+
+procedure CantidadDePesos_AEuros(pesosAConvertir){
+    /*
+    Propósito: Convertir los pesos de la cuenta actual a euros. 
+    Parámetros:
+    - pesosAConvertir: Número / cantidad de pesos a convertir a **moneda** en la cuenta actual.
+    Precondiciones: Ninguna.
+    Observaciones:
+    - Si en la cuenta hubiera menos pesos de lo solicitado, se convierte todo lo que haya.
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los euros se ven representados como bolitas azules y, cada euro, vale 115 pesos argentinos.
+    */
+    if (pesosAConvertir > nroBolitas(Negro)) then {
+        Poner_DeColor_ (nroBolitas(Negro) div 115, Azul)
+        SacarTodasLasDeColor_(Negro)
+    }
+        elseif (pesosAConvertir <= nroBolitas(Negro)) then {
+            Poner_DeColor_ (pesosAConvertir div 115, Azul)
+            Sacar_DeColor_(pesosAConvertir, Negro)
+        }
+}
+
+procedure CantidadDePesos_AYuanes(pesosAConvertir){
+    /*
+    Propósito: Convertir los pesos de la cuenta actual a yuanes. 
+    Parámetros:
+    - pesosAConvertir: Número / cantidad de pesos a convertir a **moneda** en la cuenta actual.
+    Precondiciones: Ninguna.
+    Observaciones:
+    - Si en la cuenta hubiera menos pesos de lo solicitado, se convierte todo lo que haya.
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los yuanes se ven representados como bolitas rojas y, cada yuan, vale 17 pesos argentinos.
+    */
+    if (pesosAConvertir > nroBolitas(Negro)) then {
+        Poner_DeColor_ (nroBolitas(Negro) div 17, Rojo)
+        SacarTodasLasDeColor_(Negro)
+    }
+        elseif (pesosAConvertir <= nroBolitas(Negro)) then {
+            Poner_DeColor_ (pesosAConvertir div 17, Rojo)
+            Sacar_DeColor_(pesosAConvertir, Negro)
+        }
+}
+
+
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+    /*
+    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
+    Parámetros: 
+    - cantidadASacar: número / cantidad de bolitas a sacar.
+    - colorASacar: color / color de las bolitas a sacar.
+    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    */
+    repeat(cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+
+d) 
+
+procedure RealizarCorridaCambiaria(){
+    /*
+    Propósito: Realizar una corrida cambiaria, en dónde 10 cuentas hacia el Este, comenzando por la cuenta actual, cambia la totalidad de los pesos a dólares. El cabezal no retorna ni finaliza en la celda inicial.
+    Precondiciones:
+    - Debe haber al menos 9 cuentas más hacia el este de la cuenta inicial.
+    */
+    repeat (9){
+        DePesosADolares()
+        Mover(Este)
+    }
+    DePesosADolares()
+}
+
+procedure DePesosADolares(){
+    /*
+    Propósito: Convertir los pesos de la cuenta actual a dólares. 
+    Precondiciones: 
+    - Ninguna.
+    Observaciones:
+    - Los pesos argentinos se ven representados como bolitas negras.
+    - Los dólares estadounidenses se ven representados como bolitas verdes y, cada dólar, vale 100 pesos argentinos.
+    */
+    if (nroBolitas(Negro) >= 100) then {
+        Poner_DeColor_ (nroBolitas(Negro) div 100, Verde)
+        SacarTodasLasDeColor_(Negro)
+    }
+        elseif (nroBolitas(Negro) < 100) then {
+            SacarTodasLasDeColor_(Negro)
+        }
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+
+
+
