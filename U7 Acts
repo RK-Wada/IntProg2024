@@ -50,7 +50,7 @@ function hayAlMenos5BolitasTotales(){
 
 e) 
 
-function hayTodosLosColoes(){
+function hayAlMenosUnaDeCada(){
     /*
     Propósito: Indica si en la celda actual hay al menos 1 bolita de cada color.
     Precondición: 
@@ -83,6 +83,233 @@ function faltaAlgunaBolita(){
     */
     return (not hayBolitas(Rojo) || not hayBolitas(Verde) || not hayBolitas(Negro) || not hayBolitas(Azul))
 }
+
+Ejercicio 2:
+
+a) 
+
+function esCeldaVacia(){
+    /*
+    Propósito: Indica si la celda actual está vacía.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro)
+}
+
+b)
+
+function hayAlMenosUnaDeCada(){
+    /*
+    Propósito: Indica si en la celda actual hay al menos 1 bolita de cada color.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (hayBolitas(Rojo) && hayBolitas(Verde) && hayBolitas(Negro) && hayBolitas(Azul))
+}
+
+c) 
+
+function esCeldaConBolitas(){
+    /*
+    Propósito: Indica si la celda actual hay al menos una bolita de cualquier color.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (hayBolitas(Rojo) || hayBolitas(Verde) || hayBolitas(Azul) || hayBolitas(Negro))
+}
+
+
+Ejercicio 3:
+
+a) 
+
+function cantidadDeSoldadosDe_(colorDelEjercito){
+    /*
+    Propósito: Indica la cantidad de soldados de la celda actual del ejercito **colorDelEjercito**.
+    Parámetros: 
+    - colorDelEjercito: color / color del ejercito.
+    Precondición:
+    Tipo: Número
+    */
+    return (nroBolitas(colorDelEjercito))
+}
+
+b)
+
+DUPLICAR ENEMIGOS:
+
+
+procedure EnviarAliadosParaDuplicarEnemigos(){
+    /*
+    Propósito: Agregar el doble de soldados aliados que de soldados enemigos en la celda actual.
+    Precondiciones:
+    - Ninguna.
+    Aclaraciones:
+    - Los soldados aliados son representados como bolitas negras.
+    - Los soldados enemigos son representados como bolitas rojas. 
+    */
+    repeat (cantidadDeSoldadosDe_(Rojo)*2 - cantidadDeSoldadosDe_(Negro)){
+        Poner (Negro)
+    }
+}
+
+function cantidadDeSoldadosDe_(colorDelEjercito){
+    /*
+    Propósito: Indica la cantidad de soldados de la celda actual del ejercito **colorDelEjercito**.
+    Parámetros: 
+    - colorDelEjercito: color / color del ejercito.
+    Precondición:
+    Tipo: Número
+    */
+    return (nroBolitas(colorDelEjercito))
+}
+
+PELEAR LA BATALLA:
+
+procedure PelearLaBatalla(){
+    /*Proposito: 
+    Simular una batalla estre soldados aliados y soldados enemigos en la celda actual.
+    Precondición: 
+    Hay suficiente cantidad de soldados aliados como para ganar la batalla. 
+    OBSERVACION: 
+    Durante una batalla, 2 soldados enemigos pelean contra 3 soldados aliados y todos mueren. Es decir, 3 soldados alidados son igual a 2 enemigos.
+    */ 
+    repeat (cantidadDeSoldadosDe_(Rojo) div 2){
+    if (cantidadDeSoldadosDe_(Rojo) >= 2 && (cantidadDeSoldadosDe_(Negro) >= 3)) then {
+            PeleaDe3A2()
+        }
+    }
+}
+
+procedure PeleaDe3A2(){
+    /*
+    Propósito: Simular una pelea entre 2 soldados enemigos y 3 soldados aliados, quitando a todos de la celda actual.
+    Precondiciones: 
+    - Debe haber al menos 2 soldados enemigos en la celda actual.
+    - Debe haber al menos 3 soldados aliados en la celda actual.
+    */
+    repeat (3){
+        Sacar (Negro)  
+    }
+    Sacar (Rojo)
+    Sacar (Rojo)
+}
+
+
+function cantidadDeSoldadosDe_(colorDelEjercito){
+    /*
+    Propósito: Indica la cantidad de soldados de la celda actual del ejercito **colorDelEjercito**.
+    Parámetros: 
+    - colorDelEjercito: color / color del ejercito.
+    Precondición:
+    Tipo: Número
+    */
+    return (nroBolitas(colorDelEjercito))
+}
+
+c) 
+
+function esCeldaIndefensa(){
+    /*
+    Propósito: Indica si la celda actual no tiene soldados aliados.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (cantidadDeSoldadosDe_(Negro) == 0)
+}
+
+function cantidadDeSoldadosDe_(colorDelEjercito){
+    /*
+    Propósito: Indica la cantidad de soldados de la celda actual del ejercito **colorDelEjercito**.
+    Parámetros: 
+    - colorDelEjercito: color / color del ejercito.
+    Precondición:
+    Tipo: Número
+    */
+    return (nroBolitas(colorDelEjercito))
+}
+
+d) 
+
+function estadoDeEmergencia(){
+    /*
+    Propósito: Indica si existen más de 100 soldados enemigos en la celda actual y, además, la celda está indefensa.
+    Precondición:
+    Tipo: Booleano
+    */
+    return (cantidadDeSoldadosDe_(Rojo) > 100 && esCeldaIndefensa())
+}
+
+function esCeldaIndefensa(){
+    /*
+    Propósito: Indica si la celda actual no tiene soldados aliados.
+    Precondición:
+    - Ninguna.
+    */
+    return (cantidadDeSoldadosDe_(Negro) == 0)
+}
+
+function cantidadDeSoldadosDe_(colorDelEjercito){
+    /*
+    Propósito: Indica la cantidad de soldados de la celda actual del ejercito **colorDelEjercito**.
+    Parámetros: 
+    - colorDelEjercito: color / color del ejercito.
+    Precondición:
+    Tipo: Número
+    */
+    return (nroBolitas(colorDelEjercito))
+}
+
+e) 
+
+function hayAlMenos_AliadosPorCada_Atacantes(cantidadDefensa, cantidadAtaque){
+    /*
+    Propósito: Indica si hay por lo menos **cantidadDefensa** soldados aliados por cada **cantidadAtaque** soldados enemigos en la celda actual.
+    Parámetros: 
+    - cantidadDefensa: Número / cantidad de soldados aliados defendiendo.
+    - cantidadAtaque: Número / cantidad de soldados enemigos atacando.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (cantidadDefensa >= cantidadAtaque * 2)
+}
+
+f) 
+
+function aliadosNecesariosParaDefensaEficazContra_(cantidadDeSoldadosEnemigosAdicionales){
+    /*
+    Propósito: Indica la cantidad de soldados aliados necesarios para una defensa eficaz. 
+    Parámetros: 
+    - cantidadDeSoldadosEnemigosAdicionales: Número / cantidad de soldados enemigos adicionales.
+    Precondición:
+    - Ninguna.
+    Tipo: Número.
+    */
+    return (cantidadDeSoldadosDe_(Negro) * 3 div cantidadDeSoldadosDe_(Rojo) * 2))
+}
+
+
+function cantidadDeSoldadosDe_(colorDelEjercito){
+    /*
+    Propósito: Indica la cantidad de soldados de la celda actual del ejercito **colorDelEjercito**.
+    Parámetros: 
+    - colorDelEjercito: color / color del ejercito.
+    Precondición:
+    Tipo: Número
+    */
+    return (nroBolitas(colorDelEjercito))
+}
+
+Ejercicio 4: 
+
+
+
 
 
 
