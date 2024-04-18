@@ -71,4 +71,53 @@ procedure SacarTodasLasDeColor_ (colorASacar){
 
 -------------------------------------------------------------------------------------------
 
+procedure Poner_Si_ (color, condicion){
+    /*
+    Propósito: Poner una bolita de color **color** en la celda actual si la condición es verdadera.
+    Parámetros:
+    - color: color / color de la bolita a poner.
+    - condicion: Booleano / condición para determinar si se pone o no la bolita.
+    Precondición:
+    - Ninguna.
+    */
+    if (condicion) then {
+        Poner (color)
+    }
+}
+
+-------------------------------------------------------------------------------------------
+
+procedure Sacar_Si_ (color, condicion){
+    /*
+    Propósito: Saca una bolita de color **color** en la celda actual si la condición es verdadera.
+    Parámetros:
+    - color: color / color de la bolita a Sacar.
+    - condicion: Booleano / condición para determinar si se saca o no la bolita.
+    Precondición:
+    - Ninguna.
+    */
+    if (condicion) then {
+        Sacar (color)
+    }
+}
+
+-------------------------------------------------------------------------------------------
+
+procedure Mover_Si_ (direccion, condicion){
+    /*
+    Propósito: Mueve el cabezal hacia la dirección **direccion** si la condición es verdadera.
+    Parámetros:
+    - direccion: dirección / dirección hacia dónde mover el cabezal.
+    - condicion: Booleano / condición para determinar si se saca o no la bolita.
+    Precondición:
+    - Ninguna.
+    */
+    if (condicion) then {
+        Mover (direccion)
+    }
+}
+
+-------------------------------------------------------------------------------------------
+
+
 
