@@ -350,7 +350,7 @@ function arbol(){
     - Ninguna.
     Tipo: Color.
     */
-    return (Verde)
+    return (nroBolitas(Verde))
 }
 
 SEMILLA
@@ -363,7 +363,7 @@ function semilla(){
     - Ninguna.
     Tipo: Color.
     */
-    return (Rojo)
+    return (nroBolitas(Rojo))
 }
 
 BOMBA
@@ -376,7 +376,7 @@ function bomba(){
     - Ninguna.
     Tipo: Color.
     */
-    return (Negro)
+    return (nroBolitas(Negro))
 }
 
 NUTRIENTE
@@ -389,10 +389,212 @@ function nutriente(){
     - Ninguna.
     Tipo: Color.
     */
-    return (Azul)
+    return (nroBolitas(Azul))
 }
 
 b) 
+
+procedure GerminarSemilla(){
+    /*
+    Propósito: Transforma una semilla en un árbol en la celda actual. La germinación consume tres unidades de nutrientes. Si la celda no tiene semilla o no hay suficientes nutrientes, no se hace nada.
+    Precondición: 
+    - Ninguna.
+    */
+    if (nutriente()>= 3 && semilla()>=1) then {
+        Sacar(Azul)
+        Sacar(Azul)
+        Sacar(Azul)
+        Sacar(Rojo)
+        Poner(Verde)
+    }
+}
+
+function arbol(){
+    /*
+    Propósito:
+    - Indica que un árbol es representado con el color verde.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Verde))
+}
+
+function semilla(){
+    /*
+    Propósito:
+    - Indica que una semilla es representada con el color rojo.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Rojo))
+}
+
+function nutriente(){
+    /*
+    Propósito:
+    - Indica que un nutriente es representado con el color Azul.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Azul))
+}
+
+c) 
+
+procedure AlimentarArboles(){
+    /*
+    Propósito: Alimentar los árboles de la celda actual, consumiento un nutriente cada uno. Si hay menos nutrientes de lo que se necesita, se consumen todos los que hay.
+    Precondición: 
+    - Ninguna.
+    */
+    if (nutriente() >= arbol()) then {
+        repeat (arbol()){
+            Sacar(Azul)
+        }
+            }
+            else  {
+                SacarTodasLasDeColor_(Azul)
+    }
+}
+
+function nutriente(){
+    /*
+    Propósito:
+    - Indica que un nutriente es representado con el color Azul.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Azul))
+}
+
+function arbol(){
+    /*
+    Propósito:
+    - Indica que un árbol es representado con el color verde.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Verde))
+}
+
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+d) 
+
+procedure ExplotarBomba(){
+    /*
+    Propósito: Explotar una bomba en la celda actual, eliminando 5 árboles en la celda actual y 3 en la celda lindante al norte. Si la celda actual se encuentra en el borde Norte, solo se eliminan los árboles de la celda actual. Y, si hay menos árboles de los que la bomba puede eliminar, entonces se elimina los que haya. La bomba desaparece en el proceso. El cabezal retorna y finaliza en la celda inicial.
+    Precondición: 
+    - Debe haber al menos una bomba en la celda actual.
+    */
+    if (puedeMover(Norte) && arbol() >= 5) then {
+        Mover_VecesAl_ (1, Norte)
+        ExplotarArbolesAlNorteSiEsNecesario()
+        Mover_VecesAl_ (1, Sur)
+        Sacar_DeColor_ (5, Verde)
+        Sacar_DeColor_ (1, Negro)
+    }
+        elseif (puedeMover(Norte) && arbol() < 5){
+            Mover_VecesAl_ (1, Norte)
+            ExplotarArbolesAlNorteSiEsNecesario()
+            Mover_VecesAl_ (1, Sur)
+            SacarTodasLasDeColor_(Verde)
+            Sacar_DeColor_ (1, Negro)
+        }
+}
+
+procedure ExplotarArbolesAlNorteSiEsNecesario(){
+    /*
+    Propósito: Explotar 3 árboles en la celda lindante al Norte de la celda actual si es que tiene al menos 3 árboles en ella. Sino, no hace nada.
+    Precondición: 
+    - Ninguna.
+    */
+    if (arbol() >= 3) then {
+        Sacar_DeColor_ (3, Verde)
+    }
+        elseif (arbol() < 3) then {
+            SacarTodasLasDeColor_(Verde)
+        }
+}
+
+function arbol(){
+    /*
+    Propósito:
+    - Indica que un árbol es representado con el color verde.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Verde))
+}
+
+function bomba(){
+    /*
+    Propósito:
+    - Indica que una bomba es representada con el color negro.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Negro))
+}
+
+procedure SacarTodasLasDeColor_ (colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
+    */
+    repeat(nroBolitas(colorASacar)){
+        Sacar(colorASacar)
+    }
+}
+
+procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+    /*
+    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
+    Parámetros: 
+    - cantidadASacar: número / cantidad de bolitas a sacar.
+    - colorASacar: color / color de las bolitas a sacar.
+    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    */
+    repeat(cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+e) 
 
 
 
