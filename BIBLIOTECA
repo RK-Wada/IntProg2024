@@ -156,6 +156,58 @@ function esCeldaConBolitas(){
 
 -------------------------------------------------------------------------------------------
 
+procedure IrAPrimeraCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito:
+    - Dirigir el cabezal hacia la primera celda en dónde se comenzará el recorrido de las direcciones **dirPrincipal** y **dirSecundaria**
+    Parámetros:
+    - dirPrincipal: Dirección / Primera dirección hacia dónde irá el recorrido.
+    - dirSecundaria: Dirección / Segunda dirección hacia dónde irá el recorrido.
+    Precondición:
+    - Ninguna.
+    */
+    IrAlBorde(opuesto(dirPrincipal))
+    IrAlBorde(opuesto(dirSecundaria))
+}
+
+-------------------------------------------------------------------------------------------
+
+function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito: 
+    - Indica si hay una siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / primera dirección a tener en cuenta si hay celdas.
+    - dirSecundaria: Dirección / segunda dirección a tener en cuenta si hay celdas.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(dirPrincipal) || puedeMover(dirSecundaria))
+}
+
+-------------------------------------------------------------------------------------------
+
+procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito:
+    - Dirigir el cabezal a la siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / Primera dirección hacia dónde se moverá en el recorrido.
+    - dirSecundaria: Dirección / Segunda dirección hacia dónde se moverá en el recorrido.
+    Precondición:
+    - **dirPrincipal** y **dirSecundaria** no pueden ser opuestas ni iguales.
+    */
+    if (puedeMover(dirPrincipal)) then {
+        Mover(dirPrincipal)
+    }
+    else {
+        IrAlBorde(opuesto(dirPrincipal))
+        Mover(dirSecundaria)
+    }
+}
+
+-------------------------------------------------------------------------------------------
 
 
 
