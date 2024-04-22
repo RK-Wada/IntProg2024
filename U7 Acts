@@ -596,6 +596,74 @@ procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
 
 e) 
 
+procedure Polinizar(){
+    /*
+    Propósito: Polinizar la celda lindante en la dirección Este, generando tantas semillas en esa celda como árboles haya en la celda actual, menos 3. En caso de haber 3 o menos árboles, no hará nada. El cabezal finaliza en la celda inicial.
+    Precondición: 
+    - Ninguna.
+    Observaciones:
+    - Los árboles se ven representados como bolitas verdes.
+    - Las semillas se ven representadas como bolitas rojas. 
+    */
+    if (arbol() >= 4 && puedeMover(Este)) then {
+        PonerSemillasAlEste()
+    }
+}
+
+procedure PonerSemillasAlEste(){
+    /*
+    Propósito: Poner semillas en la celda lindante a la celda actual. La cantidad de las semillas a poner es la cantidad de árboles en la celda actual menos tres. El cabezal finaliza en la celda inicial.
+    Precondición: 
+    - Debe haber al menos una celda al este de la celda actual.
+    */
+    repeat (arbol()-3){
+            Mover_VecesAl_ (1, Este)
+            Poner_DeColor_ (1, Rojo)
+            Mover_VecesAl_ (1, Oeste)
+    }
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+function arbol(){
+    /*
+    Propósito:
+    - Indica que un árbol es representado con el color verde.
+    Precondición: 
+    - Ninguna.
+    Tipo: Color.
+    */
+    return (nroBolitas(Verde))
+}
+
+Ejercicio 6)
+
+a) 
+
 
 
 
