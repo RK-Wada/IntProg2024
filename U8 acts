@@ -473,6 +473,387 @@ procedure CompletarHasta_De_EnElTablero(cantidad, color){
 
 Ejercicio 8) 
 
+procedure IrHastaLaBolitaRojaHacia_ (direccionABuscar){
+    /*
+    Propósito: Dirigir el cabezal a la celda más cercana a la celda actual hacia la dirección **direccionABuscar** que posea una bolita de color Rojo. El cabezal finaliza en la celda dónde se encuentre la bolita.
+    Parámetros: 
+    - direccionABuscar: Dirección / dirección hacia dónde mover el cabezal.
+    Precondición:
+    - Ninguna.
+    Observaciones:
+    - Si hay una bolita roja en la celda actual, el cabezal no permanece en la celda actual. 
+    */
+    Mover_VecesAl_(1, direccionABuscar)
+    while (not hayBolitas(Rojo) && puedeMover(direccionABuscar)){
+        Mover_VecesAl_(1, direccionABuscar)
+    }
+    
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio 9) 
+
+procedure IrALaSiguienteVacíaHacia_(direccion){
+    /*
+    Propósito: 
+    - Posicionar el cabezal en la celda más cercana a la celda actual hacia la dirección **direccion** que se encuentre vacía. En caso de no haber ningúna vacía, dejar el cabezal en el borde de la dirección **dirección**. 
+    Parámetros: 
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondición:
+    - Ninguna.
+    Observaciones:
+    - En caso de que la celda actual esté vacía, el cabezal no permanece en la misma.
+    */
+    Mover_VecesAl_(1, direccion)
+    while (esCeldaConBolitas() && puedeMover(direccion)){
+        Mover_VecesAl_(1, direccion)
+    }
+    
+}
+
+function esCeldaConBolitas(){
+    /*
+    Propósito: Indica si la celda actual hay al menos una bolita de cualquier color.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (hayBolitas(Rojo) || hayBolitas(Verde) || hayBolitas(Azul) || hayBolitas(Negro))
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio 10)
+
+procedure IrHastaLaQueTengaUnaDeCada(){
+    /*
+    Propósito: Dirigir el cabezal a cualquier celda del tablero que contenga una bolita de cada color. En caso de que no hubiera ninguna celda que cumpla con dicha característica, hacer BOOM.
+    Precondición:
+    - Ninguna.
+    */
+    IrAEsquinaAl_Y_ (Oeste, Sur)
+    while (not hayAlMenosUnaDeCada() && haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)){
+        IrASiguienteCeldaEnUnRecorridoAl_Y_ (Este, Norte)
+    }
+}
+
+procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito:
+    - Dirigir el cabezal a la siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / Primera dirección hacia dónde se moverá en el recorrido.
+    - dirSecundaria: Dirección / Segunda dirección hacia dónde se moverá en el recorrido.
+    Precondición:
+    - **dirPrincipal** y **dirSecundaria** no pueden ser opuestas ni iguales.
+    */
+    if (puedeMover(dirPrincipal)) then {
+        Mover(dirPrincipal)
+    }
+    else {
+        IrAlBorde(opuesto(dirPrincipal))
+        Mover(dirSecundaria)
+    }
+}
+
+function hayAlMenosUnaDeCada(){
+    /*
+    Propósito: Indica si en la celda actual hay al menos 1 bolita de cada color.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano. 
+    */
+    return (hayBolitas(Rojo) && hayBolitas(Verde) && hayBolitas(Negro) && hayBolitas(Azul))
+}
+
+procedure IrAEsquinaAl_Y_ (primeraDireccion, segundaDireccion){
+    /*
+    Propósito: Dadas dos direcciones, mover el cabezal hacia la esquina entre dichas direcciones.
+    Parámetros:
+    - primeraDireccion: dirección / Primera dirección hacia la cual mover el cabezal.
+    - segundaDireccion: dirección / Segunda dirección hacia la cual mover el cabezal.
+    Precondiciones:  Ninguna.
+    */    
+    IrAlBorde(primeraDireccion)
+    IrAlBorde(segundaDireccion)
+}
+
+function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito: 
+    - Indica si hay una siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / primera dirección a tener en cuenta si hay celdas.
+    - dirSecundaria: Dirección / segunda dirección a tener en cuenta si hay celdas.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(dirPrincipal) || puedeMover(dirSecundaria))
+}
+
+Ejercicio 12) 
+
+procedure ComerPiezaNegraConTorreHacia_(direccionAComer){
+    /*
+    Propósito: Comer la pieza negra más próxima a la celda actual hacia la dirección **direccionAComer**, dejando la torre en dicha celda. 
+    Parámetros:
+    - direccionAComer: Dirección / dirección hacia dónde mover el cabezal. 
+    Precondición:
+    - Ninguna.
+    Observaciones: 
+    - Es un recorrido de procesamiento sobre la celda del tablero, quitando la pieza negra más próxima hacia la celda actual hacia la dirección **direccionAComer** y moviendo la torre blanca.
+    - El cabezal se encuentra sobre la torre blanca.
+    */
+    while (not hayUnaPiezaNegra && puedeMover(direccionAComer)){
+        MoverTorreBlancaHacia_(direccionAComer)
+    }
+    ComerPiezaNegra()
+}
+
+function hayUnaPiezaNegra()
+/*
+PROPÓSITO: Indica si hay una pieza negra en la
+celda actual.
+TIPO: Booleano
+PRECONDICIONES:
+* Ninguna
+*/
+
+procedure ComerPiezaNegra()
+/*
+PROPÓSITO: Come la pieza negra en la celda actual.
+PRECONDICIONES:
+* Hay una pieza negra en la celda actual
+*/
+
+procedure MoverTorreBlancaHacia_(direcciónAMover)
+/*
+PROPÓSITO: Mueve la torre blanca una celda en la
+dirección dada.
+PARÁMETROS:
+* direcciónAMover: Dirección - La dirección
+hacia la cual mover la pieza.
+PRECONDICIONES:
+* Hay una celda en la dirección dada.
+*/
+
+Ejercicio 13)
+
+a) 
+
+CENTRAL
+
+function esDepositoCentral() {
+    /*
+    Propósito: Indica si el cabezal está en el deposito central.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==3)
+}
+
+LOCAL
+
+function esDepositoLocal() {
+    /*
+    Propósito: Indica si el cabezal está en un deposito local.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==2)
+}
+
+b) 
+
+procedure IrDeCentralAlLocal_(direccion){
+    /*
+    Propósito: Dirigir el cabezal hacia el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito local.
+    Parámetros: 
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondición: 
+    - El cabezal debe estar ubicado sobre la celda que contenga el deposito central.
+    */
+    while (not esDepositoLocal() && puedeMover(direccion)){
+        Mover(direccion)
+    }
+}
+
+function esDepositoCentral() {
+    /*
+    Propósito: Indica si el cabezal está en el deposito central.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==3)
+}
+
+function esDepositoLocal() {
+    /*
+    Propósito: Indica si el cabezal está en un deposito local.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==2)
+}
+
+c) 
+
+procedure IrDeLocal_ACentral(direccion){
+    /*
+    Propósito: Dirigir el cabezal hacia el deposito central desde el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito central.
+    Parámetros: 
+    - direccion: Dirección / Dirección hacia dónde está ubicado el deposito local dónde se encuentra el cabezal.
+    Precondición: 
+    - El cabezal debe estar ubicado sobre la celda que contenga el deposito local de la dirección **direccion**.
+    */
+    while (not esDepositoCentral() && puedeMover(opuesto (direccion))){
+        Mover(opuesto(direccion))
+    }
+}
+
+function esDepositoCentral() {
+    /*
+    Propósito: Indica si el cabezal está en el deposito central.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==3)
+}
+
+function esDepositoLocal() {
+    /*
+    Propósito: Indica si el cabezal está en un deposito local.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==2)
+}
+
+d) 
+
+procedure Llevar_MercaderíasAlLocal_(cantidad, direccion){
+    /*
+    Propósito: LLevar la cantidad **cantidad** de mercadería desde el deposito central al deposito local de la dirección **direccion**. Si en el deposito central hay menos mercadería que en **cantidad**, el procedimiento no hace nada. El cabezal debe volver y finalizar en el deposito central.
+    Parámetros:
+    - cantidad: Número / cantidad de mercadería a llevar al deposito local.
+    - direccion: Dirección / dirección hacia dónde queda el deposito local.
+    Precondición:
+    - El cabezal debe estar ubicado sobre la celda que contenga el deposito central.
+    */
+    if (nroBolitas(Azul)>=cantidad) then {
+        Sacar_DeColor_(cantidad, Azul)
+        IrDeCentralAlLocal_(direccion)
+        Poner_DeColor_(cantidad, Azul)
+        IrDeLocal_ACentral(direccion)
+    }
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+    /*
+    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
+    Parámetros: 
+    - cantidadASacar: número / cantidad de bolitas a sacar.
+    - colorASacar: color / color de las bolitas a sacar.
+    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    */
+    repeat(cantidadASacar){
+        Sacar(colorASacar)
+    }
+}
+
+procedure IrDeLocal_ACentral(direccion){
+    /*
+    Propósito: Dirigir el cabezal hacia el deposito central desde el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito central.
+    Parámetros: 
+    - direccion: Dirección / Dirección hacia dónde está ubicado el deposito local dónde se encuentra el cabezal.
+    Precondición: 
+    - El cabezal debe estar ubicado sobre la celda que contenga el deposito local de la dirección **direccion**.
+    */
+    while (not esDepositoCentral() && puedeMover(opuesto (direccion))){
+        Mover(opuesto(direccion))
+    }
+}
+
+procedure IrDeCentralAlLocal_(direccion){
+    /*
+    Propósito: Dirigir el cabezal hacia el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito local.
+    Parámetros: 
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondición: 
+    - El cabezal debe estar ubicado sobre la celda que contenga el deposito central.
+    */
+    while (not esDepositoLocal() && puedeMover(direccion)){
+        Mover(direccion)
+    }
+}
+
+function esDepositoCentral() {
+    /*
+    Propósito: Indica si el cabezal está en el deposito central.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==3)
+}
+
+function esDepositoLocal() {
+    /*
+    Propósito: Indica si el cabezal está en un deposito local.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (nroBolitas(Negro)==2)
+}
+
+e) 
+
+
+
 
 
 
