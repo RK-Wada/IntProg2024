@@ -1,0 +1,33 @@
+Ejercicio 1) 
+
+function hayBolitas_EnCeldaAl_(color, direccion){
+    /*
+    Propósito: Indica si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. Si no hay una celda lindante, hace BOOM.
+    Parámetros: 
+    - color: Color / color de las bolitas a ver.
+    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    Precondición: 
+    - Debe existir al menos una celda hacia la dirección **direccion**.
+    Tipo: Booleano.
+    */
+    Mover (direccion)
+    return (hayBolitas(color))
+}
+
+Ejercicio 2) 
+
+function hayBolitas_Al_(color, direccion){
+    /*
+    Propósito: Indica si existe una celda hacia la dirección **direccion** y si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. 
+    Parámetros: 
+    - color: Color / color de las bolitas a ver.
+    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(direccion) && hayBolitas_EnCeldaAl_(color, direccion))
+}
+
+Ejercicio 3) 
+
