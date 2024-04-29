@@ -209,6 +209,26 @@ procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
 
 -------------------------------------------------------------------------------------------
 
+function hayBolitas_Al_(color, direccion){
+    /*
+    Propósito: Indica si existe una celda hacia la dirección **direccion** y si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. 
+    Parámetros: 
+    - color: Color / color de las bolitas a ver.
+    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(direccion) && hayBolitas_EnCeldaAl_(color, direccion))
+}
+
+-------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
 
 
