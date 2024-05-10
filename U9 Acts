@@ -31,3 +31,42 @@ function hayBolitas_Al_(color, direccion){
 
 Ejercicio 3) 
 
+function hayBolitas_EnElBorde_(color, direccion){
+    /*
+    Propósito: Indica si en la celda que se encuentra en el borde hacia la dirección **direccion** hay bolitas del color **color**.
+    Parámetros:
+    - color: Color / color de las bolitas a ver.
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - Ninguna. 
+    Tipo: Booleano
+    */
+    IrAlBorde(direccion)
+    return (hayBolitas(color))
+}
+
+Ejercicio 4) 
+
+function hayBolitas_Hacia_(color, direccion){
+    /*
+    Propósito:
+    - Indica si en alguna celda hacia la dirección **direccion** existe alguna que contenga bolitas del color **color**. 
+    Parámetros:
+    - color: Color / color de las bolitas a ver.
+    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - Ninguna.
+    Tipo: Booleano.
+    Observaciones: 
+    - No se incluye la celda actual.
+    */
+    while (puedeMover(direccion) && not hayBolitas(color)){
+        Mover(direccion)
+    }
+    return (hayBolitas(color))
+}
+
+Ejercicio 5) 
+
+
+
