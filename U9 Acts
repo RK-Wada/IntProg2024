@@ -60,6 +60,7 @@ function hayBolitas_Hacia_(color, direccion){
     Observaciones: 
     - No se incluye la celda actual.
     */
+    Mover (direccion)
     while (puedeMover(direccion) && not hayBolitas(color)){
         Mover(direccion)
     }
@@ -67,6 +68,194 @@ function hayBolitas_Hacia_(color, direccion){
 }
 
 Ejercicio 5) 
+
+function hayCeldaVacíaHacia_ (direccion){
+    /*
+    Propósito:
+    - Indica si existe alguna celda vacia hacia la dirección **direccion**.
+    Parámetros:
+    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - Ninguna.
+    Tipo: Booleano.
+    Observaciones: 
+    - No se incluye la celda actual.
+    - Es un recorrido de búsqueda sobre las celdas del tablero.
+    */
+    Mover(direccion)
+    while (puedeMover(direccion) && not esCeldaVacia()){
+        Mover(direccion)
+    }
+    return (esCeldaVacia())
+}
+
+function esCeldaVacia(){
+    /*
+    Propósito: Indica si la celda actual está vacía.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro))
+}
+
+Ejercicio 6) 
+
+function hayAlgunaBolita_(color){
+    /*
+    Propósito: 
+    - Indica si en alguna de las celdas del tablero existe alguna bolita del color **color**.
+    Parámetros:
+    - color: Color / Color de las bolitas a ver. 
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    Observaciones: 
+    - Es un recorrido de busqueda sobre las celdas del tablero.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    while (not (hayBolitas(color)) && (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    }
+    return (hayBolitas(color))
+}
+
+procedure IrAPrimeraCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito:
+    - Dirigir el cabezal hacia la primera celda en dónde se comenzará el recorrido de las direcciones **dirPrincipal** y **dirSecundaria**
+    Parámetros:
+    - dirPrincipal: Dirección / Primera dirección hacia dónde irá el recorrido.
+    - dirSecundaria: Dirección / Segunda dirección hacia dónde irá el recorrido.
+    Precondición:
+    - la dirPrincipal y dirSecundaria no pueden ser opuestas ni iguales.
+    */
+    IrAlBorde(opuesto(dirPrincipal))
+    IrAlBorde(opuesto(dirSecundaria))
+}
+
+procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito:
+    - Dirigir el cabezal a la siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / Primera dirección hacia dónde se moverá en el recorrido.
+    - dirSecundaria: Dirección / Segunda dirección hacia dónde se moverá en el recorrido.
+    Precondición:
+    - **dirPrincipal** y **dirSecundaria** no pueden ser opuestas ni iguales.
+    */
+    if (puedeMover(dirPrincipal)) then {
+        Mover(dirPrincipal)
+    }
+    else {
+        IrAlBorde(opuesto(dirPrincipal))
+        Mover(dirSecundaria)
+    }
+}
+
+function esCeldaVacia(){
+    /*
+    Propósito: Indica si la celda actual está vacía.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro))
+}
+
+function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito: 
+    - Indica si hay una siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / primera dirección a tener en cuenta si hay celdas.
+    - dirSecundaria: Dirección / segunda dirección a tener en cuenta si hay celdas.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(dirPrincipal) || puedeMover(dirSecundaria))
+}
+
+Ejercicio 7)
+
+function hayAlgunaCeldaVacia(){
+    /*
+    Propósito: 
+    - Indica si hay alguna celda vacía en el tablero.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    Observaciones: 
+    - Es un recorrido de busqueda sobre las celdas del tablero.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    while ((not esCeldaVacia()) && (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte))) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    }
+    return (esCeldaVacia())
+}
+
+procedure IrAPrimeraCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito:
+    - Dirigir el cabezal hacia la primera celda en dónde se comenzará el recorrido de las direcciones **dirPrincipal** y **dirSecundaria**
+    Parámetros:
+    - dirPrincipal: Dirección / Primera dirección hacia dónde irá el recorrido.
+    - dirSecundaria: Dirección / Segunda dirección hacia dónde irá el recorrido.
+    Precondición:
+    - la dirPrincipal y dirSecundaria no pueden ser opuestas ni iguales.
+    */
+    IrAlBorde(opuesto(dirPrincipal))
+    IrAlBorde(opuesto(dirSecundaria))
+}
+
+procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito:
+    - Dirigir el cabezal a la siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / Primera dirección hacia dónde se moverá en el recorrido.
+    - dirSecundaria: Dirección / Segunda dirección hacia dónde se moverá en el recorrido.
+    Precondición:
+    - **dirPrincipal** y **dirSecundaria** no pueden ser opuestas ni iguales.
+    */
+    if (puedeMover(dirPrincipal)) then {
+        Mover(dirPrincipal)
+    }
+    else {
+        IrAlBorde(opuesto(dirPrincipal))
+        Mover(dirSecundaria)
+    }
+}
+
+function esCeldaVacia(){
+    /*
+    Propósito: Indica si la celda actual está vacía.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro))
+}
+
+function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
+    /*
+    Propósito: 
+    - Indica si hay una siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
+    Parámetros:
+    - dirPrincipal: Dirección / primera dirección a tener en cuenta si hay celdas.
+    - dirSecundaria: Dirección / segunda dirección a tener en cuenta si hay celdas.
+    Precondición:
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(dirPrincipal) || puedeMover(dirSecundaria))
+}
+
+Ejercicio 8) 
 
 
 
