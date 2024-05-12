@@ -126,7 +126,7 @@ function esCeldaVacia(){
     - Ninguna
     Tipo: Booleano
     */
-    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro)
+    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro))
 }
 
 -------------------------------------------------------------------------------------------
