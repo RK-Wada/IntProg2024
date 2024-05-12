@@ -257,5 +257,14 @@ function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
 
 Ejercicio 8) 
 
-
+procedure CopiarCeldaAl_(direccion){
+    /*
+    Propósito:
+    - Copiar los contenidos de la celda actual a la celda lindante hacia 
+    Parámetros:
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - Debe haber una celda lindante de la celda actual hacia la dirección **direccion**. 
+    */ 
+}
 
