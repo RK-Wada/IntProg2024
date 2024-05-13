@@ -71,6 +71,21 @@ procedure SacarTodasLasDeColor_ (colorASacar){
 
 -------------------------------------------------------------------------------------------
 
+procedure VaciarCelda(){
+    /*
+    Propósito: 
+    - Eliminar todas las bolitas de colores de la celda actual.
+    Precondiciones:
+    - Ninguna.
+    */
+    SacarTodasLasDeColor_(Rojo)
+    SacarTodasLasDeColor_(Verde)
+    SacarTodasLasDeColor_(Negro)
+    SacarTodasLasDeColor_(Azul)
+}
+
+-------------------------------------------------------------------------------------------
+
 procedure Poner_Si_ (color, condicion){
     /*
     Propósito: Poner una bolita de color **color** en la celda actual si la condición es verdadera.
@@ -224,7 +239,239 @@ function hayBolitas_Al_(color, direccion){
 
 -------------------------------------------------------------------------------------------
 
+function minimoEntre_Y_(primerValor, segundoValor){
+    /*
+    Propósito: 
+    - Indica cual de los dos valores "primerValor" y "segundoValor" es más chico.
+    Parámetros: 
+    - primerValor: Cualquiera / Primer valor a comparar.
+    - segundoValor: Cualquiera / Segundo valor a comparar.
+    Tipo: Número
+    */ 
+    return (choose (primerValor) when (primerValor <= segundoValor)
+    segundoValor otherwise)
+}
 
+-------------------------------------------------------------------------------------------
+
+function minimoEntre_Y_(primerValor, segundoValor){
+    /*
+    Propósito: 
+    - Indica cual de los dos valores "primerValor" y "segundoValor" es más chico.
+    Parámetros: 
+    - primerValor: Cualquiera / Primer valor a comparar.
+    - segundoValor: Cualquiera / Segundo valor a comparar.
+    Tipo: Número
+    */ 
+    return (choose (primerValor) when (primerValor >= segundoValor)
+    segundoValor otherwise)
+}
+
+-------------------------------------------------------------------------------------------
+
+function distanciaAlBorde_(bordeAIndicar){
+    /*
+    Propósito: 
+    - Indica la cantidad de celdas que hay entre la celda actual y el borde **bordeAIndicar**
+    Parámetro: 
+    - bordeAIndicar: Dirección / dirección hacia dónde cuenta el cabezal.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número.
+    Observaciones:
+    - Es un recorrdido de acumulación sobre las celdas del tablero. Contando las celdas hacia el borde desde la celda actual. (la celda actual no está incluida, por lo que si la celda está en el borde **bordeAIndicar**, la distancia es 0)
+    */
+    contadorDeCeldas := 0 
+    while (puedeMover(bordeAIndicar)) {
+        Mover(bordeAIndicar)
+        contadorDeCeldas := contadorDeCeldas + 1
+    }
+    return (contadorDeCeldas)
+}
+
+-------------------------------------------------------------------------------------------
+
+a) 
+function coordenadaX(){
+    /*
+    Propósito:
+    - Indicar la coordenada de la columna de la celda actual.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número
+    Observaciones: 
+    - Es un recorrido de acumulación sobre las celdas del tablero. Contando las celdas desde la celda actual hasta el borde Oeste. (la celda actual está incluida) 
+    */
+    return (distanciaAlBorde_(Oeste))
+}
+
+b) 
+function coordenadaY(){
+    /*
+    Propósito:
+    - Indicar la coordenada de la fila de la celda actual.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número
+    Observaciones: 
+    - Es un recorrido de acumulación sobre las celdas del tablero. Contando las celdas desde la celda actual hasta el borde Sur. (la celda actual está incluida) 
+    */
+    return (distanciaAlBorde_(Sur))
+}
+
+-------------------------------------------------------------------------------------------
+
+a) 
+function nroFilas(){
+    /*
+    Propósito:
+    - Indicar la cantidad de filas del tablero actual.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número
+    */
+    return (distanciaAlBorde_(Sur) + distanciaAlBorde_(Norte) + 1)
+}
+
+function distanciaAlBorde_(bordeAIndicar){
+    /*
+    Propósito: 
+    - Indica la cantidad de celdas que hay entre la celda actual y el borde **bordeAIndicar**
+    Parámetro: 
+    - bordeAIndicar: Dirección / dirección hacia dónde cuenta el cabezal.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número.
+    Observaciones:
+    - Es un recorrdido de acumulación sobre las celdas del tablero. Contando las celdas hacia el borde desde la celda actual. (la celda actual no está incluida)
+    */
+    contadorDeCeldas := 0 
+    while (puedeMover(bordeAIndicar)) {
+        Mover(bordeAIndicar)
+        contadorDeCeldas := contadorDeCeldas + 1
+    }
+    return (contadorDeCeldas)
+}
+
+b) 
+function nroColumnas(){
+    /*
+    Propósito:
+    - Indicar la cantidad de columnas del tablero actual.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número
+    */
+    return (distanciaAlBorde_(Este) + distanciaAlBorde_(Oeste) + 1)
+}
+
+function distanciaAlBorde_(bordeAIndicar){
+    /*
+    Propósito: 
+    - Indica la cantidad de celdas que hay entre la celda actual y el borde **bordeAIndicar**
+    Parámetro: 
+    - bordeAIndicar: Dirección / dirección hacia dónde cuenta el cabezal.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número.
+    Observaciones:
+    - Es un recorrdido de acumulación sobre las celdas del tablero. Contando las celdas hacia el borde desde la celda actual. (la celda actual no está incluida)
+    */
+    contadorDeCeldas := 0 
+    while (puedeMover(bordeAIndicar)) {
+        Mover(bordeAIndicar)
+        contadorDeCeldas := contadorDeCeldas + 1
+    }
+    return (contadorDeCeldas)
+}
+
+-------------------------------------------------------------------------------------------
+
+function unoSi_CeroSiNo(valor){
+    /*
+    Propósito: 
+    - Indica si la condición se cumple o no. Si se cumple, indica 1 y sino, indica 0.
+    Parámetros:
+    - valor: Cualquiera / Valor a evaluar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (choose 1 when (valor)
+                    0 otherwise)
+}
+
+-------------------------------------------------------------------------------------------
+
+function nroVacias(){
+    /*
+    Propósito: 
+    - Indicar la cantidad de celdas vacías en el tablero.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número.
+    Observaciones: 
+    - Es un recorrido de acumulación, recorriendo las celdas del tablero. Contando las celdas vacías.
+    */
+    IrAEsquinaAl_Y_(Oeste, Sur)
+    nroCeldasVacias := 0
+    nroCeldasVacias := nroCeldasVacias + unoSi_CeroSiNo(esCeldaVacia())
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)){
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        nroCeldasVacias := nroCeldasVacias + unoSi_CeroSiNo(esCeldaVacia())
+    }
+    return (nroCeldasVacias)
+}
+
+-------------------------------------------------------------------------------------------
+
+function cantidadDeCeldasConBolitasDeColor_ (color){
+    /*
+    Propósito: 
+    - Indica la cantidad de celdas que contienen al menos una bolita del color **color**.
+    Parámetros: 
+    - color: Color / Color a evaluar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número.
+    Observaciones:
+    - Es un recorrido de acumulación, recorriendo las celdas del tablero. Acumula la cantidad de celdas que tienen al menos una bolita del color **color**.
+    */
+    IrAEsquinaAl_Y_(Oeste, Sur)
+    nroCeldasConBolitas := 0
+    nroCeldasConBolitas := nroCeldasConBolitas + unoSi_CeroSiNo(hayBolitas(color))
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)){
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        nroCeldasConBolitas := nroCeldasConBolitas + unoSi_CeroSiNo(hayBolitas(color))
+    }
+    return (nroCeldasConBolitas)
+}
+
+-------------------------------------------------------------------------------------------
+
+function nroBolitasTotalDeColor_ (color){
+    /*
+    Propósito: 
+    - Indica la cantidad de bolitas totales del color **color** en el tablero.
+    Parámetros: 
+    - color: Color / Color a evaluar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número.
+    Observaciones:
+    - Es un recorrido de acumulación, recorriendo las celdas del tablero. Acumula la cantidad de bolitas totales del color **color** que hay en el tablero.
+    */
+    IrAEsquinaAl_Y_(Oeste, Sur)
+    nroTotalBolitas := 0
+    nroTotalBolitas := nroTotalBolitas + nroBolitas(color)
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        nroTotalBolitas := nroTotalBolitas + nroBolitas(color)
+    }
+    return (nroTotalBolitas)
+}
+
+-------------------------------------------------------------------------------------------
 
 
 
