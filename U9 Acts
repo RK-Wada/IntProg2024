@@ -1119,11 +1119,104 @@ function direcciónHaciaLaCualHayBolitasDe_ (colorAIndicar){
     - Es un recorrido de busqueda sobre las celdas del tablero. Indicando hacia qué dirección hay una bolita de color **colorAIndicar**.
     */
     dirActual := minDir()
-    while (dirActual /= maxDir()){
-        Mover
+    while (dirActual /= maxDir() && not hayBolitas_Al_(colorAIndicar, dirActual)){
         dirActual := siguiente (dirActual) 
     }
+    return (dirActual)
 }
+
+function hayBolitas_Al_(color, direccion){
+    /*
+    Propósito: Indica si existe una celda hacia la dirección **direccion** y si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. 
+    Parámetros: 
+    - color: Color / color de las bolitas a ver.
+    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(direccion) && hayBolitas_EnCeldaAl_(color, direccion))
+}
+
+function hayBolitas_EnCeldaAl_(color, direccion){
+    /*
+    */
+    Mover(direccion)
+    return(hayBolitas(color))
+}
+
+Ejercicio 31) 
+
+function direcciónHaciaLaCualHayBolitasDe_ (colorAIndicar){
+    /*
+    Propósito: 
+    - Indica la dirección hacia la cual hay bolitas del color **colorAIndicar**.
+    Parámetros: 
+    - colorAIndicar: Color / color de las bolitas a indicar.
+    Precondiciones: 
+    - Debe existir una celda vecina que tenga al menos una bolita del color **colorAIndicar**.
+    - No hay más de una celda vecina con bolitas del color **colorAIdentificar**.
+    Tipo: Dirección.
+    Observaciones: 
+    - Es un recorrido de busqueda sobre las celdas del tablero. Indicando hacia qué dirección hay una bolita de color **colorAIndicar**.
+    */
+    dirActual := minDir()
+    contadorDeCeldas := 0
+    while (dirActual /= maxDir()){
+        dirActual := siguiente (dirActual) 
+    }
+    return (dirActual)
+}
+
+contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
+
+function unoSi_CeroSiNo(valor){
+    /*
+    Propósito: 
+    - Indica si la condición se cumple o no. Si se cumple, indica 1 y sino, indica 0.
+    Parámetros:
+    - valor: Cualquiera / Valor a evaluar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (choose 1 when (valor)
+                    0 otherwise)
+}
+
+function esCeldaConBolitas(){
+    /*
+    Propósito: Indica si la celda actual hay al menos una bolita de cualquier color.
+    Precondición:
+    - Ninguna
+    Tipo: Booleano
+    */
+    return (hayBolitas(Rojo) || hayBolitas(Verde) || hayBolitas(Azul) || hayBolitas(Negro))
+}
+
+function hayBolitas_Al_(color, direccion){
+    /*
+    Propósito: Indica si existe una celda hacia la dirección **direccion** y si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. 
+    Parámetros: 
+    - color: Color / color de las bolitas a ver.
+    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    Precondición: 
+    - Ninguna.
+    Tipo: Booleano.
+    */
+    return (puedeMover(direccion) && hayBolitas_EnCeldaAl_(color, direccion))
+}
+
+function hayBolitas_EnCeldaAl_(color, direccion){
+    /*
+    */
+    Mover(direccion)
+    return(hayBolitas(color))
+}
+
+Ejercicio 32) 
+
+
 
 
 
