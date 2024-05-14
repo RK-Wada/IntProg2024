@@ -1147,28 +1147,35 @@ function hayBolitas_EnCeldaAl_(color, direccion){
 
 Ejercicio 31) 
 
-function direcciónHaciaLaCualHayBolitasDe_ (colorAIndicar){
+function cantidadDeVecinasConBolitas(){
     /*
     Propósito: 
-    - Indica la dirección hacia la cual hay bolitas del color **colorAIndicar**.
-    Parámetros: 
-    - colorAIndicar: Color / color de las bolitas a indicar.
+    - Indica la cantidad de celdas vecinas con bolitas de cualquier color. 
     Precondiciones: 
-    - Debe existir una celda vecina que tenga al menos una bolita del color **colorAIndicar**.
-    - No hay más de una celda vecina con bolitas del color **colorAIdentificar**.
-    Tipo: Dirección.
+    - Ninguna. 
+    Tipo: Número.
     Observaciones: 
-    - Es un recorrido de busqueda sobre las celdas del tablero. Indicando hacia qué dirección hay una bolita de color **colorAIndicar**.
+    - Es un recorrido de acumulación sobre las celdas del tablero. Acumulando la cantidad de celdas que tengan al menos una bolita de cualquier color.
     */
     dirActual := minDir()
     contadorDeCeldas := 0
     while (dirActual /= maxDir()){
+        Mover(dirActual)
+        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
+        Mover(siguiente(dirActual))
+        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
+        Mover(previo(dirActual)) 
+        Mover(opuesto(dirActual)) 
         dirActual := siguiente (dirActual) 
     }
-    return (dirActual)
+        Mover(dirActual)
+        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
+        Mover(siguiente(dirActual))
+        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
+        Mover(previo(dirActual)) 
+        Mover(opuesto(dirActual)) 
+    return (contadorDeCeldas)
 }
-
-contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
 
 function unoSi_CeroSiNo(valor){
     /*
@@ -1194,27 +1201,61 @@ function esCeldaConBolitas(){
     return (hayBolitas(Rojo) || hayBolitas(Verde) || hayBolitas(Azul) || hayBolitas(Negro))
 }
 
-function hayBolitas_Al_(color, direccion){
-    /*
-    Propósito: Indica si existe una celda hacia la dirección **direccion** y si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. 
-    Parámetros: 
-    - color: Color / color de las bolitas a ver.
-    - direccion: Dirección / dirección hacia dónde mover el cabezal.
-    Precondición: 
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (puedeMover(direccion) && hayBolitas_EnCeldaAl_(color, direccion))
-}
-
-function hayBolitas_EnCeldaAl_(color, direccion){
-    /*
-    */
-    Mover(direccion)
-    return(hayBolitas(color))
-}
-
 Ejercicio 32) 
+
+procedure Poner_EnLineaHacia_De_IncrementandoDeA_ComenzandoEn_(cantidad, direccion, color, factorDeIncremento, numeroInicial){
+    /*
+    Propósito: 
+    - Pone una línea de bolitas hacia la dirección **direccion** de un largo indicado por el número **cantidad**, del color **colo** y que inicia con el número **numeroInicial** en la primera línea y va incrementando y sumando por cada celda que recorre la cantidad de bolitas de la celda anterior más el número **factorDeIncremento**.
+    - El cabezal vuelve y finaliza en la celda inicial.
+    Parámetros:  
+    - cantidad: Número / Cantidad de celdas que ocupará la fila.
+    - direccion: Dirección / Dirección hacia dónde se hará la fila. 
+    - color: Color / Color de las bolitas que conforman la fila.
+    - factorDeIncremento: Número / Número que se le suma por cada celda.
+    - numeroInicial: Número / Número que corresponde a la primera celda de la fila.
+    Precondiciones:
+    - Debe haber al menos **cantidad** - 1 celdas hacia la dirección **direccion** desde la celda actual.
+    */
+    Poner_DeColor_ (numeroInicial, color)
+    contadorBolitasAPoner := numeroInicial
+    repeat (cantidad - 1){
+        Mover(direccion)
+        Poner_DeColor_ (contadorBolitasAPoner + factorDeIncremento, color)
+        contadorBolitasAPoner := (contadorBolitasAPoner + factorDeIncremento)
+    }
+        Mover_VecesAl_(cantidad - 1, opuesto (direccion))
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
+    /*
+    Propósito: Dado un número "cantidadAMover" y una dirección "direccionAMover", mover el cabezal tantas veces como el número dado hacia la direccón dada.
+    Parámetros:
+    - cantidadAMover: número / cantidad de celdas a mover el cabezal.
+    - direccionAMover: dirección / dirección hacia dónde mover el cabezal.
+    Precondiciones: Debe haber al menos tantas celdas como se indique en "cantidadAMover" hacia "direccionAMover"
+    */   
+    repeat (cantidadAMover){
+        Mover(direccionAMover)
+    }
+}
+
+Ejercicio 34) 
+
+
 
 
 
