@@ -1253,9 +1253,69 @@ procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
     }
 }
 
-Ejercicio 34) 
+Ejercicio 36) 
 
+function colorMasChicoDelCualHayBolitas(){
+    /*
+    Propósito: 
+    - Indica el color más chico para el cual haya bolitas en la celda actual.
+    Precondiciones: 
+    - Debe haber al menos una bolita de cualquier color en la cleda actual.
+    Tipo: 
+    - Color.
+    Observaciones: 
+    - Es un recorrido por maximo-minimo en la celda actual. Buscando el color mínimo sobre el cual hay bolitas.
+    */
+    colorAIndicar := minColor()
+    while (not hayBolitas(colorAIndicar) && colorAIndicar /= maxColor()) {
+        colorAIndicar := siguiente (colorAIndicar) 
+    }
+    return (colorAIndicar)
+}
 
+Ejercicio 37) 
+
+function colorMasGrandeDelCualHayBolitas(){
+    /*
+    Propósito: 
+    - Indica el color más grande para el cual haya bolitas en la celda actual.
+    Precondiciones: 
+    - Debe haber al menos una bolita de cualquier color en la cleda actual.
+    Tipo: 
+    - Color.
+    Observaciones: 
+    - Es un recorrido por maximo-minimo en la celda actual. Buscando el color máximo sobre el cual hay bolitas.
+    */
+    colorAIndicar := maxColor()
+    while (not hayBolitas(colorAIndicar) && colorAIndicar /= minColor()) {
+        colorAIndicar := previo (colorAIndicar) 
+    }
+    return (colorAIndicar)
+}
+
+Ejercicio 39) 
+
+procedure IrAVaciaNumero_(numeroDeVacia){
+    /*
+    Propósito: 
+    - Posicionar el cabezal en la celda vacía número **numeroDeVacia**. Si no hay suficientes celdas vacías, deja el cabezal en la esquina NorEste.
+    Parámetros: 
+    - numeroDeVacia: Número / Número de celda vacía sobre la cual posicionar el cabezal.
+    Precondiciones: 
+    - Ninguna.
+    Observaciones: 
+    - Es un recorrido de busqueda sobre las celdas del tablero. Buscando la celda vacía número **numeroDeVacia**.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    celdasVaciasYaVistas := 0
+    celdasVaciasYaVistas := celdasVaciasYaVistas + unoSi_CeroSiNo(esCeldaVacia())
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte) && celdasVaciasYaVistas < numeroDeVacia) {
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        celdasVaciasYaVistas := celdasVaciasYaVistas + unoSi_CeroSiNo(esCeldaVacia())
+    }
+}
+
+Ejercicio 40) 
 
 
 
