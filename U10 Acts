@@ -1,0 +1,183 @@
+Ejercicio 1)
+
+type DiaDeLaSemana is variant {
+    /*
+    Propósito: 
+    - Modelar los días de la semana.
+    */
+    case Lunes     {}
+    case Martes    {}
+    case Miercoles {}
+    case Jueves    {}
+    case Viernes   {}
+    case Sabado    {}
+    case Domingo   {}
+}
+
+Ejercicio 1, a) 
+
+function diaSiguiente_ (dia){
+    /*
+    Propósito: 
+    - Indica el día siguiente a **dia**.
+    Parámetros: 
+    - dia: DiaDeLaSemana
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - DiaDeLaSemana
+    */
+    return (choose Lunes when (dia == Domingo)
+                   Martes when (dia == Lunes)
+                   Miercoles when (dia == Martes)
+                   Jueves when (dia == Miercoles)
+                   Viernes when (dia == Jueves)
+                   Sabado when (dia == Viernes)
+                   Domingo otherwise)
+}
+
+Ejercicio 1, b) 
+
+function diaPrevio_ (dia){
+    /*
+    Propósito: 
+    - Indica el día previo al día **dia**.
+    Parámetros: 
+    - dia: DiaDeLaSemana.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - DiaDeLaSemana.
+    */
+    return (choose Lunes when (dia == Martes)
+                   Martes when (dia == Miercoles)
+                   Miercoles when (dia == Jueves)
+                   Jueves when (dia == Viernes)
+                   Viernes when (dia == Sabado)
+                   Sabado when (dia == Domingo)
+                   Domingo otherwise)
+}
+
+Ejercicio 1, c) 
+
+function esDiaDeFinDeSemana_ (dia){
+    /*
+    Propósito: 
+    - Indica si el día **dia** es día de fin de semana.
+    Parámetros:
+    - dia: DiaDeLaSemana.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (dia == Sabado || dia == Domingo)
+}
+
+Ejercicio 2) 
+
+Ejercicio 3) 
+
+type Carta is record {
+    /*
+    Propósito: 
+    - Modela cartas españolas para el truco.
+    Inv. Rep: 
+    - El número está entre el 1 y el 7 o el 10 y el 12.
+    */
+    field numero  // Un valor del tipo Número
+    field palo    // Un valor del tipo Palo.
+}
+
+type Palo is variant {
+    /*
+    Propósito: 
+    - Modela los palos de las cartas españolas.
+    */
+    Oros    {}
+    Espadas {}
+    Bastos  {}
+    Copas   {}
+}
+
+Ejercicio 3, a) 
+
+function anchoDeEspadas(){
+    /*
+    Propósito: 
+    - Indica la carta de 1 de espadas.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Carta.
+    */
+    return (Carta(numero <- 1, palo <- Espadas))
+}
+
+Ejercicio 3, b) 
+
+function anchoDeBastos(){
+    /*
+    Propósito: 
+    - Indica la carta de 1 de bastos.
+    Precondición:
+    - Ninguna.
+    Tipo: 
+    - Carta
+    */
+    return (Carta(numero <- 1, palo <- Bastos))
+}
+
+Ejercicio 3, c) 
+
+function laCarta_De_ (numeroDeLaCarta, paloDeLaCarta){
+    /*
+    Propósito: 
+    - Indica la carta de número **numeroDeLaCarta** del palo **paloDeLaCarta**.
+    Parámetros: 
+    - numeroDeLaCarta: Número / Número de la carta.
+    - paloDeLaCarta: Palo / Palo de la carta.
+    Precondiciones: 
+    - **numeroDeLaCarta** Debe ser un número entre 1 y 7 o 10 y 12.
+    Tipo: 
+    - Carta.
+    */
+    return (Carta(numero <- numeroDeLaCarta, palo <- paloDeLaCarta))
+}
+
+Ejercicio 3, d) 
+
+function esUnAncho_(numero){
+    /*
+    Propósito: 
+    - Indica si el número **numero** es un ancho.
+    Parámetros: 
+    - numero: Número / Número de la carta.
+    Precondición: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (numero == 1)
+}
+
+Ejercicio 3, e) 
+
+function esFigura_(carta){
+    /*
+    Propósito: 
+    - Indica si el número **numero** corresponde a una figura.
+    Parámetros: 
+    - numero: Número / Número de la carta.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (numero(carta) == 10 || numero(carta) == 11 || numero(carta) == 12)
+}
+
+Ejercicio 3, f) 
+
+
+
