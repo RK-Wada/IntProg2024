@@ -569,5 +569,218 @@ function tienenMismaCantidadDeRojas_Y_(primerCelda, segundaCelda){
 
 Ejercicio 5, a)
 
+type Persona is record {
+    /*
+    Propósito: 
+    - Modelar una persona.
+    Inv. Rep.: 
+    - Ninguna.
+    */
+    field dni // Un valor de tipo Número.
+    field domicilio // Un valor de tipo String.
+    field esDonanteDeOrganos // Un valor de tipo Booleano.
+}
+
+Ejercicio 5, b)
+
+function sonConvivientes_Y_(primerPersona, segundaPersona){
+    /*
+    Propósito: 
+    - Indica si dos personas (**primerPersona** y **segundaPersona**) conviven en el mismo domicilio.
+    Parámetros:
+    - primerPersona: Persona / Primer persona a determinar si vive en el mismo domicilio.
+    - segundaPersona: PErsona / Segunda persona a determinar si vive en el mismo domicilio.
+    Precondiciones:
+    - Las personas **primerPersona** y **segundaPersona** no pueden ser la misma persona.
+    Tipo:
+    - Booleano.
+    */
+    return (domicilio(primerPersona) == domicilio(segundaPersona))
+}
+
+Ejercicio 5, c)
+
+function personaNacidaDe_(personaMadre){
+    /*
+    Propósito: 
+    - Indica una persona que es hijo/a de la persona **dniMadre**. 
+    Parámetros: 
+    - personaMadre: Persona / Madre de la persona a que nació.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Persona.
+    */
+    return (Persona (dni <- sinAsignar()
+                    , domicilio <- domicilio(personaMadre)
+                    , esDonanteDeOrganos <- False)
+}
+
+Ejercicio 5, d)
+
+function persona_RegistradaCon_(personaSinAsignar, dniAAsignar){
+    /*
+    Propósito: 
+    - Indica a la persona **personaSinAsignar** su nuevo número de DNI **dniAAsignar**. 
+    Parámetros:
+    - personaSinAsignar: Persona / Persona que no tiene dni asignado.
+    - dniAAsignar: Número / Número de DNI a asignar.
+    Precondiciones: 
+    - La persona **personaSinAsignar** no debe tener DNI asignado.
+    Tipo: 
+    - Persona.
+    */
+    return (Persona (dni <- dniAAsignar
+                    ,domicilio <- domicilio(personaSinAsignar)
+                    ,esDonanteDeOrganos <- esDonanteDeOrganos(personaSinAsignar))
+}
+
+Ejercicio 5, e)
+
+function persona_ConDomicilioNuevoEn_(personaDelDomicilio, domicilioACambiar){
+    /*
+    Propósito:
+    - Indica a la persona con su nuevo domicilio.
+    Parámetros:
+    - personaDelDomicilio: Persona / Persona a la cual asignarle el nuevo domicilio.
+    - domicilioACambiar: String / Nuevo domicilio a asignar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Persona.
+    */
+    return (Persona (personaDelDomicilio | domicilio <- domicilioACambiar))
+}
+
+Ejercicio 5, f)
+
+function persona_ConSituacionComoDonanteCambiada(personaACambiarDonar){
+    /*
+    Propósito: 
+    - Indica la persona **personaACambiarDonar** con la situación de donante cambiada.
+    Parámetros:
+    - personaACambiarDonar: Persona / Persona a cambiar su situación de donación.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Persona.
+    */
+    return (Persona(personaACambiarDonar | esDonanteDeOrganos <- not esDonanteDeOrganos(personaACambiarDonar))
+}
+
+Ejercicio 6) 
+
+type Empleado is record {
+    /*
+    Propósito: 
+    - Modela el perfil del empleado dentro de la empresa.
+    Inv. Rep.: 
+    - Ninguna.
+    */
+    field persona //  Un valor del tipo Persona.
+    field puesto // Un valor del tipo Puesto.
+    field sueldo // Un valor del tipo Número.
+}
+
+type Puesto is variant {
+    /*
+    PROPÓSITO: Modelar los diferentes puestos que hay
+    dentro de una empresa de software
+    */
+    case GestorDeProyecto {}
+    case LiderDeProyecto {}
+    case Desarrollador {}
+    case Operador {}
+}
+
+Ejercicio 6, a)
+
+function empleado_ConSueldoActualizadoA_(empleadoACambiarSueldo, nuevoSueldo){
+    /*
+    Propósito: 
+    - Indica el empleado **empleadoACambiarSueldo** con el sueldo actualizado con **nuevoSueldo**. 
+    Parámetros:
+    - empleadoACambiarSueldo: Empleado / Empleado a actualizar el sueldo.
+    - nuevoSueldo: Número / Nuevo sueldo a actualizar.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Empleado.
+    */
+    return (Empleado(empleadoACambiarSueldo | sueldo <- nuevoSueldo))
+}
+
+Ejercicio 6, b) 
+
+function empleado_ConNuevoPuesto_(empleadoACambiar, nuevoPuesto){
+    /*
+    Propósito:
+    - Indica el empleado **empleadoACambiar** con su nuevo puesto **nuevoPuesto**.
+    Parámetros: 
+    - empleadoACambiar: Empleado / Empleado a cambiar el puesto.
+    - nuevoPuesto: Puesto / Nuevo puesto para el empleado.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Empleado.
+    */
+    return (Empleado(empleadoACambiar | puesto <- nuevoPuesto))
+}
+
+Ejercicio 6, c) 
+
+function categoriaDelPuesto_(puesto){
+    /*
+    Propósito: 
+    - Indica la categoría del puesto **puesto**.
+    Parámetros: 
+    - puesto: Puesto / Puesto a indicar su categoría.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Número.
+    */
+    return (choose 4 when (puesto == GestorDeProyecto)
+                   3 when (puesto == LiderDeProyecto)
+                   2 when (puesto == Desarrollador)
+                   1 otherwise)
+}
+
+Ejercicio 6, d) 
+
+function empleadoConMayorCargoEntre_Y_(primerEmpleado, segundoEmpleado){
+    /*
+    Propósito: 
+    - Indica el empleado con mayor categoría entre dos empleados **primerEmpleado** y **segundoEmpleado**.
+    Parámetros: 
+    - primerEmpleado: Empleado / Primer empleado a comparar.
+    - segundoEmpleado: Empleado / Segundo empleado a comparar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Empleado.
+    */
+    return (choose primerEmpleado when (categoriaDelPuesto_(puesto(primerEmpleado)) > categoriaDelPuesto_(puesto(segundoEmpleado))
+                   segundoEmpleado otherwise)
+}
+
+Ejercicio 6, e)
+
+function tienenIgualSueldo_Y_(primerEmpleado, segundoEmpleado){
+    /*
+    Propósito: 
+    - Indica si los dos empleados **primerEmpleado** y **segundoEmpleado** tienen el mismo sueldo.
+    Parámetros: 
+    - primerEmpleado: Empleado / Primer empleado a comparar.
+    - segundoEmpleado: Empleado / Segundo empleado a comparar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (sueldo(primerEmpleado) == sueldo(segundoEmpleado))
+}
+
+Ejercicio 6, f) 
 
 
