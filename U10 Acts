@@ -76,6 +76,223 @@ function esDiaDeFinDeSemana_ (dia){
 
 Ejercicio 2) 
 
+type PartidoPolitico is variant {
+    /*
+    Propósito: 
+    - Modelar los partidos políticos del país.
+    */
+    case DemocraciaPorLaVerdad  {}
+    case UnidosPorLaRepublica   {}
+    case LiberalesPorLaLibertad {}
+    case IzquierdaDeLosObreros  {}
+}
+
+Ejercicio 2, a) 
+
+function tieneMasVotantes_Que_ (primerPartido, segundoPartido){
+    /*
+    Propósito: 
+    - Indica si el partido **primerPartido** tiene más votantes que el partido **segundoPartido**.
+    Parámetros: 
+    - primerPartido: PartidoPolitico / Primer partido político que se compara la cantidad de votos.
+    - segundoPartido: PartidoPolitico / Segundo partido político que se compara la cantidad de votos.
+    Precondiciones: 
+    - **primerPartido** y **segundoPartido** no pueden ser iguales.
+    Tipo: 
+    - Booleano.
+    */
+    return (cantidadDeVotosDe_(primerPartido) > cantidadDeVotosDe_(segundoPartido))
+}
+
+Ejercicio 2, b) 
+
+function elQueTieneMasVotos(){
+    /*
+    Propósito: 
+    - Indica el partido político con más votantes.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - PartidoPolitico
+    Observaciones: 
+    - Es un recorrido de búsqueda sobre los partidos políticos, buscando el partido con mayor cantidad de votos.
+    */
+    partidoActual := DemocraciaPorLaVerdad
+    partidoConMasVotosHastaAhora := DemocraciaPorLaVerdad
+    while (partidoActual /= IzquierdaDeLosObreros) then {
+        partidoActual:= siguiente (partidoActual)
+        partidoConMasVotosHastaAhora := PartidoConMasVotosEntre_Y_ (partidoConMasVotosHastaAhora, partidoActual)
+    }
+    return (partidoConMasVotosHastaAhora)
+}
+
+function siguientePartidoA_(partidoPolitico){
+    /*
+    Propósito: 
+    - Indica el siguiente partido al partido **partidoPolitico**.
+    Parámetros: 
+    - partidoPolítico: PartidoPolitico / Partido político a indicar su siguiente partido.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - PartidoPolitico.
+    */
+    return (choose UnidosPorLaRepublica when (partidoPolitico == DemocraciaPorLaVerdad)
+                   LiberalesPorLaLibertad when (partidoPolitico == UnidosPorLaRepublica)
+                   IzquierdaDeLosObreros when (partidoPolitico == LiberalesPorLaLibertad)
+                   DemocraciaPorLaVerdad otherwise)
+}
+
+function PartidoConMasVotosEntre_Y_ (primerPartido, segundoPartido){
+    /*
+    Propósito: 
+    - Indica el partido con más votos entre **primerPartido** y **segundoPartido**.
+    Parámetros: 
+    - primerPartido: PartidoPolitico / Primer partido político a comparar la cantidad de votos.
+    - segundoPartido: PartidoPolitico / Segundo partido político a comparar la cantidad de votos.
+    Precondiciones: 
+    - **primerPartido** y **segundoPartido** no deben ser iguales.
+    */
+    return (choose primerPartido when tieneMasVotantes_Que_ (primerPartido, segundoPartido)
+                   segundoPartido otherwise)
+}
+
+function tieneMasVotantes_Que_ (primerPartido, segundoPartido){
+    /*
+    Propósito: 
+    - Indica si el partido **primerPartido** tiene más votantes que el partido **segundoPartido**.
+    Parámetros: 
+    - primerPartido: PartidoPolitico / Primer partido político que se compara la cantidad de votos.
+    - segundoPartido: PartidoPolitico / Segundo partido político que se compara la cantidad de votos.
+    Precondiciones: 
+    - **primerPartido** y **segundoPartido** no pueden ser iguales.
+    Tipo: 
+    - Booleano.
+    */
+    return (cantidadDeVotosDe_(primerPartido) > cantidadDeVotosDe_(segundoPartido))
+}
+
+Ejercicio 2, c) NO TERMINADO
+
+type PartidoPolitico is variant {
+    /*
+    Propósito: 
+    - Modelar los partidos políticos del país.
+    */
+    case DemocraciaPorLaVerdad  {}
+    case UnidosPorLaRepublica   {}
+    case LiberalesPorLaLibertad {}
+    case IzquierdaDeLosObreros  {}
+}
+
+function habraBallotage(){
+    /*
+    Propósito: 
+    - Indica si en las elecciones habrá ballotage. 
+    Precondiciones:
+    - Ninguna.
+    Tipo: Booleano.
+    Observaciones:
+    - El ballotage se da cuando el partido con más votos no acumula más del 50% de los votos totales y no hay una diferencia de más del 10% entre el primer y el segundo candidato.
+    */
+    return (cantidadDeVotosDe_(elQueTieneMasVotos()) < totalDeVotos() && diferenciaDeVotosCandidatos1Y2() <= diezPorcientoDeLosVotosTotales())
+}
+
+function elQueTieneMasVotos(){
+    /*
+    Propósito: 
+    - Indica el partido político con más votantes.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - PartidoPolitico
+    Observaciones: 
+    - Es un recorrido de búsqueda sobre los partidos políticos, buscando el partido con mayor cantidad de votos.
+    */
+    partidoActual := DemocraciaPorLaVerdad
+    partidoConMasVotosHastaAhora := DemocraciaPorLaVerdad
+    while (partidoActual /= IzquierdaDeLosObreros) then {
+        partidoActual:= siguiente (partidoActual)
+        partidoConMasVotosHastaAhora := PartidoConMasVotosEntre_Y_ (partidoConMasVotosHastaAhora, partidoActual)
+    }
+    return (partidoConMasVotosHastaAhora)
+}
+
+function siguientePartidoA_(partidoPolitico){
+    /*
+    Propósito: 
+    - Indica el siguiente partido al partido **partidoPolitico**.
+    Parámetros: 
+    - partidoPolítico: PartidoPolitico / Partido político a indicar su siguiente partido.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - PartidoPolitico.
+    */
+    return (choose UnidosPorLaRepublica when (partidoPolitico == DemocraciaPorLaVerdad)
+                   LiberalesPorLaLibertad when (partidoPolitico == UnidosPorLaRepublica)
+                   IzquierdaDeLosObreros when (partidoPolitico == LiberalesPorLaLibertad)
+                   DemocraciaPorLaVerdad otherwise)
+}
+
+function PartidoConMasVotosEntre_Y_ (primerPartido, segundoPartido){
+    /*
+    Propósito: 
+    - Indica el partido con más votos entre **primerPartido** y **segundoPartido**.
+    Parámetros: 
+    - primerPartido: PartidoPolitico / Primer partido político a comparar la cantidad de votos.
+    - segundoPartido: PartidoPolitico / Segundo partido político a comparar la cantidad de votos.
+    Precondiciones: 
+    - **primerPartido** y **segundoPartido** no deben ser iguales.
+    */
+    return (choose primerPartido when tieneMasVotantes_Que_ (primerPartido, segundoPartido)
+                   segundoPartido otherwise)
+}
+
+function tieneMasVotantes_Que_ (primerPartido, segundoPartido){
+    /*
+    Propósito: 
+    - Indica si el partido **primerPartido** tiene más votantes que el partido **segundoPartido**.
+    Parámetros: 
+    - primerPartido: PartidoPolitico / Primer partido político que se compara la cantidad de votos.
+    - segundoPartido: PartidoPolitico / Segundo partido político que se compara la cantidad de votos.
+    Precondiciones: 
+    - **primerPartido** y **segundoPartido** no pueden ser iguales.
+    Tipo: 
+    - Booleano.
+    */
+    return (cantidadDeVotosDe_(primerPartido) > cantidadDeVotosDe_(segundoPartido))
+}
+
+function totalDeVotos(){
+    /*
+    Propósito: 
+    - Indica el total de votos entre todos los partidos.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: Número.
+    */
+    return (cantidadDeVotosDe_(DemocraciaPorLaVerdad) + cantidadDeVotosDe_(UnidosPorLaRepublica) + cantidadDeVotosDe_(LiberalesPorLaLibertad) + cantidadDeVotosDe_(IzquierdaDeLosObreros))
+}
+
+function diferenciaDeVotosCandidatos1Y2(){
+    
+}
+
+function segundoPartidoConMasVotos(){
+    /**/
+    partidoActual := DemocraciaPorLaVerdad
+    segundoPartidoConMasVotos := DemocraciaPorLaVerdad
+    while (partidoActual /= IzquierdaDeLosObreros && segundoPartidoConMasVotos /= elQueTieneMasVotos()) then {
+        partidoActual:= siguiente (partidoActual)
+        segundoPartidoConMasVotos := PartidoConMasVotosEntre_Y_ (partidoConMasVotosHastaAhora, partidoActual)
+    }
+    return (partidoConMasVotosHastaAhora)
+}
+
+
+elQueTieneMasVotos()
+
 Ejercicio 3) 
 
 type Carta is record {
@@ -168,7 +385,7 @@ function esFigura_(carta){
     Propósito: 
     - Indica si el número **numero** corresponde a una figura.
     Parámetros: 
-    - numero: Número / Número de la carta.
+    - carta: Carta / Carta a determinar si es figura.
     Precondiciones: 
     - Ninguna.
     Tipo: 
@@ -178,6 +395,179 @@ function esFigura_(carta){
 }
 
 Ejercicio 3, f) 
+
+function esDeOro_(carta){
+    /*
+    Propósito: 
+    - Indicar si la carta **carta** es del palo oro.
+    Parámetros:
+    - carta: Carta / Carta a determinar si es del palo "Oro".
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (palo(carta) == Oros)
+}
+
+Ejercicio 3, g)
+
+function tieneUnNumeroMasGrande_Que_(primeraCarta, segundaCarta){
+    /*
+    Propósito: 
+    - Indica si el número de la carta **primeraCarta** es más grande que el número de la carta **segundaCarta**.
+    Parámetros:
+    - primeraCarta: Carta / Primera carta a analizar.
+    - segundaCarta: Carta / Segunda carta a analizar.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (numero(primerCarta) > numero(segundaCarta))
+}
+
+Ejercicio 3, h)
+
+function sonDelMismoPalo_Y_(primerCarta, segundaCarta){
+    /*
+    Propósito:
+    - Indica si las cartas **primerCarta** y **segundaCarta** son del mismo palo.
+    Parámetros:
+    - primerCarta: Carta / Primer carta a determinar si es del mismo palo.
+    - segundaCarta: Carta / Segunda carta a determinar si es del mismo palo.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (palo(primerCarta) == palo(segundaCarta))
+}
+
+Ejercicio 3, i)
+
+function valorParaEnvidoDe_(carta){
+    /*
+    Propósito: 
+    - Indica el número que aporta la carta **carta** para el canto del envido. 
+    Parámetros: 
+    - carta: Carta / Carta a indicar el valor que aportaría en el envido.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Número.
+    Observaciones:
+    - Si la carta es una figura, el número que aporta es cero.
+    */
+    return (choose numero(carta) when (numero(carta) <= 7 && numero(carta) >= 1)
+                   0 otherwise)
+}
+
+Ejercicio 3, j) NO TERMINADO
+
+function mayorValorEntre_Y_(primerCarta, segundaCarta){
+    /*
+    Propósito: 
+    - Indica cual de las dos cartas **primerCarta** y **segundaCarta** aporta más para el envido.
+    Parámetros:
+    - primerCarta: Carta / Primera carta a determinar si es más grande.
+    - segundaCarta: Carta / Segunda carta a determinar si es más grande.
+    Precondiciones: 
+    - Ninguna.
+    Tipo: 
+    - Número.
+    Observaciones: 
+    - Si la carta es una figura, el número que aporta es cero. (Es decir, si la carta es un número 10, 11 o 12).
+    */
+    return ()
+}
+
+Ejercicio 3, k)
+
+function sumaParaElEnvidoCon_Y_(primeraCarta, segundaCarta){
+    /*
+    Propósito: 
+    - Indica el número que generan dos cartas del mismo palo para el envido.
+    Parámetros: 
+    - primeraCarta: Carta / Primera carta a sumar el valor del envido.
+    - segundaCarta: Carta / Segunda carta a sumar el valor del envido.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Número.
+    */
+    return (valorParaEnvidoDe_(primeraCarta) + valorParaEnvidoDe_(segundaCarta) + 20)
+}
+
+Ejercicio 3, l)
+
+function sonMejores_Y_Que_Y_(primeraCarta, segundaCarta, terceraCarta, cuartaCarta){
+    /*
+    Propósito:
+    - Indica si las 2 cartas del primer jugador (**primeraCarta** y **segundaCarta**) son mejores para el envido que las del jugador 2 (**terceraCarta** y **cuartaCarta**).
+    Parámetros: 
+    - primeraCarta: Carta / Primera carta del jugador número 1.
+    - segundaCarta: Carta / Segunda carta del jugador número 1.
+    - teceraCarta: Carta / Primera carta del jugador número 2.
+    - cuartaCarta: Carta / Segunda carta del jugador número 2.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (sumaParaElEnvidoCon_Y_(primeraCarta, segundaCarta) > sumaParaElEnvidoCon_Y_(primeraCarta, segundaCarta))
+}
+
+Ejercicio 4, a) 
+
+function celdaActual(){
+    /*
+    Propósito:
+    - Indicar la celda actual como un registro del tipo Celda.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Celda.
+    */
+    return (Celda (cantidadDeAzules <- nroBolitas(Azul))
+                  (cantidadDeNegras <- nroBolitas(Negro))
+                  (cantidadDeRojas  <- nroBolitas(Rojo))
+                  (cantidadDeVerdes <- nroBolitas(Verde)))
+}
+
+Ejercicio 4, b)
+
+procedure EscribirEnCelda_(celda){
+    /*
+    Propósito: 
+    - Escribir la información de la celda **celda** en la celda actual del tablero.
+    Parámetros: 
+    - celda: Celda / La celda a escribir en la celda actual.
+    Precondiciones: 
+    - Ninguna.
+    */
+    Poner_DeColor_(cantidadDeAzules, Azul)
+    Poner_DeColor_(cantidadDeNegras, Negro)
+    Poner_DeColor_(cantidadDeRojas, Rojo)
+    Poner_DeColor_(cantidadDeVerdes, Verde)
+}
+
+Ejercicio 4, c)
+
+function tienenMismaCantidadDeRojas_Y_(primerCelda, segundaCelda){
+    /*
+    Propósito: 
+    - Indica si ambas celdas (**primerCelda** y **segundaCelda**) tienen la misma cantidad de bolitas rojas. 
+    Parámetros:
+    - primerCelda: Celda / Primer celda a comparar la cantidad de bolitas rojas.
+    - segundaCelda: Celda / Segunda celda a comparar la cantidad de bolitas rojas.
+    Precondiciones:
+    - Ninguna.
+    */
+    return (cantidadDeRojas(primerCelda) == cantidadDeRojas(segundaCelda))
+}
+
+Ejercicio 5, a)
 
 
 
