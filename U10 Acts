@@ -783,4 +783,41 @@ function tienenIgualSueldo_Y_(primerEmpleado, segundoEmpleado){
 
 Ejercicio 6, f) 
 
+function empleado_ConAumentoEn_PorBonoDeFinalizacionDeProyecto(empleado, porcentajeDeAumento){
+    /*
+    Propósito: 
+    - Indica al empleado **empleado** con el sueldo actualizado en base al aumento **porcentajeDeAumento** que le corresponde.
+    Parámetros:
+    - empleado: Empleado / Empleado que recibe el aumento.
+    - porcentajeDeAumento: Número / Porcentaje de aumento para el sueldo del empleado **empleado**.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Empleado.
+    */
+    return (Empleado(empleado | sueldo <- ((sueldo(empleado) div 100) * porcentajeDeAumento) + sueldo(empleado)))
+}
+
+Ejercicio 6, g)
+
+function empleado_ConDomicilioActualizadoA_(empleado, nuevoDomicilio){
+    /*
+    Propósito: 
+    - Indica el empleado **empleado** con su domicilio actualizado con el nuevo domicilio **nuevoDomicilio**.
+    Parámetros:
+    - empleado: Empleado / Empleado a cambiar el domicilio.
+    - nuevoDomicilio: String / Nuevo domicilio del empleado **empleado**.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Empleado.
+    */
+    return (Empleado (emleado | domicilio(persona) <- nuevoDomicilio))
+}
+
+Ejercicio 7) 
+
+
+
+
 
