@@ -812,8 +812,12 @@ function empleado_ConDomicilioActualizadoA_(empleado, nuevoDomicilio){
     Tipo: 
     - Empleado.
     */
-    return (Empleado (emleado | domicilio(persona) <- nuevoDomicilio))
+    return (Empleado(empleado | identidad <- Persona(identidad(empleado) | domicilio <- domicilioNuevo)
 }
+
+POSIBLE:
+return (Empleado(empleado | identidad <- Persona(identidad(empleado) | domicilio <- domicilioNuevo)
+
 
 Ejercicio 7) 
 
