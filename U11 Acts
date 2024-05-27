@@ -1,0 +1,53 @@
+Ejercicio 1)
+
+function singularCon_(elementoABuscar){
+    /*
+    Propósito: 
+    - Indicar la lista que tiene únicamente el elemento dado.
+    Parámetros:
+    - elementoABuscar: Elemento / Elemento a buscar en las listas.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Lista de "Elemento"
+    */
+    return ([elementoABuscar])
+}
+
+Ejercicio 2)
+
+function segundoDe_(lista){
+    /*
+    Propósito: 
+    - Indica el segundo elemento de la lista **lista**.
+    Parámetros:
+    - lista: Lista de "Elemento" / Lista a determinar el segundo elemento.
+    Precondiciones:
+    - La lista **lista** debe tener al menos 2 elementos.
+    Tipo: 
+    - "Elemento".
+    */
+    return (primero(resto(lista)))
+}
+
+Ejercicio 3) 
+
+function esSingular_(lista){
+    /*
+    Propósito: 
+    - Indica si la lista es singular (si tiene un único elemento).
+    Parámetros:
+    - lista: Lista de "Elemento" / Lista a determinar si es singular.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (not esVacia(lista) && esVacia(resto(lista)))
+}
+
+Ejercicio 4) 
+
+
+
+
