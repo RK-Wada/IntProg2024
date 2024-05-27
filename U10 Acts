@@ -576,7 +576,7 @@ type Persona is record {
     Inv. Rep.: 
     - Ninguna.
     */
-    field dni // Un valor de tipo Número.
+    field dni // Un valor de tipo String.
     field domicilio // Un valor de tipo String.
     field esDonanteDeOrganos // Un valor de tipo Booleano.
 }
