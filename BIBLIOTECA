@@ -473,7 +473,26 @@ function nroBolitasTotalDeColor_ (color){
 
 -------------------------------------------------------------------------------------------
 
+DESPUES DEL PP
 
+-------------------------------------------------------------------------------------------
+
+
+function esSingular_(lista){
+    /*
+    Propósito: 
+    - Indica si la lista es singular (si tiene un único elemento).
+    Parámetros:
+    - lista: Lista / Lista a determinar si es singular.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (not esVacia_(lista) && esVacia_(resto(lista)))
+}
+
+-------------------------------------------------------------------------------------------
 
 
 
