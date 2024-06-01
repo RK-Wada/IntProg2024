@@ -1,45 +1,53 @@
 Ejercicio 1) 
 
-function hayBolitas_EnCeldaAl_(color, direccion){
+function hayBolitas_EnCeldaAl_(colorDeLasBolitas, direccion){
     /*
-    Propósito: Indica si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. Si no hay una celda lindante, hace BOOM.
-    Parámetros: 
-    - color: Color / color de las bolitas a ver.
-    - direccion: Dirección / dirección hacia dónde mover el cabezal.
-    Precondición: 
-    - Debe existir al menos una celda hacia la dirección **direccion**.
-    Tipo: Booleano.
+    Propósito:
+    - Indica si hay bolitas del color **colorDeLasBolitas** en la celda lindante a la celda actual hacia la dirección **direccion**.
+    Parámetros:
+    - colorDeLasBolitas: Color / Color de las bolitas a indicar.
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
     */
-    Mover (direccion)
-    return (hayBolitas(color))
+    Mover(direccion)
+    return(choose True when (hayBolitas(colorDeLasBolitas))
+                  False otherwise)
 }
 
 Ejercicio 2) 
 
-function hayBolitas_Al_(color, direccion){
+function hayBolitas_Al_(colorDeLasBolitas, direccion){
     /*
-    Propósito: Indica si existe una celda hacia la dirección **direccion** y si la celda lindante hacia la dirección **dirección** posee bolitas del color **color**. 
-    Parámetros: 
-    - color: Color / color de las bolitas a ver.
-    - direccion: Dirección / dirección hacia dónde mover el cabezal.
-    Precondición: 
+    Propósito:
+    - Indica si hay una celda lindante a la celda actual hacia la dirección **direccion** que contenga al menos una bolita de color **colorDeLasBolitas**. Si no hay celda lindante, describe False.
+    Parámetros:
+    - colorDeLasBolitas: Color / Color de las bolitas a buscar.
+    - direccion: Dirección / Dirección hacia la cual buscar.
+    Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
+    Tipo: 
+    - Booleano.
     */
-    return (puedeMover(direccion) && hayBolitas_EnCeldaAl_(color, direccion))
+    return (choose True when (puedeMover(direccion) && hayBolitas_EnCeldaAl_(colorDeLasBolitas, direccion))
+                   False otherwise)
 }
 
 Ejercicio 3) 
 
 function hayBolitas_EnElBorde_(color, direccion){
     /*
-    Propósito: Indica si en la celda que se encuentra en el borde hacia la dirección **direccion** hay bolitas del color **color**.
-    Parámetros:
-    - color: Color / color de las bolitas a ver.
-    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Propósito:
+    - Indica si hay bolitas del color **color** en la celda correspondiente al borde hacia la dirección **direccion**.
+    Parámetros: 
+    color: Color / Color de las bolitas a indicar.
+    direccion: Dirección / Dirección a indicar si hay bolitas del color **color** en el borde.
     Precondiciones:
-    - Ninguna. 
-    Tipo: Booleano
+    - Ninguna.
+    Tipo: 
+    - Booleano.
     */
     IrAlBorde(direccion)
     return (hayBolitas(color))
@@ -50,18 +58,19 @@ Ejercicio 4)
 function hayBolitas_Hacia_(color, direccion){
     /*
     Propósito:
-    - Indica si en alguna celda hacia la dirección **direccion** existe alguna que contenga bolitas del color **color**. 
+    - Indica si en alguna celda hacia la dirección **direccion** hay una bolita del color **color**. 
     Parámetros:
-    - color: Color / color de las bolitas a ver.
-    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    - color: Color / Color de las bolitas a buscar.
+    - direccion: Dirección / Dirección hacia dónde buscar las bolitas del color **color**. 
     Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
-    Observaciones: 
-    - No se incluye la celda actual.
+    Tipo: 
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas de la fila hacia la dirección **direccion**, buscando una celda que contenga al menos una bolita de color **color**.
     */
-    Mover (direccion)
-    while (puedeMover(direccion) && not hayBolitas(color)){
+    Mover(direccion)
+    while (not hayBolitas(color) && puedeMover(direccion)){
         Mover(direccion)
     }
     return (hayBolitas(color))
@@ -69,21 +78,21 @@ function hayBolitas_Hacia_(color, direccion){
 
 Ejercicio 5) 
 
-function hayCeldaVacíaHacia_ (direccion){
+function hayCeldaVacíaHacia_(direccion){
     /*
     Propósito:
-    - Indica si existe alguna celda vacia hacia la dirección **direccion**.
+    - Indicar si alguna de las celdas hacia la dirección **direccion** desde la celda actual está vacía. 
     Parámetros:
-    - direccion: Dirección / dirección hacia dónde mover el cabezal.
+    - direccion: Dirección / Dirección hacia dónde buscar.
     Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
-    Observaciones: 
-    - No se incluye la celda actual.
-    - Es un recorrido de búsqueda sobre las celdas del tablero.
+    Tipo: 
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas de la fila hacia la dirección **direccion**. Buscando una celda que se encuentre vacía.
     */
     Mover(direccion)
-    while (puedeMover(direccion) && not esCeldaVacia()){
+    while (not esCeldaVacia() && puedeMover(direccion)){
         Mover(direccion)
     }
     return (esCeldaVacia())
@@ -103,156 +112,42 @@ Ejercicio 6)
 
 function hayAlgunaBolita_(color){
     /*
-    Propósito: 
-    - Indica si en alguna de las celdas del tablero existe alguna bolita del color **color**.
+    Propósito:
+    - Indica si hay alguna celda que contenga al menos una bolita del color **color** en el tablero.
     Parámetros:
-    - color: Color / Color de las bolitas a ver. 
-    Precondiciones: 
+    - color: Color / Color de la bolita a buscar.
+    Precondiciones:
     - Ninguna.
     Tipo: 
     - Booleano.
-    Observaciones: 
-    - Es un recorrido de busqueda sobre las celdas del tablero.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas del tablero, buscando una celda que contenga al menos una bolita de color **color**.
     */
     IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
-    while (not (hayBolitas(color)) && (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)) {
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte) && not hayBolitas(color)){
         IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
     }
     return (hayBolitas(color))
-}
-
-procedure IrAPrimeraCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
-    /*
-    Propósito:
-    - Dirigir el cabezal hacia la primera celda en dónde se comenzará el recorrido de las direcciones **dirPrincipal** y **dirSecundaria**
-    Parámetros:
-    - dirPrincipal: Dirección / Primera dirección hacia dónde irá el recorrido.
-    - dirSecundaria: Dirección / Segunda dirección hacia dónde irá el recorrido.
-    Precondición:
-    - la dirPrincipal y dirSecundaria no pueden ser opuestas ni iguales.
-    */
-    IrAlBorde(opuesto(dirPrincipal))
-    IrAlBorde(opuesto(dirSecundaria))
-}
-
-procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
-    /*
-    Propósito:
-    - Dirigir el cabezal a la siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
-    Parámetros:
-    - dirPrincipal: Dirección / Primera dirección hacia dónde se moverá en el recorrido.
-    - dirSecundaria: Dirección / Segunda dirección hacia dónde se moverá en el recorrido.
-    Precondición:
-    - **dirPrincipal** y **dirSecundaria** no pueden ser opuestas ni iguales.
-    */
-    if (puedeMover(dirPrincipal)) then {
-        Mover(dirPrincipal)
-    }
-    else {
-        IrAlBorde(opuesto(dirPrincipal))
-        Mover(dirSecundaria)
-    }
-}
-
-function esCeldaVacia(){
-    /*
-    Propósito: Indica si la celda actual está vacía.
-    Precondición:
-    - Ninguna
-    Tipo: Booleano
-    */
-    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro))
-}
-
-function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
-    /*
-    Propósito: 
-    - Indica si hay una siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
-    Parámetros:
-    - dirPrincipal: Dirección / primera dirección a tener en cuenta si hay celdas.
-    - dirSecundaria: Dirección / segunda dirección a tener en cuenta si hay celdas.
-    Precondición:
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (puedeMover(dirPrincipal) || puedeMover(dirSecundaria))
 }
 
 Ejercicio 7)
 
 function hayAlgunaCeldaVacia(){
     /*
-    Propósito: 
+    Propósito:
     - Indica si hay alguna celda vacía en el tablero.
-    Precondiciones: 
+    Precondiciones:
     - Ninguna.
     Tipo: 
     - Booleano.
-    Observaciones: 
-    - Es un recorrido de busqueda sobre las celdas del tablero.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas del tablero, buscando una celda vacía.
     */
     IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
-    while ((not esCeldaVacia()) && (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte))) {
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte) && not esCeldaVacia()){
         IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
     }
     return (esCeldaVacia())
-}
-
-procedure IrAPrimeraCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
-    /*
-    Propósito:
-    - Dirigir el cabezal hacia la primera celda en dónde se comenzará el recorrido de las direcciones **dirPrincipal** y **dirSecundaria**
-    Parámetros:
-    - dirPrincipal: Dirección / Primera dirección hacia dónde irá el recorrido.
-    - dirSecundaria: Dirección / Segunda dirección hacia dónde irá el recorrido.
-    Precondición:
-    - la dirPrincipal y dirSecundaria no pueden ser opuestas ni iguales.
-    */
-    IrAlBorde(opuesto(dirPrincipal))
-    IrAlBorde(opuesto(dirSecundaria))
-}
-
-procedure IrASiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
-    /*
-    Propósito:
-    - Dirigir el cabezal a la siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
-    Parámetros:
-    - dirPrincipal: Dirección / Primera dirección hacia dónde se moverá en el recorrido.
-    - dirSecundaria: Dirección / Segunda dirección hacia dónde se moverá en el recorrido.
-    Precondición:
-    - **dirPrincipal** y **dirSecundaria** no pueden ser opuestas ni iguales.
-    */
-    if (puedeMover(dirPrincipal)) then {
-        Mover(dirPrincipal)
-    }
-    else {
-        IrAlBorde(opuesto(dirPrincipal))
-        Mover(dirSecundaria)
-    }
-}
-
-function esCeldaVacia(){
-    /*
-    Propósito: Indica si la celda actual está vacía.
-    Precondición:
-    - Ninguna
-    Tipo: Booleano
-    */
-    return (not hayBolitas(Rojo) && not hayBolitas(Verde) && not hayBolitas(Azul) && not hayBolitas(Negro))
-}
-
-function haySiguienteCeldaEnUnRecorridoAl_Y_(dirPrincipal, dirSecundaria){
-    /*
-    Propósito: 
-    - Indica si hay una siguiente celda en un recorrido hacia las direcciones **dirPrincipal** y **dirSecundaria**.
-    Parámetros:
-    - dirPrincipal: Dirección / primera dirección a tener en cuenta si hay celdas.
-    - dirSecundaria: Dirección / segunda dirección a tener en cuenta si hay celdas.
-    Precondición:
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (puedeMover(dirPrincipal) || puedeMover(dirSecundaria))
 }
 
 Ejercicio 8) 
@@ -260,22 +155,22 @@ Ejercicio 8)
 procedure CopiarCeldaAl_(direccion){
     /*
     Propósito:
-    - Copiar los contenidos de la celda actual a la celda lindante hacia 
+    - Copiar el contenido de la celda actual a la celda lindante a la dirección **direccion**.
     Parámetros:
-    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    - direccion: Dirección / Dirección hacia dónde copiar la celda actual.
     Precondiciones:
-    - Debe haber una celda lindante de la celda actual hacia la dirección **direccion**. 
-    */ 
+    - Debe haber una celda lindante desde la celda actual hacia la dirección **direccion**.
+    */
     bolitasAzules := nroBolitas(Azul)
-    bolitasRojas := nroBolitas(Rojo)
     bolitasVerdes := nroBolitas(Verde)
     bolitasNegras := nroBolitas(Negro)
-    Mover_VecesAl_(1, direccion)
+    bolitasRojas  := nroBolitas(Rojo)
+    Mover(direccion)
     VaciarCelda()
-    Poner_DeColor_ (bolitasAzules, Azul)
-    Poner_DeColor_ (bolitasRojas, Rojo)
-    Poner_DeColor_ (bolitasVerdes, Verde)
-    Poner_DeColor_ (bolitasNegras, Negro)
+    Poner_DeColor_(bolitasAzules, Azul)
+    Poner_DeColor_(bolitasVerdes, Verde)
+    Poner_DeColor_(bolitasNegras, Negro)
+    Poner_DeColor_(bolitasRojas, Rojo)
 }
 
 procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
