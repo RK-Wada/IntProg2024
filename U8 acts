@@ -600,16 +600,17 @@ Ejercicio 12)
 
 procedure ComerPiezaNegraConTorreHacia_(direccionAComer){
     /*
-    Propósito: Comer la pieza negra más próxima a la celda actual hacia la dirección **direccionAComer**, dejando la torre en dicha celda. 
+    Propósito: 
+    - Comer la pieza negra más próxima a la celda actual hacia la dirección **direccionAComer**, dejando la torre blanca en la celda dónde se comió la pieza negra.
     Parámetros:
-    - direccionAComer: Dirección / dirección hacia dónde mover el cabezal. 
-    Precondición:
-    - Ninguna.
-    Observaciones: 
-    - Es un recorrido de procesamiento sobre la celda del tablero, quitando la pieza negra más próxima hacia la celda actual hacia la dirección **direccionAComer** y moviendo la torre blanca.
-    - El cabezal se encuentra sobre la torre blanca.
+    - direccionAComer: Dirección / Dirección hacia dónde mover la torre blanca.
+    Precondiciones:
+    - El cabezal debe estar ubicado sobre una torre blanca.
+    Observaciones:
+    - Es un recorrido de procesamiento sobre las celdas de las filas, comiendo la pieza negra más próxima a la celda actual hacia la dirección **direccionAComer**.
     */
-    while (not hayUnaPiezaNegra && puedeMover(direccionAComer)){
+    MoverTorreBlancaHacia_(direccionAComer)
+    while (not hayUnaPiezaNegra() && puedeMover(direccionAComer)){
         MoverTorreBlancaHacia_(direccionAComer)
     }
     ComerPiezaNegra()
@@ -648,24 +649,28 @@ a)
 
 CENTRAL
 
-function esDepositoCentral() {
+function esDepositoCentral(){
     /*
-    Propósito: Indica si el cabezal está en el deposito central.
-    Precondición:
+    Propósito: 
+    - Indica si el cabezal se encuentra sobre la celda correspondiente al deposito central.
+    Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
+    Tipo: 
+    - Booleano.
     */
     return (nroBolitas(Negro)==3)
 }
 
 LOCAL
 
-function esDepositoLocal() {
+function esDepositoLocal(){
     /*
-    Propósito: Indica si el cabezal está en un deposito local.
-    Precondición:
+    Propósito: 
+    - Indica si el cabezal se encuentra sobre la celda correspondiente a un deposito local.
+    Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
+    Tipo: 
+    - Booleano.
     */
     return (nroBolitas(Negro)==2)
 }
@@ -674,89 +679,487 @@ b)
 
 procedure IrDeCentralAlLocal_(direccion){
     /*
-    Propósito: Dirigir el cabezal hacia el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito local.
-    Parámetros: 
+    Propósito:
+    - Mover el cabezal a la celda correspondiente al deposito local de la dirección **direccion**. El cabezal finaliza en la celda dónde se ubique el deposito local.
+    Parámetros:
     - direccion: Dirección / Dirección hacia dónde mover el cabezal.
-    Precondición: 
-    - El cabezal debe estar ubicado sobre la celda que contenga el deposito central.
+    Precondiciones:
+    - El cabezal debe estar ubicado sobre la celda correspondiente al deposito central.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas de la fila, buscando el deposito local.
     */
+    Mover(direccion)
     while (not esDepositoLocal() && puedeMover(direccion)){
         Mover(direccion)
     }
 }
 
-function esDepositoCentral() {
-    /*
-    Propósito: Indica si el cabezal está en el deposito central.
-    Precondición:
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (nroBolitas(Negro)==3)
-}
-
-function esDepositoLocal() {
-    /*
-    Propósito: Indica si el cabezal está en un deposito local.
-    Precondición:
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (nroBolitas(Negro)==2)
-}
-
 c) 
 
-procedure IrDeLocal_ACentral(direccion){
+procedure IrDelLocal_ACentral(direccion){
     /*
-    Propósito: Dirigir el cabezal hacia el deposito central desde el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito central.
-    Parámetros: 
-    - direccion: Dirección / Dirección hacia dónde está ubicado el deposito local dónde se encuentra el cabezal.
-    Precondición: 
-    - El cabezal debe estar ubicado sobre la celda que contenga el deposito local de la dirección **direccion**.
+    Propósito:
+    - Dirigir el cabezal hacia la celda correspondiente al deposito central. El cabezal finaliza en la celda correspondiente al deposito central.
+    Parámetros:
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - El cabezal debe estar ubicado sobre la celda que corresponda al deposito local de la dirección **direccion**.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas de la fila, buscando la celda correspondiente al deposito central.
     */
-    while (not esDepositoCentral() && puedeMover(opuesto (direccion))){
+    Mover(opuesto(direccion))
+    while (not esDepositoCentral() && puedeMover(opuesto(direccion))){
         Mover(opuesto(direccion))
     }
 }
 
-function esDepositoCentral() {
-    /*
-    Propósito: Indica si el cabezal está en el deposito central.
-    Precondición:
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (nroBolitas(Negro)==3)
-}
-
-function esDepositoLocal() {
-    /*
-    Propósito: Indica si el cabezal está en un deposito local.
-    Precondición:
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (nroBolitas(Negro)==2)
-}
-
 d) 
 
-procedure Llevar_MercaderíasAlLocal_(cantidad, direccion){
+procedure Llevar_MercaderiasAlLocal_(cantidad, direccion){
     /*
-    Propósito: LLevar la cantidad **cantidad** de mercadería desde el deposito central al deposito local de la dirección **direccion**. Si en el deposito central hay menos mercadería que en **cantidad**, el procedimiento no hace nada. El cabezal debe volver y finalizar en el deposito central.
+    Propósito:
+    - LLeva la cantidad **cantidad** de mercadería del deposito central al deposito local que se encuentra ubicado hacia la dirección **direccion**. Si en el deposito central hay menor cantidad de mercadería que la indicada en **cantidad**, entonces no se hace nada.
     Parámetros:
-    - cantidad: Número / cantidad de mercadería a llevar al deposito local.
-    - direccion: Dirección / dirección hacia dónde queda el deposito local.
-    Precondición:
-    - El cabezal debe estar ubicado sobre la celda que contenga el deposito central.
+    - cantidad: Número / Cantidad de mercadería a mover.
+    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
+    Precondiciones:
+    - El cabezal debe estar ubicado sobre la celda correspondiente al deposito central.
+    Observaciones:
+    - Es un recorrido de procesamiento sobre las celdas de la fila, llevando la mercadería del deposito central al deposito local de la dirección **direccion**.
     */
-    if (nroBolitas(Azul)>=cantidad) then {
+    if (nroBolitas(Azul) >= cantidad) then {
         Sacar_DeColor_(cantidad, Azul)
-        IrDeCentralAlLocal_(direccion)
+        while (puedeMover(direccion) && not esDepositoLocal()){
+            Mover(direccion)
+        }
         Poner_DeColor_(cantidad, Azul)
-        IrDeLocal_ACentral(direccion)
     }
+}
+
+e) 
+
+procedure Traer_MercaderiasDelLocal_(cantidad, direccion){
+    /*
+    Propósito: 
+    - Llevar la cantidad **cantidad** de mercadería del deposito local de la dirección **direccion** hacia el deposito central. Si en el deposito local de la dirección **direccion** hay menos cantidad de mercadería de la indicada en **cantidad**, entonces no ocurre nada. El cabezal finaliza en la celda del deposito central, y si no ocurre nada, finaliza en la celda del deposito local de la dirección **direccion**.
+    Parámetros: 
+    - cantidad: Número / Cantidad de mercadería a llevar del deposito local de la dirección **direccion** al deposito central.
+    - direccion: Dirección / Dirección del deposito local.
+    Precondiciones:
+    - El cabezal se encuentra en la celda correspondiente al deposito local de la dirección **direccion**.
+    Observaciones:
+    - Es un recorrido de procesamiento sobre las celdas de la fila, moviendo la mercadería del deposito local al deposito central.
+    */
+    if (nroBolitas(Azul) >= cantidad) then {
+        Sacar_DeColor_(cantidad, Azul)
+        while (puedeMover(opuesto(direccion)) && not esDepositoCentral()){
+            Mover(opuesto(direccion))
+        }
+        Poner_DeColor_(cantidad, Azul)
+    }
+}
+
+f) 
+
+procedure Mover_MercaderiasDelLocal_AlLocal_(cantidad, origen, destino){
+    /*
+    Propósito:
+    - Mover la cantidad **cantidad** de mercaderías del deposito local con dirección **origen** al deposito local con dirección **destino**. Si en el deposito de la dirección **origen** hay menor cantidad de mercadería que **cantidad**, no se hace nada. El cabezal finaliza en la celda correspondiente al deposito central.
+    Parámetros:
+    - cantidad: Número / Cantidad de mercadería a mover.
+    - origen: Dirección / Dirección del deposito local de origen.
+    - destino: Dirección / Dirección del deposito local de destino.
+    Precondiciones:
+    - El cabezal debe estár ubicado en la celda correspondiente al deposito central. 
+    */
+    IrDeCentralAlLocal_(origen)
+    if (nroBolitas(Azul) >= cantidad) then {
+        Sacar_DeColor_(cantidad, Azul)
+        IrDelLocal_ACentral(origen)
+        IrDeCentralAlLocal_(destino)
+        Poner_DeColor_(cantidad, Azul)
+        IrDelLocal_ACentral(destino)
+    } 
+    elseif (nroBolitas(Azul) < cantidad) {
+        IrDelLocal_ACentral(origen)
+    }
+}
+
+Ejercicio 14)
+
+a) 
+
+function colorCaminante(){
+    /*
+    Propósito:
+    - Indica el color del caminante.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano. 
+    */
+    return (Azul)
+}
+
+function colorIndicador(){
+    /*
+    Propósito:
+    - Indica el color del indicador. 
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (Verde)
+}
+
+function colorHuella(){
+    /*
+    Propósito:
+    - Indica el color de la huella.
+    Precondiciones:
+    - Nignuna.
+    Tipo: 
+    - Booleano.
+    */
+    return (Negro)
+}
+
+function colorMeta(){
+    /*
+    Propósito:
+    - Indica el color de la meta.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (Rojo)
+}
+
+b) 
+
+c)
+
+function estaEnLaMeta(){
+    /*
+    Propósito:
+    - Indica si el caminante está o no en la meta.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (colorMeta())
+}
+
+d)
+
+procedure DejarHuella(){
+    /*
+    Propósito:
+    - Deja una huella en la celda actual.
+    Precondiciones:
+    - Ninguna.
+    Observaciones:
+    - La huella se ve representada como una bolita de color negro.
+    */
+    Poner(Negro)
+}
+
+e)
+
+f) 
+
+procedure CambiarDeDireccionSiHayIndicador(){
+    /*
+    Propósito:
+    - Cambia la dirección del caminante cuando se encuentra con un indicador, dejando una bolita azul si hay una bolita verde, dos bolitas azules si hay 2 bolitas verdes, 3 bolitas azules si hay 3 bolitas verdes y cuatro bolitas azules si hay 4 bolitas verdes. 
+    Precondiciones:
+    - Debe haber al menos una bolita de color verde.
+    - El número de bolitas verdes no puede ser mayor a 4.
+    */
+    if (hayIndicadorDeCambioDeDireccion()) then {
+        CambiarDireccionDelCaminanteALaDelIndicador()
+    }
+}
+
+g)
+
+procedure MoverAlCaminanteHaciaDondeMira(){
+    /*
+    Propósito:
+    - Mover el caminante un paso en la dirección hacia la cual está mirando.
+    Precondiciones:
+    - Debe haber al menos una bolita de color negro en la celda actual.
+    - Las bolitas de color negro de la celda actual no deben ser mayor a 4.
+    */
+    if (nroBolitas(Negro) == 1) then {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Norte)
+        Poner(Negro)
+    }
+    elseif (nroBolitas(Negro) == 2) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Este)
+        Poner_DeColor_(2, Negro)
+    }
+    elseif (nroBolitas(Negro) == 3) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Sur)
+        Poner_DeColor_(3, Negro)
+    }
+    else {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Oeste)
+        Poner_DeColor_(4, Negro)
+    }
+}
+
+h)
+
+function hayIndicadorDeCambioDeDireccion(){
+    /*
+    Propósito:
+    Indica si en la celda actual hay un indicador de dirección.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (hayBolitas(Verde))
+}
+
+i)
+
+procedure CambiarDireccionDelCaminanteALaDelIndicador(){
+    /*
+    Propósito:
+    - Cambia la dirección del caminante dependiendo del indicador, dejando una bolita azul si hay una bolita verde, dos bolitas azules si hay 2 bolitas verdes, 3 bolitas azules si hay 3 bolitas verdes y cuatro bolitas azules si hay 4 bolitas verdes. 
+    Precondiciones:
+    - Debe haber al menos una bolita de color verde.
+    - El número de bolitas verdes no puede ser mayor a 4.
+    */
+    if (nroBolitas(Verde) == 1) then {
+        SacarTodasLasDeColor_(Negro)
+        Poner(Negro)
+    }
+    elseif (nroBolitas(Verde) == 2) {
+        SacarTodasLasDeColor_(Negro)
+        Poner_DeColor_(2, Negro)
+    }
+    elseif (nroBolitas(Verde) == 3) {
+        SacarTodasLasDeColor_(Negro)
+        Poner_DeColor_(3, Negro)
+    }
+    else {
+        SacarTodasLasDeColor_(Negro)
+        Poner_DeColor_(4, Negro)
+    }
+}
+
+j)
+
+procedure MoverAlCaminanteAl_(direccion){
+    /*
+    Propósito:
+    - Mover al caminante un paso a la dirección **direccion**. El cabezal finaliza en la celda lindante a la celda actual hacia la dirección **direccion**.
+    Parámetros:
+    - direccion: Dirección / Dirección hacia dónde mover al caminante.
+    Precondiciones:
+    - Debe haber al menos una bolita de color negro en la celda actual.
+    - Debe haber al menos una celda hacia la dirección **dirección**.
+    */
+    if (nroBolitas(Negro) == 1) then {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(1, Negro)
+    }
+    elseif (nroBolitas(Negro) == 2) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(2, Negro)
+    }
+    elseif (nroBolitas(Negro) == 3) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(3, Negro)
+    }
+    else {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(4, Negro)
+    }
+}
+
+k)
+ 
+------------------------------------------------------------------------------------------------
+
+RESTO DEL EJERCICIO 14)
+
+program {
+    
+}
+
+
+//C
+function estaEnLaMeta(){
+    /*
+    Propósito:
+    - Indica si el caminante está o no en la meta.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (colorMeta())
+}
+
+//D
+procedure DejarHuella(){
+    /*
+    Propósito:
+    - Deja una huella en la celda actual.
+    Precondiciones:
+    - Ninguna.
+    Observaciones:
+    - La huella se ve representada como una bolita de color negro.
+    */
+    Poner(Negro)
+}
+
+//E
+procedure DarUnPaso(){
+    /*
+    Propósito:
+    - Dar un paso en el paseo del caminante. 
+    */
+}
+
+//F
+procedure CambiarDeDireccionSiHayIndicador(){
+    /*
+    Propósito:
+    - Cambia la dirección del caminante cuando se encuentra con un indicador, dejando una bolita azul si hay una bolita verde, dos bolitas azules si hay 2 bolitas verdes, 3 bolitas azules si hay 3 bolitas verdes y cuatro bolitas azules si hay 4 bolitas verdes. 
+    Precondiciones:
+    - Debe haber al menos una bolita de color verde.
+    - El número de bolitas verdes no puede ser mayor a 4.
+    */
+    if (hayIndicadorDeCambioDeDireccion()) then {
+        CambiarDireccionDelCaminanteALaDelIndicador()
+    }
+}
+
+//G
+procedure MoverAlCaminanteHaciaDondeMira(){
+    /*
+    Propósito:
+    - Mover el caminante un paso en la dirección hacia la cual está mirando.
+    Precondiciones:
+    - Debe haber al menos una bolita de color negro en la celda actual.
+    - Las bolitas de color negro de la celda actual no deben ser mayor a 4.
+    */
+    if (nroBolitas(Negro) == 1) then {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Norte)
+        Poner(Negro)
+    }
+    elseif (nroBolitas(Negro) == 2) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Este)
+        Poner_DeColor_(2, Negro)
+    }
+    elseif (nroBolitas(Negro) == 3) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Sur)
+        Poner_DeColor_(3, Negro)
+    }
+    else {
+        SacarTodasLasDeColor_(Negro)
+        Mover(Oeste)
+        Poner_DeColor_(4, Negro)
+    }
+}
+
+//H
+function hayIndicadorDeCambioDeDireccion(){
+    /*
+    Propósito:
+    Indica si en la celda actual hay un indicador de dirección.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (hayBolitas(Verde))
+}
+
+//I
+procedure CambiarDireccionDelCaminanteALaDelIndicador(){
+    /*
+    Propósito:
+    - Cambia la dirección del caminante dependiendo del indicador, dejando una bolita azul si hay una bolita verde, dos bolitas azules si hay 2 bolitas verdes, 3 bolitas azules si hay 3 bolitas verdes y cuatro bolitas azules si hay 4 bolitas verdes. 
+    Precondiciones:
+    - Debe haber al menos una bolita de color verde.
+    - El número de bolitas verdes no puede ser mayor a 4.
+    */
+    if (nroBolitas(Verde) == 1) then {
+        SacarTodasLasDeColor_(Negro)
+        Poner(Negro)
+    }
+    elseif (nroBolitas(Verde) == 2) {
+        SacarTodasLasDeColor_(Negro)
+        Poner_DeColor_(2, Negro)
+    }
+    elseif (nroBolitas(Verde) == 3) {
+        SacarTodasLasDeColor_(Negro)
+        Poner_DeColor_(3, Negro)
+    }
+    else {
+        SacarTodasLasDeColor_(Negro)
+        Poner_DeColor_(4, Negro)
+    }
+}
+
+//J
+procedure MoverAlCaminanteAl_(direccion){
+    /*
+    Propósito:
+    - Mover al caminante un paso a la dirección **direccion**. El cabezal finaliza en la celda lindante a la celda actual hacia la dirección **direccion**.
+    Parámetros:
+    - direccion: Dirección / Dirección hacia dónde mover al caminante.
+    Precondiciones:
+    - Debe haber al menos una bolita de color negro en la celda actual.
+    - Debe haber al menos una celda hacia la dirección **dirección**.
+    */
+    if (nroBolitas(Negro) == 1) then {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(1, Negro)
+    }
+    elseif (nroBolitas(Negro) == 2) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(2, Negro)
+    }
+    elseif (nroBolitas(Negro) == 3) {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(3, Negro)
+    }
+    else {
+        SacarTodasLasDeColor_(Negro)
+        Mover(direccion)
+        Poner_DeColor_(4, Negro)
+    }
+}
+
+//K
+procedure Cambiar_ParaImitar_(colorACambiar, colorAImitar){
+    /*
+    
+    */
 }
 
 procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
@@ -772,66 +1175,68 @@ procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
     }
 }
 
-procedure Sacar_DeColor_ (cantidadASacar, colorASacar){
+procedure SacarTodasLasDeColor_ (colorASacar){
     /*
-    Propósito: Dado un número "cantidadASacar" y un color "colorASacar", saque tantas bolitas como se indica del color que se especifique en la celda actual.
-    Parámetros: 
-    - cantidadASacar: número / cantidad de bolitas a sacar.
-    - colorASacar: color / color de las bolitas a sacar.
-    Precondiciones: Debe haber tantas bolitas como "cantidadASacar" del color "colorASacar" en la celda actual.
+    Propósito: Sacar todas las bolitas del color **colorASacar** de la celda actual. 
+    Parámetros:
+    - colorASacar: Color / color de las bolitas a sacar.
+    Precondiciones:
+    Ninguna.
     */
-    repeat(cantidadASacar){
+    repeat(nroBolitas(colorASacar)){
         Sacar(colorASacar)
     }
 }
 
-procedure IrDeLocal_ACentral(direccion){
+function colorCaminante(){
     /*
-    Propósito: Dirigir el cabezal hacia el deposito central desde el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito central.
-    Parámetros: 
-    - direccion: Dirección / Dirección hacia dónde está ubicado el deposito local dónde se encuentra el cabezal.
-    Precondición: 
-    - El cabezal debe estar ubicado sobre la celda que contenga el deposito local de la dirección **direccion**.
-    */
-    while (not esDepositoCentral() && puedeMover(opuesto (direccion))){
-        Mover(opuesto(direccion))
-    }
-}
-
-procedure IrDeCentralAlLocal_(direccion){
-    /*
-    Propósito: Dirigir el cabezal hacia el deposito local de la dirección **direccion**, el cabezal permanece en la celda dónde se encuentra ubicado el deposito local.
-    Parámetros: 
-    - direccion: Dirección / Dirección hacia dónde mover el cabezal.
-    Precondición: 
-    - El cabezal debe estar ubicado sobre la celda que contenga el deposito central.
-    */
-    while (not esDepositoLocal() && puedeMover(direccion)){
-        Mover(direccion)
-    }
-}
-
-function esDepositoCentral() {
-    /*
-    Propósito: Indica si el cabezal está en el deposito central.
-    Precondición:
+    Propósito:
+    - Indica el color del caminante.
+    Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
+    Tipo:
+    - Booleano. 
     */
-    return (nroBolitas(Negro)==3)
+    return (Azul)
 }
 
-function esDepositoLocal() {
+function colorIndicador(){
     /*
-    Propósito: Indica si el cabezal está en un deposito local.
-    Precondición:
+    Propósito:
+    - Indica el color del indicador. 
+    Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
+    Tipo: 
+    - Booleano.
     */
-    return (nroBolitas(Negro)==2)
+    return (Verde)
 }
 
-e) 
+function colorHuella(){
+    /*
+    Propósito:
+    - Indica el color de la huella.
+    Precondiciones:
+    - Nignuna.
+    Tipo: 
+    - Booleano.
+    */
+    return (Negro)
+}
+
+function colorMeta(){
+    /*
+    Propósito:
+    - Indica el color de la meta.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (Rojo)
+}
+
+
 
 
 
