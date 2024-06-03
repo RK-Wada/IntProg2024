@@ -254,10 +254,10 @@ function minimoEntre_Y_(primerValor, segundoValor){
 
 -------------------------------------------------------------------------------------------
 
-function minimoEntre_Y_(primerValor, segundoValor){
+function maximoEntre_Y_(primerValor, segundoValor){
     /*
     Propósito: 
-    - Indica cual de los dos valores "primerValor" y "segundoValor" es más chico.
+    - Indica cual de los dos valores "primerValor" y "segundoValor" es más grande.
     Parámetros: 
     - primerValor: Cualquiera / Primer valor a comparar.
     - segundoValor: Cualquiera / Segundo valor a comparar.
