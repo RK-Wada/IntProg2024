@@ -1044,82 +1044,57 @@ Ejercicio 31)
 
 function cantidadDeVecinasConBolitas(){
     /*
-    Propósito: 
-    - Indica la cantidad de celdas vecinas con bolitas de cualquier color. 
-    Precondiciones: 
-    - Ninguna. 
-    Tipo: Número.
-    Observaciones: 
-    - Es un recorrido de acumulación sobre las celdas del tablero. Acumulando la cantidad de celdas que tengan al menos una bolita de cualquier color.
+    Propósito:
+    - Indica la cantidad de celdas lindantes a la celda actual que posean al menos una bolita de cualquier color. (En esas celdas lindantes también se toman las celdas en diagonal a la celda actual).
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre direcciones, acumulando las celdas lindantes (y diagonales) a la celda actual que tengan al menos una bolita de algún color.
     */
+    cantidadDeVecinas := 0 
     dirActual := minDir()
-    contadorDeCeldas := 0
     while (dirActual /= maxDir()){
         Mover(dirActual)
-        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
+        cantidadDeVecinas := cantidadDeVecinas + unoSi_CeroSiNo(not esCeldaVacia())
         Mover(siguiente(dirActual))
-        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
-        Mover(previo(dirActual)) 
-        Mover(opuesto(dirActual)) 
-        dirActual := siguiente (dirActual) 
+        cantidadDeVecinas := cantidadDeVecinas + unoSi_CeroSiNo(not esCeldaVacia())
+        Mover(previo(dirActual))
+        Mover(opuesto(dirActual))
+        dirActual := siguiente (dirActual)
     }
-        Mover(dirActual)
-        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
+    Mover(dirActual)
+        cantidadDeVecinas := cantidadDeVecinas + unoSi_CeroSiNo(not esCeldaVacia())
         Mover(siguiente(dirActual))
-        contadorDeCeldas := contadorDeCeldas + unoSi_CeroSiNo(esCeldaConBolitas())
-        Mover(previo(dirActual)) 
-        Mover(opuesto(dirActual)) 
-    return (contadorDeCeldas)
-}
-
-function unoSi_CeroSiNo(valor){
-    /*
-    Propósito: 
-    - Indica si la condición se cumple o no. Si se cumple, indica 1 y sino, indica 0.
-    Parámetros:
-    - valor: Cualquiera / Valor a evaluar.
-    Precondiciones: 
-    - Ninguna.
-    Tipo: Booleano.
-    */
-    return (choose 1 when (valor)
-                    0 otherwise)
-}
-
-function esCeldaConBolitas(){
-    /*
-    Propósito: Indica si la celda actual hay al menos una bolita de cualquier color.
-    Precondición:
-    - Ninguna
-    Tipo: Booleano
-    */
-    return (hayBolitas(Rojo) || hayBolitas(Verde) || hayBolitas(Azul) || hayBolitas(Negro))
+        cantidadDeVecinas := cantidadDeVecinas + unoSi_CeroSiNo(not esCeldaVacia())
+    return (cantidadDeVecinas)
 }
 
 Ejercicio 32) 
 
-procedure Poner_EnLineaHacia_De_IncrementandoDeA_ComenzandoEn_(cantidad, direccion, color, factorDeIncremento, numeroInicial){
+procedure Poner_EnLineaHacia_De_IncrementandoDeA_ComenzandoEn_(celdasAAbarcar, direccion, color, factorDeIncremento, numeroInicial){
     /*
-    Propósito: 
-    - Pone una línea de bolitas hacia la dirección **direccion** de un largo indicado por el número **cantidad**, del color **colo** y que inicia con el número **numeroInicial** en la primera línea y va incrementando y sumando por cada celda que recorre la cantidad de bolitas de la celda anterior más el número **factorDeIncremento**.
-    - El cabezal vuelve y finaliza en la celda inicial.
-    Parámetros:  
-    - cantidad: Número / Cantidad de celdas que ocupará la fila.
-    - direccion: Dirección / Dirección hacia dónde se hará la fila. 
-    - color: Color / Color de las bolitas que conforman la fila.
-    - factorDeIncremento: Número / Número que se le suma por cada celda.
-    - numeroInicial: Número / Número que corresponde a la primera celda de la fila.
-    Precondiciones:
-    - Debe haber al menos **cantidad** - 1 celdas hacia la dirección **direccion** desde la celda actual.
+    Propósito:
+    - Pone una línea de **celdasAAbarcar** de largo, hacia la dirección **direccion** de bolitas de color **color** en dónde, en la primer celda pone tantas bolitas del color **color** como indique el número de **numeroInicial**, en la siguiente celda pone tantas bolitas del color **color** como la anterior celda + el factor de incremento.
+    Parámetros:
+    - celdasAAbarcar: Número / Cantidad de celdas que abarcará la línea.
+    - direccion: Dirección / Dirección hacia dónde se dibuja la línea.
+    - color: Color / Color de las bolitas a poner.
+    - factorDeIncremento: Número / Número correspondiente al factor de incremento entre cada celda.
+    - numeroInicial: Número / Número inicial de la línea.
+    Observaciones: 
+    - Es un recorrido de procesamiento sobre las celdas de la fila, poniendo la cantidad de bolitas del color **color** indicada por el **numeroInicial** y el **factorDeIncremento**.
     */
-    Poner_DeColor_ (numeroInicial, color)
-    contadorBolitasAPoner := numeroInicial
-    repeat (cantidad - 1){
+    bolitasAPoner := numeroInicial
+    Poner_DeColor_(bolitasAPoner, color)
+    celdasDeLaLineaHechas := 1
+    while (celdasDeLaLineaHechas /= celdasAAbarcar){
         Mover(direccion)
-        Poner_DeColor_ (contadorBolitasAPoner + factorDeIncremento, color)
-        contadorBolitasAPoner := (contadorBolitasAPoner + factorDeIncremento)
+        bolitasAPoner := bolitasAPoner + factorDeIncremento
+        Poner_DeColor_(bolitasAPoner, color)
+        celdasDeLaLineaHechas := celdasDeLaLineaHechas + 1
     }
-        Mover_VecesAl_(cantidad - 1, opuesto (direccion))
 }
 
 procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
@@ -1148,44 +1123,174 @@ procedure Mover_VecesAl_ (cantidadAMover, direccionAMover){
     }
 }
 
+Ejercicio 33)
+
+function fibonacciNro_(numero){
+    /*
+    Propósito:
+    - Indica el número de fibonacci correspondiente a la posición que indique el número **numero**. 
+    Parámetros:
+    - numero: Número / Número correspondiente a la posición que describe al número de fibonacci.
+    Precondiciones:
+    - El número **numero** debe ser mayor o igual a 0.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre números. Acumulando los números de fibonacci hasta llegar al número correspondiente al numero de la posición **numero**.
+    */
+    posicionActual := 0
+    elementoActual := 1
+    elementoFantasma := 1
+    elementoAnterior := 0
+    while (posicionActual /= numero){
+        posicionActual := posicionActual +1
+        elementoFantasma := elementoActual
+        elementoActual := elementoActual + elementoAnterior
+        elementoAnterior := elementoFantasma
+    }
+    return (elementoActual)
+}
+
+Ejercicio 34)
+
+a) 
+
+function coordenadaXConMasBolitas(){
+    /*
+    Propósito:
+    - Indica la coordenada x de la celda que contenga más bolitas (en total) de la fila actual.
+    Precondiciones:
+    - Debe haber alguna celda que tenga más bolitas que el resto.
+    Tipo:
+    - Número.
+    Observaciones: 
+    - Es un recorrido de búsqueda sobre las celdas de la fila actual, buscando la celda que tenga más bolitas (en total).
+    */
+    IrAlBorde(Oeste)
+    coordenadaXActual := 0
+    coordenadaXConMasBolitas := 0
+    mayorNumeroDeBolitasVisto := totalDeBolitasCeldaActual()
+    coordenadaXFantasma := mayorNumeroDeBolitasVisto
+    while (puedeMover(Este)){
+        Mover(Este)
+        coordenadaXActual := coordenadaXActual + 1
+        coordenadaXFantasma := mayorNumeroDeBolitasVisto
+        mayorNumeroDeBolitasVisto := maximoEntre_Y_(mayorNumeroDeBolitasVisto, totalDeBolitasCeldaActual())
+        if (mayorNumeroDeBolitasVisto > coordenadaXFantasma) then {
+            coordenadaXConMasBolitas := coordenadaXActual
+        }
+    }
+    return (coordenadaXConMasBolitas)
+}
+
+function totalDeBolitasCeldaActual(){
+    /*
+    Propósito:
+    - Define el total de las bolitas en la celda actual.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    */
+    return (nroBolitas(Rojo) + nroBolitas(Azul) + nroBolitas(Verde) + nroBolitas(Negro))
+}
+
+b)
+
+function coordenadaYConMasBolitas(){
+    /*
+    Propósito:
+    - Indica la coordenada Y de la celda que contenga más bolitas (en total) de la columna actual.
+    Precondiciones:
+    - Debe haber alguna celda que tenga más bolitas que el resto.
+    Tipo:
+    - Número.
+    Observaciones: 
+    - Es un recorrido de búsqueda sobre las celdas de la columna actual, buscando la celda que tenga más bolitas (en total).
+    */
+    IrAlBorde(Sur)
+    coordenadaXActual := 0
+    coordenadaXConMasBolitas := 0
+    mayorNumeroDeBolitasVisto := totalDeBolitasCeldaActual()
+    coordenadaXFantasma := mayorNumeroDeBolitasVisto
+    while (puedeMover(Norte)){
+        Mover(Norte)
+        coordenadaXActual := coordenadaXActual + 1
+        coordenadaXFantasma := mayorNumeroDeBolitasVisto
+        mayorNumeroDeBolitasVisto := maximoEntre_Y_(mayorNumeroDeBolitasVisto, totalDeBolitasCeldaActual())
+        if (mayorNumeroDeBolitasVisto > coordenadaXFantasma) then {
+            coordenadaXConMasBolitas := coordenadaXActual
+        }
+    }
+    return (coordenadaXConMasBolitas)
+}
+
+Ejercicio 35)
+
+function bordeMasCercano(){
+    /*
+    Propósito:
+    - Indica el borde más cercano a la celda actual. 
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Dirección.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las direcciones, buscando el borde más cercano a la celda actual.
+    */
+    dirActual := minDir()
+    dirMasCercaActual := dirActual
+    menorDistanciaAlBorde := distanciaAlBorde_(dirActual)
+    dirFantasma :=  menorDistanciaAlBorde
+    while (dirActual /= maxDir()) {
+        dirActual := siguiente (dirActual)
+        dirFantasma := menorDistanciaAlBorde
+        menorDistanciaAlBorde := minimoEntre_Y_(menorDistanciaAlBorde, distanciaAlBorde_(dirActual))
+        if (menorDistanciaAlBorde < dirFantasma) then {
+            dirMasCercaActual := (dirActual)
+        }
+    }
+    return (dirMasCercaActual)
+}
+
 Ejercicio 36) 
 
 function colorMasChicoDelCualHayBolitas(){
     /*
-    Propósito: 
-    - Indica el color más chico para el cual haya bolitas en la celda actual.
-    Precondiciones: 
-    - Debe haber al menos una bolita de cualquier color en la cleda actual.
-    Tipo: 
+    Propósito:
+    - Indica el color más chico del cual hay bolitas en la celda actual. 
+    Precondiciones:
+    - Debe haber al menos una bolita de algún color en la celda actual.
+    Tipo:
     - Color.
-    Observaciones: 
-    - Es un recorrido por maximo-minimo en la celda actual. Buscando el color mínimo sobre el cual hay bolitas.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los colores, buscando el color más chico del cual hay bolitas en la celda actual.
     */
-    colorAIndicar := minColor()
-    while (not hayBolitas(colorAIndicar) && colorAIndicar /= maxColor()) {
-        colorAIndicar := siguiente (colorAIndicar) 
+    colorActual := minColor()
+    while (not hayBolitas(colorActual) && colorActual /= maxColor()){
+        colorActual := siguiente(colorActual)
     }
-    return (colorAIndicar)
+    return (colorActual)
 }
 
 Ejercicio 37) 
 
 function colorMasGrandeDelCualHayBolitas(){
     /*
-    Propósito: 
-    - Indica el color más grande para el cual haya bolitas en la celda actual.
-    Precondiciones: 
-    - Debe haber al menos una bolita de cualquier color en la cleda actual.
-    Tipo: 
+    Propósito:
+    - Indica el color más grande del cual hay bolitas en la celda actual. 
+    Precondiciones:
+    - Debe haber al menos una bolita de algún color en la celda actual.
+    Tipo:
     - Color.
-    Observaciones: 
-    - Es un recorrido por maximo-minimo en la celda actual. Buscando el color máximo sobre el cual hay bolitas.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los colores, buscando el color más grande del cual hay bolitas en la celda actual.
     */
-    colorAIndicar := maxColor()
-    while (not hayBolitas(colorAIndicar) && colorAIndicar /= minColor()) {
-        colorAIndicar := previo (colorAIndicar) 
+    colorActual := maxColor()
+    while (not hayBolitas(colorActual) && colorActual /= minColor()){
+        colorActual := previo(colorActual)
     }
-    return (colorAIndicar)
+    return (colorActual)
 }
 
 Ejercicio 39) 
