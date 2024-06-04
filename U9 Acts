@@ -1297,27 +1297,267 @@ Ejercicio 39)
 
 procedure IrAVaciaNumero_(numeroDeVacia){
     /*
-    Propósito: 
-    - Posicionar el cabezal en la celda vacía número **numeroDeVacia**. Si no hay suficientes celdas vacías, deja el cabezal en la esquina NorEste.
-    Parámetros: 
-    - numeroDeVacia: Número / Número de celda vacía sobre la cual posicionar el cabezal.
-    Precondiciones: 
+    Propósito:
+    - Posiciona el cabezal en la celda vacía número **numeroDeVacia**, en un recorrido hacia el noreste. En caso de que la cantidad de celdas vacías sea menor al número **numeroDeVacia**, se deja el cabezal en la celda correspondiente a la esquina noreste.
+    Parámetros:
+    - numeroDeVacia: Número / Número de celda vacía en la cual posicionar el cabezal.
+    Precondiciones:
     - Ninguna.
-    Observaciones: 
-    - Es un recorrido de busqueda sobre las celdas del tablero. Buscando la celda vacía número **numeroDeVacia**.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas del tablero, buscando la celda vacía número **numeroDeVacia** en un recorrido hacia el noreste.
     */
     IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
-    celdasVaciasYaVistas := 0
-    celdasVaciasYaVistas := celdasVaciasYaVistas + unoSi_CeroSiNo(esCeldaVacia())
-    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte) && celdasVaciasYaVistas < numeroDeVacia) {
+    celdaVaciaActual := 0
+    celdaVaciaActual := celdaVaciaActual + unoSi_CeroSiNo(esCeldaVacia())
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte) && celdaVaciaActual /= numeroDeVacia){
         IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
-        celdasVaciasYaVistas := celdasVaciasYaVistas + unoSi_CeroSiNo(esCeldaVacia())
+        celdaVaciaActual := celdaVaciaActual + unoSi_CeroSiNo(esCeldaVacia())
+    }
+    if (celdaVaciaActual /= numeroDeVacia) then {
+        IrAEsquinaAl_Y_(Este, Norte)
     }
 }
 
 Ejercicio 40) 
 
+a) 
 
+function cantidadDePistasLibres(){
+    /*
+    Propósito:
+    - Indica la cantidad de pistas libres, sin ningún avión en ellas.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número
+    Observaciones:
+    - Es un recorrido de acumulación sobre las pistas, acumulando la cantidad de pistas libres.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    cantidadDePistasLibres := unoSi_CeroSiNo(pistaLibre())
+    while (puedeMover(Este)) {
+        Mover(Este)
+        cantidadDePistasLibres := cantidadDePistasLibres + unoSi_CeroSiNo(pistaLibre())
+    }
+    return (cantidadDePistasLibres)
+}
+
+
+function pistaLibre(){
+    /*
+    Propósito:
+    - Indica si la pista actual está libre o no.
+    Precondiciones:
+    - El cabezal debe estar ubicado sobre la celda correspondiente al borde sur de la pista.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas de la pista. Búscando un avión en la pista.
+    */
+    esLibre := False
+    celdasRecorridas := 1
+    celdasVaciasEnPista := unoSi_CeroSiNo(esCeldaVacia())
+    while (puedeMover(Norte)){
+        Mover(Norte)
+        celdasRecorridas := celdasRecorridas + 1
+        celdasVaciasEnPista := celdasVaciasEnPista + unoSi_CeroSiNo(esCeldaVacia())
+    }
+    if (celdasRecorridas == celdasVaciasEnPista) then {
+        esLibre := True
+    }
+    else {
+        esLibre := False
+    }
+    return (esLibre)
+}
+
+b)
+
+function cantidadDeAvionesDespegando(){
+    /*
+    Propósito:
+    - Indica la cantidad de aviones despegando en todo el aeropuerto. 
+    Precondiciones:
+    - No deben haber dos aviones en la misma celda.
+    Tipo: 
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre las celdas del aeropuesto, acumulando los aviones que esten despegando.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    avionesDespegando := unoSi_CeroSiNo(hayBolitas(Azul) && (hayBolitas(Verde)))
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)){
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        avionesDespegando := avionesDespegando + unoSi_CeroSiNo(hayBolitas(Azul) && (hayBolitas(Verde)))
+    }
+    return (avionesDespegando)
+}
+
+c)
+
+procedure IrAPistaLibreParaDespegar(){
+    /*
+    Propósito:
+    - Mover el cabezal hacia la primera pista libre más cerca al este del aeropuerto, en la posición más al sur de la pista.
+    Precondiciones:
+    - Debe haber al menos una pista libre.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las pistas del aeropuerto.
+    */
+    IrAEsquinaAl_Y_(Este, Sur)
+    while (puedeMover(Oeste) && not pistaLibre()){
+        Mover(Oeste)
+    }
+}
+
+d) 
+
+function cantidadDeAvionesTotales(){
+    /*
+    Propósito:
+    - Indica la cantidad de aviones totales en el aeropuerto.
+    Precondiciones:
+    - No puede haber más de un avion por celda.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre las celdas del aeropuerto, acumulando los aviones que hay.
+    - No importa si los aviones están despegando o aterrizando.
+    */
+    IrAPrimeraCeldaEnUnRecorridoAl_Y_(Este, Norte)
+    cantidadDeAviones := unoSi_CeroSiNo(hayBolitas(Azul))
+    while (haySiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)){
+        IrASiguienteCeldaEnUnRecorridoAl_Y_(Este, Norte)
+        cantidadDeAviones := cantidadDeAviones + unoSi_CeroSiNo(hayBolitas(Azul))
+    }
+    return (cantidadDeAviones)
+}
+
+e) 
+
+procedure IrAPistaLibreParaAterrizar(){
+    /*
+    Propósito:
+    - Mover el cabezal hacia la primera pista libre más cerca al oeste del aeropuerto, en la posición más al norte de la pista.
+    Precondiciones:
+    - Debe haber al menos una pista libre.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las pistas del aeropuerto.
+    */
+    IrAEsquinaAl_Y_(Oeste, Norte)
+    while (puedeMover(Este) && not pistaLibre()){
+        Mover(Este)
+    }
+}
+
+function pistaLibre(){
+    /*
+    Propósito:
+    - Indica si la pista actual está libre o no.
+    Precondiciones:
+    - El cabezal debe estar ubicado sobre la celda correspondiente al borde sur de la pista.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas de la pista. Búscando un avión en la pista.
+    */
+    IrAlBorde(Sur)
+    esLibre := False
+    celdasRecorridas := 1
+    celdasVaciasEnPista := unoSi_CeroSiNo(esCeldaVacia())
+    while (puedeMover(Norte)){
+        Mover(Norte)
+        celdasRecorridas := celdasRecorridas + 1
+        celdasVaciasEnPista := celdasVaciasEnPista + unoSi_CeroSiNo(esCeldaVacia())
+    }
+    if (celdasRecorridas == celdasVaciasEnPista) then {
+        esLibre := True
+    }
+    else {
+        esLibre := False
+    }
+    return (esLibre)
+}
+
+f) 
+
+function cantidadDePistasConColisionInminente(){
+    /*
+    Propósito:
+    - Indica la cantidad de pistas del aeropuerto que tienen una colisión inminente.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número
+    Observaciones:
+    - Es un recorrido de acumulación sobre las pistas del aeropuerto, acumulando las que tienen una colisión inminente.
+    */
+    IrAEsquinaAl_Y_(Sur, Oeste)
+    pistasConColision := unoSi_CeroSiNo(pistaConColisionInminente())
+    while (puedeMover(Este)){
+        Mover(Este)
+        pistasConColision := pistasConColision + unoSi_CeroSiNo(pistaConColisionInminente())
+    }
+    return (pistasConColision)
+}
+
+function pistaConColisionInminente(){
+    /*
+    Propósito:
+    - Indica si la pista actual tiene una colisión inminente o no.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las celdas de la pista, buscando si hay una colisión inminente.
+    - Una colisión se ocasiona cuando en la misma pista hay un avión que está despegando debajo de un avión que está aterrizando. Cabe aclarar que el que está despegando tiene que estar al sur del que está aterrizando.
+    */
+    IrAlBorde(Sur)
+    celdaActual := 1
+    avionDespegandoMasAlSur := distanciaAlBorde_(Norte)
+    avionAterrizandoMasAlNorte := 0 
+    hayAvionesDespegando := False
+    hayAvionesAterrizando := False
+    if (hayAvionDespegando()) then {
+        avionDespegandoMasAlSur := celdaActual
+        hayAvionesDespegando := True
+    }
+    elseif (hayAvionAterrizando()) {
+        avionAterrizandoMasAlNorte := celdaActual
+        hayAvionesAterrizando := True
+    }
+    while (puedeMover(Norte)){
+        Mover(Norte)
+        celdaActual := celdaActual + 1
+        if (hayAvionDespegando()) then {
+            avionDespegandoMasAlSur := minimoEntre_Y_(avionDespegandoMasAlSur, celdaActual)
+            hayAvionesDespegando := True
+        }
+        elseif (hayAvionAterrizando()) {
+            avionAterrizandoMasAlNorte := maximoEntre_Y_(avionAterrizandoMasAlNorte, celdaActual)
+            hayAvionesAterrizando := True
+        }
+    }
+    return (avionDespegandoMasAlSur < avionAterrizandoMasAlNorte && hayAvionesDespegando == True && hayAvionesAterrizando == True)
+}
+
+g) 
+
+procedure IrAPistaConColisionInminente(){
+    /*
+    Propósito:
+    - Mueve el cabezal hacia el borde sur de la pista más al oeste que tenga una colisión inminente.
+    Precondiciones:
+    - Debe haber alguna pista con colisión inminente.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre las pistas del aeropuerto, buscando la primer pista más al oeste que tenga una colisión inminente.
+    */
+    IrAEsquinaAl_Y_(Oeste, Sur)
+    while (not pistaConColisionInminente() && puedeMover(Este)){
+        Mover(Este)
+    }
+}
 
 
 
