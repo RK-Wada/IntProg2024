@@ -1,0 +1,46 @@
+//PUNTO 1
+
+function cantidadDeBañosEn_ (unMultiverso){
+    /*
+    Propósito:
+    - Describe la cantidad de baños que hay en el multiverso dado.
+    Precondiciones:
+    - Ninguna.
+    Parámetros:
+    - unMultiverso: [Universo] / es el universo de cual quiero contar los baños.
+    Tipo: 
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación
+    */
+    cantidadBaños := 0
+    foreach universo in unMultiverso {
+        cantidadBaños := cantidadBaños + cantidadDeBañosEnGalaxia_(galaxias(universo))
+    }
+    return (cantidadBaños)
+}
+
+function cantidadDeBañosEnGalaxia_(unaGalaxia){
+    /**/
+}
+
+function cantidadDeBañosEnPiso_(unPiso){
+    /*
+    Propósito:
+    - Describe la cantidad de baños que hay en el piso dado.
+    Precondiciones:
+    - Ninguna.
+    Parámetros:
+    - unPiso: Piso / Es el piso del cual quiero contar los baños.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación.
+    */
+    cantidadBaños := 0
+    foreach habitacion in habitaciones(unPiso){
+        cantidadBaños := cantidadBaños + unoSi_CeroSino(esBañoHabitacion_(habitacion))
+    }
+}
+
+// PUNTO 2
