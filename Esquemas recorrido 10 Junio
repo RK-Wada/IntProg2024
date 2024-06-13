@@ -1,0 +1,55 @@
+// Esquemas de recorridos sobre listas 
+// dada una lista de cosas de tipo A llamada **Lista** (tipo [A])
+
+
+// Busqueda (sin saber si esta ) [A] -> Booleano
+//requiere la sub tarea "es_ElementoBuscado" (A -> Booleano)
+
+    elementosPorVer := lista
+    while (not esVacia(elementosPorVer) && not es_ElementoBuscado(primero(elementoPorVer))) {
+        elementosPorver(sinElPrimero(elementosPorVer)
+    }
+    return (not esVacia(elementosPorVer)
+}
+
+// Busqueda ( si esta ) [A] -> A
+// Prec : La lista no es vacia && El elemento buscado esta en la lista
+//requiere la sub tarea "es_ElementoBuscado" (A -> Booleano)
+
+    elementosPorVer := lista
+    while (not es_ElementoBuscado(primero(elementoPorVer))) {
+        elementosPorVer(sinElPrimero(elementosPorVer)
+    }
+    return (primero(elementosPorVer))
+}
+
+// Acumulacion ([A] -> Numero)
+//Requiere la subtarea "valorDe_" [A] -> Numero
+
+acumuladorAlMomento
+foreach elemento in lista {
+    acumuladoalMomento := acumuladoAlMomento + valorDe_(elemento)
+}
+//Transformacion
+// Requiere la subtarea "transformado_" (A -> B)
+transformadoAlMomento := []
+foreach elemento in lista {
+    acumuladoalMomento := acumuladoAlMomento ++ [transformado_(elemento)]
+}
+
+//Filtrado ([A] -> [A])
+//requiere la subtarea "debe_EstarEnResultado" (A -> Booleano)
+
+filtradosAlMoment :? []
+foreach elemento in lista {
+    filtradosAlMomento := filtradosAlMomento ++ singular_si_ (elemento, Debe_EstarEnResulanto(elemento)
+}
+
+// Maximo minimo ([A] -> A)
+// prec la lista no puede estar vacia
+// requiere la subtarea "elmasEntre_Y_" (A, A -> A)
+masAlMomento := primero(lista)
+foreach elemento in lista {
+    masAlMomento := elMasEntre_Y_(elemento, el masAlMomento)
+}
+return (masAlMomento)
