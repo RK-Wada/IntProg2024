@@ -60,16 +60,18 @@ function diaPrevio_ (dia){
 
 Ejercicio 1, c) 
 
-function esDiaDeFinDeSemana_ (dia){
+function esDiaDeFinDeSemana_(dia){
     /*
-    Propósito: 
+    Propósito:
     - Indica si el día **dia** es día de fin de semana.
     Parámetros:
     - dia: DiaDeLaSemana.
-    Precondiciones: 
+    Precondiciones:
     - Ninguna.
-    Tipo: 
+    Tipo:
     - Booleano.
+    Observaciones:
+    - Los días de fin de semana son Sabado y Domingo.
     */
     return (dia == Sabado || dia == Domingo)
 }
