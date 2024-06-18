@@ -91,209 +91,142 @@ type PartidoPolitico is variant {
 
 Ejercicio 2, a) 
 
-function tieneMasVotantes_Que_ (primerPartido, segundoPartido){
+function tieneMasVotantes_Que_(primerPartido, segundoPartido){
     /*
-    Propósito: 
-    - Indica si el partido **primerPartido** tiene más votantes que el partido **segundoPartido**.
-    Parámetros: 
-    - primerPartido: PartidoPolitico / Primer partido político que se compara la cantidad de votos.
-    - segundoPartido: PartidoPolitico / Segundo partido político que se compara la cantidad de votos.
-    Precondiciones: 
-    - **primerPartido** y **segundoPartido** no pueden ser iguales.
-    Tipo: 
+    Proposito:
+    - Indica si el **primerPartido** tiene más votantes que el **segundoPartido**.
+    Parámetros:
+    - primerPartido: PartidoPolitico 
+    - segundoPartido: PartidoPolitico
+    Precondiciones:
+    - **primerPartido** y **segundoPartido** deben ser distintos partidos.
+    - **primerPartido** y **segundoPartido** deben tener distinta cantidad de votos.
+    Tipo:
     - Booleano.
     */
-    return (cantidadDeVotosDe_(primerPartido) > cantidadDeVotosDe_(segundoPartido))
+    return (cantidadDeVotosDe_(primerPartido) > cantidadDeVotos_(segundoPartido))
 }
 
 Ejercicio 2, b) 
 
 function elQueTieneMasVotos(){
     /*
-    Propósito: 
-    - Indica el partido político con más votantes.
-    Precondiciones: 
-    - Ninguna.
-    Tipo: 
+    Propósito:
+    - Indica el partido político con más votos.
+    Precondiciones:
+    - Debe haber un partido político que tenga más votos que todo el resto.
+    Tipo:
     - PartidoPolitico
-    Observaciones: 
-    - Es un recorrido de búsqueda sobre los partidos políticos, buscando el partido con mayor cantidad de votos.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los partidos políticos, buscando el partido con la mayor cantidad de votos.
     */
     partidoActual := DemocraciaPorLaVerdad
-    partidoConMasVotosHastaAhora := DemocraciaPorLaVerdad
-    while (partidoActual /= IzquierdaDeLosObreros) then {
-        partidoActual:= siguiente (partidoActual)
-        partidoConMasVotosHastaAhora := PartidoConMasVotosEntre_Y_ (partidoConMasVotosHastaAhora, partidoActual)
+    partidoConMasVotos := partidoActual
+    while (partidoActual /= IzquierdaDeLosObreros) {
+        partidoActual := partidoSiguienteA_(partidoActual)
+        partidoConMasVotos := maximoEntrePartido_Y_(partidoConMasVotos, partidoActual)
     }
-    return (partidoConMasVotosHastaAhora)
+    return (partidoConMasVotos)
 }
 
-function siguientePartidoA_(partidoPolitico){
+function partidoSiguienteA_(partidoPolitico){
     /*
-    Propósito: 
-    - Indica el siguiente partido al partido **partidoPolitico**.
-    Parámetros: 
-    - partidoPolítico: PartidoPolitico / Partido político a indicar su siguiente partido.
-    Precondiciones: 
+    Propósito:
+    - Indica el partido político siguiente al partido **partidoPolitico**.
+    Parámetros:
+    - partidoPolitico: PartidoPolitco
+    Precondiciones:
     - Ninguna.
     Tipo: 
     - PartidoPolitico.
     */
-    return (choose UnidosPorLaRepublica when (partidoPolitico == DemocraciaPorLaVerdad)
+    return (choose DemocraciaPorLaVerdad when (partidoPolitico == IzquierdaDeLosObreros)
+                   UnidosPorLaRepublica when (partidoPolitico == DemocraciaPorLaVerdad)
                    LiberalesPorLaLibertad when (partidoPolitico == UnidosPorLaRepublica)
-                   IzquierdaDeLosObreros when (partidoPolitico == LiberalesPorLaLibertad)
-                   DemocraciaPorLaVerdad otherwise)
+                   IzquierdaDeLosObreros otherwise)
 }
 
-function PartidoConMasVotosEntre_Y_ (primerPartido, segundoPartido){
+function maximoEntrePartido_Y_(primerPartido, segundoPartido){
     /*
-    Propósito: 
-    - Indica el partido con más votos entre **primerPartido** y **segundoPartido**.
-    Parámetros: 
-    - primerPartido: PartidoPolitico / Primer partido político a comparar la cantidad de votos.
-    - segundoPartido: PartidoPolitico / Segundo partido político a comparar la cantidad de votos.
-    Precondiciones: 
-    - **primerPartido** y **segundoPartido** no deben ser iguales.
+    Propósito:
+    - Indica el partido con más votantes entre el **primerPartido** y el **segundoPartido**.
+    Parámetros:
+    - primerPartido: PartidoPolitico 
+    - segundoPartido: PartidoPolitico
+    Precondiciones:
+    - **primerPartido** y **segundoPartido** deben ser distintos partidos.
+    - **primerPartido** y **segundoPartido** deben tener distinta cantidad de votos.
+    Tipo:
+    - PartidoPolitico.
     */
-    return (choose primerPartido when tieneMasVotantes_Que_ (primerPartido, segundoPartido)
+    return (choose primerPartido when (tieneMasVotantes_Que_(primerPartido, segundoPartido))
                    segundoPartido otherwise)
 }
 
-function tieneMasVotantes_Que_ (primerPartido, segundoPartido){
-    /*
-    Propósito: 
-    - Indica si el partido **primerPartido** tiene más votantes que el partido **segundoPartido**.
-    Parámetros: 
-    - primerPartido: PartidoPolitico / Primer partido político que se compara la cantidad de votos.
-    - segundoPartido: PartidoPolitico / Segundo partido político que se compara la cantidad de votos.
-    Precondiciones: 
-    - **primerPartido** y **segundoPartido** no pueden ser iguales.
-    Tipo: 
-    - Booleano.
-    */
-    return (cantidadDeVotosDe_(primerPartido) > cantidadDeVotosDe_(segundoPartido))
-}
-
-Ejercicio 2, c) NO TERMINADO
-
-type PartidoPolitico is variant {
-    /*
-    Propósito: 
-    - Modelar los partidos políticos del país.
-    */
-    case DemocraciaPorLaVerdad  {}
-    case UnidosPorLaRepublica   {}
-    case LiberalesPorLaLibertad {}
-    case IzquierdaDeLosObreros  {}
-}
+Ejercicio 2, c) 
 
 function habraBallotage(){
     /*
-    Propósito: 
-    - Indica si en las elecciones habrá ballotage. 
+    Propósito:
+    - Indica si en las elecciones habrá ballotage.
     Precondiciones:
     - Ninguna.
-    Tipo: Booleano.
-    Observaciones:
-    - El ballotage se da cuando el partido con más votos no acumula más del 50% de los votos totales y no hay una diferencia de más del 10% entre el primer y el segundo candidato.
-    */
-    return (cantidadDeVotosDe_(elQueTieneMasVotos()) < totalDeVotos() && diferenciaDeVotosCandidatos1Y2() <= diezPorcientoDeLosVotosTotales())
-}
-
-function elQueTieneMasVotos(){
-    /*
-    Propósito: 
-    - Indica el partido político con más votantes.
-    Precondiciones: 
-    - Ninguna.
-    Tipo: 
-    - PartidoPolitico
-    Observaciones: 
-    - Es un recorrido de búsqueda sobre los partidos políticos, buscando el partido con mayor cantidad de votos.
-    */
-    partidoActual := DemocraciaPorLaVerdad
-    partidoConMasVotosHastaAhora := DemocraciaPorLaVerdad
-    while (partidoActual /= IzquierdaDeLosObreros) then {
-        partidoActual:= siguiente (partidoActual)
-        partidoConMasVotosHastaAhora := PartidoConMasVotosEntre_Y_ (partidoConMasVotosHastaAhora, partidoActual)
-    }
-    return (partidoConMasVotosHastaAhora)
-}
-
-function siguientePartidoA_(partidoPolitico){
-    /*
-    Propósito: 
-    - Indica el siguiente partido al partido **partidoPolitico**.
-    Parámetros: 
-    - partidoPolítico: PartidoPolitico / Partido político a indicar su siguiente partido.
-    Precondiciones: 
-    - Ninguna.
-    Tipo: 
-    - PartidoPolitico.
-    */
-    return (choose UnidosPorLaRepublica when (partidoPolitico == DemocraciaPorLaVerdad)
-                   LiberalesPorLaLibertad when (partidoPolitico == UnidosPorLaRepublica)
-                   IzquierdaDeLosObreros when (partidoPolitico == LiberalesPorLaLibertad)
-                   DemocraciaPorLaVerdad otherwise)
-}
-
-function PartidoConMasVotosEntre_Y_ (primerPartido, segundoPartido){
-    /*
-    Propósito: 
-    - Indica el partido con más votos entre **primerPartido** y **segundoPartido**.
-    Parámetros: 
-    - primerPartido: PartidoPolitico / Primer partido político a comparar la cantidad de votos.
-    - segundoPartido: PartidoPolitico / Segundo partido político a comparar la cantidad de votos.
-    Precondiciones: 
-    - **primerPartido** y **segundoPartido** no deben ser iguales.
-    */
-    return (choose primerPartido when tieneMasVotantes_Que_ (primerPartido, segundoPartido)
-                   segundoPartido otherwise)
-}
-
-function tieneMasVotantes_Que_ (primerPartido, segundoPartido){
-    /*
-    Propósito: 
-    - Indica si el partido **primerPartido** tiene más votantes que el partido **segundoPartido**.
-    Parámetros: 
-    - primerPartido: PartidoPolitico / Primer partido político que se compara la cantidad de votos.
-    - segundoPartido: PartidoPolitico / Segundo partido político que se compara la cantidad de votos.
-    Precondiciones: 
-    - **primerPartido** y **segundoPartido** no pueden ser iguales.
-    Tipo: 
+    Tipo:
     - Booleano.
+    Observaciones:
+    - El ballotage se da cuando el partido con más votos no acumula más del 50% de los votos totales y no hay una diferencia de más del 10% sobre entre el primero y el segundo candidato.
     */
-    return (cantidadDeVotosDe_(primerPartido) > cantidadDeVotosDe_(segundoPartido))
+    return (cantidadDeVotosDe_(elQueTieneMasVotos()) > cantidadDeVotosTotal() div 2 && diferenciaEntrePrimeroYSegundo() < cantidadDeVotosTotal() * 0.1)
 }
 
-function totalDeVotos(){
+function cantidadDeVotosTotal(){
     /*
-    Propósito: 
-    - Indica el total de votos entre todos los partidos.
-    Precondiciones: 
+    Propósito:
+    - Indica la cantidad total de votos entre todos los partidos políticos.
+    Precondiciones:
     - Ninguna.
-    Tipo: Número.
+    Tipo:
+    - Número.
     */
     return (cantidadDeVotosDe_(DemocraciaPorLaVerdad) + cantidadDeVotosDe_(UnidosPorLaRepublica) + cantidadDeVotosDe_(LiberalesPorLaLibertad) + cantidadDeVotosDe_(IzquierdaDeLosObreros))
 }
 
-function diferenciaDeVotosCandidatos1Y2(){
-    
-}
-
-function segundoPartidoConMasVotos(){
-    /**/
+function segundoConMasVotos(){
+    /*
+    Propósito:
+    - Indica el segundo partido político con más votos. 
+    Precondiciones:
+    - Debe haber un segundo partido que tenga más votos que otros 2 pero menos votos que el primero.
+    Tipo: 
+    - PartidoPolitico.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los partidos políticos, buscando el segundo partido con más votos.
+    */
     partidoActual := DemocraciaPorLaVerdad
-    segundoPartidoConMasVotos := DemocraciaPorLaVerdad
-    while (partidoActual /= IzquierdaDeLosObreros && segundoPartidoConMasVotos /= elQueTieneMasVotos()) then {
-        partidoActual:= siguiente (partidoActual)
-        segundoPartidoConMasVotos := PartidoConMasVotosEntre_Y_ (partidoConMasVotosHastaAhora, partidoActual)
+    if (partidoActual == elQueTieneMasVotos()) then {
+        partidoActual := partidoSiguienteA_(partidoActual)
     }
-    return (partidoConMasVotosHastaAhora)
+    segundoPartidoConMasVotos := partidoActual
+    while (partidoActual /= IzquierdaDeLosObreros){
+        partidoActual := partidoSiguienteA_(partidoActual)
+        if (partidoActual /= elQueTieneMasVotos()) then {
+            segundoPartidoConMasVotos := maximoEntrePartido_Y_(segundoPartidoConMasVotos, partidoActual)
+        }
+    }
+    return (segundoPartidoConMasVotos)
 }
 
-
-elQueTieneMasVotos()
+function diferenciaEntrePrimeroYSegundo(){
+    /*
+    Propósito:
+    - Indica la diferencia entre el partido político con más votos y el segundo partido con más votos.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    */
+    return (cantidadDeVotosDe_(elQueTieneMasVotos()) - cantidadDeVotosDe_(segundoConMasVotos()))
+}
 
 Ejercicio 3) 
 
