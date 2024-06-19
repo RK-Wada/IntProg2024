@@ -400,57 +400,60 @@ function valorParaEnvidoDe_(carta){
 
 Ejercicio 3, j) NO TERMINADO
 
-function mayorValorEntre_Y_(primerCarta, segundaCarta){
+function mayorValorEntre_Y_(primeraCarta, segundaCarta){
     /*
-    Propósito: 
-    - Indica cual de las dos cartas **primerCarta** y **segundaCarta** aporta más para el envido.
+    Propósito:
+    - Indica el valor más grande entre las cartas **primeraCarta** y **segundaCarta**, según lo que aporta cada una para el envido.
     Parámetros:
-    - primerCarta: Carta / Primera carta a determinar si es más grande.
-    - segundaCarta: Carta / Segunda carta a determinar si es más grande.
-    Precondiciones: 
+    - primeraCarta: Carta.
+    - segundaCarta: Carta.
+    Precondiciones:
     - Ninguna.
-    Tipo: 
-    - Número.
-    Observaciones: 
-    - Si la carta es una figura, el número que aporta es cero. (Es decir, si la carta es un número 10, 11 o 12).
+    Tipo:
+    - Número. 
     */
-    return ()
+    return (choose maximoEntre_Y_(numero(primeraCarta), numero(segundaCarta)) when (numero(PrimeraCarta) <= 7 && numero(segundaCarta) <= 7)
+                   numero(primeraCarta) when (numero(primeraCarta) <= 7 && numero(segundaCarta) >= 10)
+                   numero(segundaCarta) otherwise)
 }
 
 Ejercicio 3, k)
 
 function sumaParaElEnvidoCon_Y_(primeraCarta, segundaCarta){
     /*
-    Propósito: 
-    - Indica el número que generan dos cartas del mismo palo para el envido.
-    Parámetros: 
-    - primeraCarta: Carta / Primera carta a sumar el valor del envido.
-    - segundaCarta: Carta / Segunda carta a sumar el valor del envido.
+    Propósito:
+    - Indica el número que tienen las cartas **primeraCarta** y **segundaCarta** para el envido.
+    Parámetros:
+    - primeraCarta: Carta.
+    - segundaCarta: Carta.
     Precondiciones:
-    - Ninguna.
-    Tipo: 
+    - Las cartas **primeraCarta** y **segundaCarta** deben ser del mismo palo.
+    Tipo:
     - Número.
     */
-    return (valorParaEnvidoDe_(primeraCarta) + valorParaEnvidoDe_(segundaCarta) + 20)
+    return (choose numero(primeraCarta) + numero(segundaCarta) + 20 when (numero(PrimeraCarta) <= 7 && numero(segundaCarta) <= 7)
+                   numero(primeraCarta) + 20 when (numero(primeraCarta) <= 7 && numero(segundaCarta) >= 10)
+                   numero(segundaCarta) + 20 when (numero(segundaCarta) <= 7 && numero(primeraCarta) >= 10)
+                   20 otherwise)
 }
 
 Ejercicio 3, l)
 
-function sonMejores_Y_Que_Y_(primeraCarta, segundaCarta, terceraCarta, cuartaCarta){
+function sonMejores_Y_Que_Y_(primeraCartaPrimerJugador, segundaCartaPrimerJugador, primeraCartaSegundoJugador, segundaCartaSegundoJugador){
     /*
     Propósito:
-    - Indica si las 2 cartas del primer jugador (**primeraCarta** y **segundaCarta**) son mejores para el envido que las del jugador 2 (**terceraCarta** y **cuartaCarta**).
-    Parámetros: 
-    - primeraCarta: Carta / Primera carta del jugador número 1.
-    - segundaCarta: Carta / Segunda carta del jugador número 1.
-    - teceraCarta: Carta / Primera carta del jugador número 2.
-    - cuartaCarta: Carta / Segunda carta del jugador número 2.
+    - Indica si las cartas del primer jugador son mejores que las del segundo para el envido.
+    Parámetros:
+    - primeraCartaPrimerJugador: Carta.
+    - segundaCartaPrimerJugador: Carta.
+    - primeraCartaSegundoJugador: Carta.
+    - segundaCartaSegundoJugador: Carta.
     Precondiciones:
-    - Ninguna.
-    Tipo: 
+    - El primer y el segundo jugador deben de tener envido.
+    Tipo:
     - Booleano.
     */
-    return (sumaParaElEnvidoCon_Y_(primeraCarta, segundaCarta) > sumaParaElEnvidoCon_Y_(primeraCarta, segundaCarta))
+    return (sumaParaElEnvidoCon_Y_(primeraCartaPrimerJugador, segundaCartaPrimerJugador) > sumaParaElEnvidoCon_Y_(primeraCartaSegundoJugador, segundaCartaSegundoJugador))
 }
 
 Ejercicio 4, a) 
@@ -458,48 +461,50 @@ Ejercicio 4, a)
 function celdaActual(){
     /*
     Propósito:
-    - Indicar la celda actual como un registro del tipo Celda.
+    - Indica la celda actual.
     Precondiciones:
     - Ninguna.
-    Tipo: 
+    Tipo:
     - Celda.
     */
-    return (Celda (cantidadDeAzules <- nroBolitas(Azul))
-                  (cantidadDeNegras <- nroBolitas(Negro))
-                  (cantidadDeRojas  <- nroBolitas(Rojo))
-                  (cantidadDeVerdes <- nroBolitas(Verde)))
+    return (Celda (cantidadDeAzules <- nroBolitas(Azul)
+                 , cantidadDeNegras <- nroBolitas(Negro)
+                 , cantidadDeRojas <- nroBolitas(Rojo)
+                 , cantidadDeVerdes <- nroBolitas(Verde))
 }
 
 Ejercicio 4, b)
 
-procedure EscribirEnCelda_(celda){
+procedure EscribirEnCelda_(celdaACopiar){
     /*
-    Propósito: 
-    - Escribir la información de la celda **celda** en la celda actual del tablero.
-    Parámetros: 
-    - celda: Celda / La celda a escribir en la celda actual.
-    Precondiciones: 
+    Propósito:
+    - Escribe la información de la celda **celdaACopiar** en la celda actual.
+    Parámetros:
+    - celdaACopiar: Celda / Celda a copiar información en la celda actual.
+    Precondiciones:
     - Ninguna.
     */
-    Poner_DeColor_(cantidadDeAzules, Azul)
-    Poner_DeColor_(cantidadDeNegras, Negro)
-    Poner_DeColor_(cantidadDeRojas, Rojo)
-    Poner_DeColor_(cantidadDeVerdes, Verde)
+    Poner_DeColor_(cantidadDeAzules(celdaACopiar), Azul)
+    Poner_DeColor_(cantidadDeNegras(celdaACopiar), Negro)
+    Poner_DeColor_(cantidadDeRojas(celdaACopiar), Rojo)
+    Poner_DeColor_(cantidadDeVerdes(celdaACopiar), Verde)
 }
 
 Ejercicio 4, c)
 
-function tienenMismaCantidadDeRojas_Y_(primerCelda, segundaCelda){
+function tienenMismaCantidadDeRojas_Y_(primeraCelda, segundaCelda){
     /*
-    Propósito: 
-    - Indica si ambas celdas (**primerCelda** y **segundaCelda**) tienen la misma cantidad de bolitas rojas. 
+    Propósito:
+    - Indica si la celda **primeraCelda** y la celda **segundaCelda** tienen la misma cantidad de bolitas del color rojo.
     Parámetros:
-    - primerCelda: Celda / Primer celda a comparar la cantidad de bolitas rojas.
-    - segundaCelda: Celda / Segunda celda a comparar la cantidad de bolitas rojas.
+    - primeraCelda: Celda.
+    - segundaCelda: Celda.
     Precondiciones:
     - Ninguna.
+    Tipo:
+    - Booleano.
     */
-    return (cantidadDeRojas(primerCelda) == cantidadDeRojas(segundaCelda))
+    return (cantidadDeRojas(primeraCelda) == cantidadDeRojas(segundaCelda))
 }
 
 Ejercicio 5, a)
