@@ -511,14 +511,14 @@ Ejercicio 5, a)
 
 type Persona is record {
     /*
-    Propósito: 
+    Propósito:
     - Modelar una persona.
     Inv. Rep.: 
     - Ninguna.
     */
-    field dni // Un valor de tipo String.
-    field domicilio // Un valor de tipo String.
-    field esDonanteDeOrganos // Un valor de tipo Booleano.
+    field dni            //Un valor de tipo string.
+    field domicilio      //Un valor de tipo string.
+    field esDontante     //Un valor de tipo booleano.
 }
 
 Ejercicio 5, b)
