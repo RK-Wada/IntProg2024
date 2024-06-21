@@ -512,126 +512,126 @@ Ejercicio 5, a)
 type Persona is record {
     /*
     Propósito:
-    - Modelar una persona.
-    Inv. Rep.: 
-    - Ninguna.
-    */
-    field dni            //Un valor de tipo string.
-    field domicilio      //Un valor de tipo string.
-    field esDontante     //Un valor de tipo booleano.
+    
+Modelar una persona.
+  Inv. Rep.: 
+Ninguna.*/
+field dni            //Un valor de tipo string.
+field domicilio      //Un valor de tipo string.
+field esDontante     //Un valor de tipo booleano.
 }
 
 Ejercicio 5, b)
 
 function sonConvivientes_Y_(primerPersona, segundaPersona){
     /*
-    Propósito: 
-    - Indica si dos personas (**primerPersona** y **segundaPersona**) conviven en el mismo domicilio.
-    Parámetros:
-    - primerPersona: Persona / Primer persona a determinar si vive en el mismo domicilio.
-    - segundaPersona: PErsona / Segunda persona a determinar si vive en el mismo domicilio.
-    Precondiciones:
-    - Las personas **primerPersona** y **segundaPersona** no pueden ser la misma persona.
-    Tipo:
-    - Booleano.
-    */
-    return (domicilio(primerPersona) == domicilio(segundaPersona))
+    Propósito:
+    
+Indica si la persona primerPersona y segundaPersona son convivientes, es decir, comparten domicilio.
+  Parámetros:
+primerPersona: Persona.
+segundaPersona: Persona.
+Precondiciones:
+primerPersona y segundaPersona no pueden ser la misma persona.
+Tipo:
+Booleano.
+*/
+return (domicilio(primerPersona) == domicilio(segundaPersona))
 }
 
 Ejercicio 5, c)
 
 function personaNacidaDe_(personaMadre){
     /*
-    Propósito: 
-    - Indica una persona que es hijo/a de la persona **dniMadre**. 
-    Parámetros: 
-    - personaMadre: Persona / Madre de la persona a que nació.
+    Propósito:
+    Indica una persona nacida de **personaMadre**. 
+    Parámetros:
+    - segundaPersona: Persona.
     Precondiciones:
-    - Ninguna.
-    Tipo: 
+    - Nignuna.
+    Tipo:
     - Persona.
     */
-    return (Persona (dni <- sinAsignar()
-                    , domicilio <- domicilio(personaMadre)
-                    , esDonanteDeOrganos <- False)
+    return (Persona(dni <- sinAsignar()
+                   ,domicilio <- domicilio(personaMadre)
+                   ,esDonante <- False))
 }
 
 Ejercicio 5, d)
 
-function persona_RegistradaCon_(personaSinAsignar, dniAAsignar){
+function persona_RegistradaCon_(personaSinDni, nuevoDni){
     /*
-    Propósito: 
-    - Indica a la persona **personaSinAsignar** su nuevo número de DNI **dniAAsignar**. 
+    Propósito:
+    - Indica a la persona **personaSinDni** con su nuevo dni **nuevoDni**.
     Parámetros:
-    - personaSinAsignar: Persona / Persona que no tiene dni asignado.
-    - dniAAsignar: Número / Número de DNI a asignar.
-    Precondiciones: 
-    - La persona **personaSinAsignar** no debe tener DNI asignado.
-    Tipo: 
+    - personaSinDni: Persona.
+    - nuevoDni: String.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
     - Persona.
     */
-    return (Persona (dni <- dniAAsignar
-                    ,domicilio <- domicilio(personaSinAsignar)
-                    ,esDonanteDeOrganos <- esDonanteDeOrganos(personaSinAsignar))
+    return (Persona (personaSinDni | dni <- nuevoDni))
 }
 
 Ejercicio 5, e)
 
-function persona_ConDomicilioNuevoEn_(personaDelDomicilio, domicilioACambiar){
+function persona_ConDomicilioNuevoEn_(personaACambiarDomicilio, nuevoDomicilio){
     /*
     Propósito:
-    - Indica a la persona con su nuevo domicilio.
+    - Indica a la persona **personaACambiarDomicilio** con su nuevo domicilio **nuevoDomicilio**. 
     Parámetros:
-    - personaDelDomicilio: Persona / Persona a la cual asignarle el nuevo domicilio.
-    - domicilioACambiar: String / Nuevo domicilio a asignar.
-    Precondiciones: 
+    - personaACambiarDomicilio: Persona.
+    - nuevoDomicilio: String.
+    Precondiciones:
     - Ninguna.
-    Tipo: 
+    Tipo:
     - Persona.
     */
-    return (Persona (personaDelDomicilio | domicilio <- domicilioACambiar))
+    return (Persona (personaACambiarDomicilio | domicilio <- nuevoDomicilio)
 }
 
 Ejercicio 5, f)
 
-function persona_ConSituacionComoDonanteCambiada(personaACambiarDonar){
+function persona_ConSituacionComoDonanteCambiada(personaACambiarDonante){
     /*
-    Propósito: 
-    - Indica la persona **personaACambiarDonar** con la situación de donante cambiada.
+    Propósito:
+    - Indica a la persona **personaACambiarDonante** con el valor en el campo "esDonante" cambiado.
     Parámetros:
-    - personaACambiarDonar: Persona / Persona a cambiar su situación de donación.
+    - personaACambiarDonante: Persona.
     Precondiciones:
     - Ninguna.
-    Tipo: 
+    Tipo:
     - Persona.
     */
-    return (Persona(personaACambiarDonar | esDonanteDeOrganos <- not esDonanteDeOrganos(personaACambiarDonar))
+    return (choose (Persona(personaACambiarDonante | esDonante <- not esDontante(personaACambiarDonante))
 }
 
 Ejercicio 6) 
 
-type Empleado is record {
+type Empleado is record{
     /*
-    Propósito: 
-    - Modela el perfil del empleado dentro de la empresa.
-    Inv. Rep.: 
+    Propósito:
+    - Modelar la identidad de un empleado.
+    Inv. Rep.:
     - Ninguna.
     */
-    field persona //  Un valor del tipo Persona.
-    field puesto // Un valor del tipo Puesto.
-    field sueldo // Un valor del tipo Número.
+    field persona        //Un valor de tipo Persona.
+    field puesto         //Un valor de tipo Puesto.
+    field sueldo         //Un valor de tipo Número.
 }
 
 type Puesto is variant {
     /*
-    PROPÓSITO: Modelar los diferentes puestos que hay
-    dentro de una empresa de software
+    Propósito:
+    - Modelar los diferentes puestos que hay dentro de una empresa de software.
     */
     case GestorDeProyecto {}
-    case LiderDeProyecto {}
-    case Desarrollador {}
-    case Operador {}
+    case LiderDeProyecto  {}
+    case Desarrollador    {}
+    case Operador         {}
 }
+
 
 Ejercicio 6, a)
 
