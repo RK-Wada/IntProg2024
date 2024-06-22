@@ -740,19 +740,34 @@ function empleado_ConAumentoEn_PorBonoDeFinalizacionDeProyecto(empleado, porcent
 
 Ejercicio 6, g)
 
-function empleado_ConDomicilioActualizadoA_(empleado, nuevoDomicilio){
+function empleado_ConDomicilioActualizadoA_(empleadoACambiarDomicilio, nuevoDomicilio){
     /*
-    Propósito: 
-    - Indica el empleado **empleado** con su domicilio actualizado con el nuevo domicilio **nuevoDomicilio**.
+    Propósito:
+    - Indica el empleado **empleadoACambiarDomicilio** con el domicilio actualizado a **nuevoDomicilio**.
     Parámetros:
-    - empleado: Empleado / Empleado a cambiar el domicilio.
-    - nuevoDomicilio: String / Nuevo domicilio del empleado **empleado**.
+    - empleadoACambiarDomicilio: Empleado.
+    - nuevoDomicilio: String.
     Precondiciones:
     - Ninguna.
-    Tipo: 
+    Tipo:
     - Empleado.
     */
-    return (Empleado(empleado | identidad <- Persona(identidad(empleado) | domicilio <- domicilioNuevo)
+    return (Empleado (empleadoACambiarDomicilio | persona <- persona_ConDomicilioNuevoEn_(persona(empleadoACambiarDomicilio, nuevoDomicilio)))
+}
+
+function persona_ConDomicilioNuevoEn_(personaACambiarDomicilio, nuevoDomicilio){
+    /*
+    Propósito:
+    - Indica a la persona **personaACambiarDomicilio** con su nuevo domicilio **nuevoDomicilio**. 
+    Parámetros:
+    - personaACambiarDomicilio: Persona.
+    - nuevoDomicilio: String.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Persona.
+    */
+    return (Persona (personaACambiarDomicilio | domicilio <- nuevoDomicilio))
 }
 
 POSIBLE:
@@ -760,6 +775,589 @@ return (Empleado(empleado | identidad <- Persona(identidad(empleado) | domicilio
 
 
 Ejercicio 7) 
+
+type Fechas is record {
+    /*
+    Propósito:
+    - Modelar fechas según el calendario gregoriano.
+    Rep. Inv.:
+    - Cuando se utilice el mes "Enero" el número en el campo "dia" será "31".
+    - Cuando se utilice el mes "Febrero" el número en el campo "dia" será "28", a no ser que este tenga un año bisiesto en el campo "año", si es así, en "dia" será "29".
+    - Cuando se utilice el mes "Marzo" el número en el campo "dia" será "31".
+    - Cuando se utilice el mes "Abril" el número en el campo "dia" será "30".
+    - Cuando se utilice el mes "Mayo" el número en el campo "dia" será "31".
+    - Cuando se utilice el mes "Junio" el número en el campo "dia" será "30".
+    - Cuando se utilice el mes "Julio" el número en el campo "dia" será "31".
+    - Cuando se utilice el mes "Agosto" el número en el campo "dia" será "31".
+    - Cuando se utilice el mes "Septiembre" el número en el campo "dia" será "30".
+    - Cuando se utilice el mes "Octubre" el número en el campo "dia" será "31".
+    - Cuando se utilice el mes "Noviembre" el número en el campo "dia" será "30".
+    - Cuando se utilice el mes "Diciembre" el número en el campo "dia" será "31".
+    Observaciones:
+    - Un año se considera bisiesto cuando este es divisible por 4 pero no por 100. O cuando es divisible por 4, por 100 y por 400 al mismo tiempo.
+    */
+    field dia       //Un valor de tipo Número.
+    field mes       //Un valor de tipo Mes.
+    field año       //Un valor de tipo Número.
+}
+
+type Mes is variant {
+    /*
+    Propósito:
+    - Modelar los distintos meses del año.
+    */
+    case Enero      {}
+    case Febrero    {}
+    case Marzo      {}
+    case Abril      {}
+    case Mayo       {}
+    case Junio      {}
+    case Julio      {}
+    case Agosto     {}
+    case Septiembre {}
+    case Octubre    {}
+    case Noviembre  {}
+    case Diciembre  {}
+}
+
+Ejercicio 7.B)
+
+function diaDeLaMemoria(){
+    /*
+    Propósito:
+    - Indica la fecha del día de la memoria, 24 de Marzo de 1976.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 24
+                 , mes <- Marzo
+                 , año <- 1976))
+}
+
+function inicioReformaUniversitaria(){
+    /*
+    Propósito:
+    - Indica la fecha del inicio de la reforma universitaria.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 15
+                 , mes <- Junio
+                 , año <- 1918))
+}
+
+function votoFemenino(){
+    /*
+    Propósito:
+    - Indica la fecha de la reglametación del voto femenino en Argentina.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 23
+                 , mes <- Septiembre
+                 , año <- 1947))
+}
+
+function diaDeLosTrabajadores(){
+    /*
+    Propósito:
+    - Indica la fecha en la que ocurrieron los hechos conmemorados en el día internacional de los trabajadores.
+    Precondiciones:
+    - Nignuna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 4
+                 , mes <- Mayo
+                 , año <- 1886))
+}
+
+function creacionMinCiYTeArg(){
+    /*
+    Propósito:
+    - Indica la fecha en la que se creo el ministerio de ciéncia, tecnología e innovación de Argentina.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 10
+                 , mes <- Diciembre
+                 , año <- 2007))
+}
+
+function diaDeLaMujer(){
+    /*
+    Propósito:
+    - Indica la fecha de la primera celebración del día internacional de la mujer.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 19
+                 , mes <- Marzo
+                 , año <- 1911))
+}
+
+
+Ejercicio 8)
+
+procedure EscribirFecha_(fecha){
+    /*
+    Propósito:
+    - Dibujar la fecha **fecha** representada en una fila hacia el este de la celda actual, representando en la celda actual los días de la fecha **fecha** con bolitas de color azul. En la celda lindante al este de la celda actual, el mes representado con bolitas de color rojo y, 2 celdas hacia el este de la celda actual, representado el año con color verde.
+    Parámetros:
+    - fecha: Fecha / fecha a dibujar en el tablero.
+    Precondiciones:
+    - Debe haber al menos 2 celdas más hacia el este de la celda actual.
+    */
+    Poner_DeColor_(dia(fecha), Azul)
+    Mover(Este)
+    Poner_DeColor_(numeroDelMes_(mes(fecha)), Rojo)
+    Mover(Este)
+    Poner_DeColor_(año(fecha), Verde)
+}
+
+procedure Poner_DeColor_(cantidadAPoner, colorAPoner){
+    /*
+    Propósito: Dado un número "cantidadAPoner" y un color "colorAPoner", poner tantas bolitas de un determinado color en la celda actual.
+    Parámetros:
+    - cantidadAPoner: número / cantidad de bolitas rojas a poner.
+    - colorAPoner: color / color de las bolitas a poner.
+    Precondiciones: Ninguna.
+    */
+    repeat (cantidadAPoner){
+        Poner(colorAPoner)
+    }
+}
+
+function numeroDelMes_(mes){
+    /*
+    Propósito:
+    - Indica el número correspondiente al mes **mes**.
+    Parámetros:
+    - mes: Mes
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    */
+    return (choose 1 when (mes == Enero)
+                   2 when (mes == Febrero)
+                   3 when (mes == Marzo)
+                   4 when (mes == Abril)
+                   5 when (mes == Mayo)
+                   6 when (mes == Junio)
+                   7 when (mes == Julio)
+                   8 when (mes == Agosto)
+                   9 when (mes == Septiembre)
+                   10 when (mes == Octubre)
+                   11 when (mes == Noviembre)
+                   12 otherwise)
+}
+
+Ejercicio 9)
+
+//9.A
+function esDiaDeÑoquis_(fecha){
+    /*
+    Propósito:
+    - Indica si el día de la fecha **fecha** es día de ñoquis, es decir, es 29.
+    Parámetros:
+    - fecha: Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (dia(fecha) == 29)
+}
+
+//9.B
+function esDelPrimerSemestre_(fecha){
+    /*
+    Propósito:
+    - Indica si la fecha **fecha** es del primer semestre, es decir, es un día entre el 1ro de enero y el 31 de julio.
+    Parámetros.
+    - fecha: Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (numeroDelMes_(mes(fecha)) <= 6)
+}
+
+//9.C
+function esFechaDeAñoBisiesto_(fecha){
+    /*
+    Propósito:
+    - Indica si la fecha **fecha** es de un año bisiesto.
+    Parámetros:
+    - fecha. Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (choose False when (esMultiploDe4_(año(fecha) && not esMultiploDe100_(año(fecha)))
+                   True otherwise)
+}
+
+function esMultiploDe4_(año){
+    /*
+    Propósito:
+    - Indica si el año **año** es múltiplo de 4.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return ((año mod 4 ) == 0)
+}
+
+function esMultiploDe100_(año){
+    /*
+    Propósito:
+    - Indica si el año **año** es múltiplo de 100.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return ((año mod 100 ) == 0)
+}
+
+function esMultiploDe400_(año){
+    /*
+    Propósito:
+    - Indica si el año **año** es múltiplo de 400.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return ((año mod 400 ) == 0)
+}
+
+//9.D
+function primerDiaDelInviernoDe_(año){
+    /*
+    Propósito:
+    - Indica el primer día del invierno del año **año** en el hemisferio sur.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 21
+                 , mes <- Junio
+                 , año <- año))
+}
+
+//9.E
+function ultimoDiaDelInviernoDe_(año){
+    /*
+    Propósito:
+    - Indica el último día del invierno del año **año** en el hemisferio sur.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 21
+                 , mes <- Septiembre
+                 , año <- año))
+}
+
+//9.F
+function esMasAntigua_Que_(primerFecha, segundaFecha){
+    /*
+    Propósito:
+    - Indica si **primerFecha** es más antigua que **segundaFecha**. 
+    Parámetros:
+    - primerFecha: Fecha.
+    - segundaFecha: Fecha.
+    Precondiciones:
+    - **primerFecha** y **segundaFecha** no deben ser iguales. 
+    - Los años de **primerFecha** y **segundaFecha** deben ser positivos.
+    Tipo:
+    - Booleano.
+    */
+    return (choose False when (año(primerFecha) > año(segundaFecha))
+                   False when (año(primerFecha) == año(segundaFecha) && mes(primerFecha) > mes(segundaFecha))
+                   False when (año(primerFecha) == año(segundaFecha) && mes(primerFecha) == mes(segundaFecha) && dia(primerFecha) > dia(segundaFecha))
+                   True otherwise)
+}
+
+function esAñoMasAntiguo_Que_(primerAño, segundoAño){
+    /*
+    Propósito:
+    - Indica si **primerAño** es más antiguo que **segundoAño**. 
+    Parámetros:
+    - primerAño: Número.
+    - segundoAño: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (primerAño < segundoAño)
+}
+
+function esMesMasChico_Que_(primerMes, segundoMes){
+    /*
+    Propósito:
+    - Indica si **primerMes** es más chico que **segundoMes**.
+    Parámetros:
+    - primerMes: Número.
+    - segundoMes: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Booleano.
+    */
+    return (primerMes < segundoMes)
+}
+
+function esDiaMasChico_Que_(primerDia, segundoDia){
+    /*
+    Propósito:
+    - Indica si **primerDia** es más chico que **segundoDia**.
+    Parámetros:
+    - primerDia: Número.
+    - segundoDia: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (primerDia < segundoDia)
+}
+
+//9.G
+function esInviernoEl_(fecha){
+    /*
+    Propósito:
+    - Indica si la fecha **fecha** es un día de invierno. 
+    Parámetros:
+    - fecha: Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (esMasAntigua_Que_(fecha, ultimoDiaDelInviernoDe_(año(fecha)) && not esMasAntigua_Que_(fecha, primerDiaDelInviernoDe_(año(fecha))))
+}
+
+//9.H
+//Verano
+function primerDiaDeVeranoDe_(año){
+    /*
+    Propósito:
+    - indica el primer día de verano del año **año** en el hemisferio Sur.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 21
+                 , mes <- Diciembre
+                 , año <- año))
+}
+
+function ultimoDiaDeVeranoDe_(año){
+    /*
+    Propósito:
+    - Indica el último día de verano del año **año** en el hemisferio sur.
+    Parámetros:
+    - año. Número.
+    Precondiciones:
+    - Ningnuna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 20
+                 , mes <- Marzo
+                 , año <- año + 1))
+}
+
+function esVeranoEl_(fecha){
+    /*
+    Propósito:
+    - Indica si la fecha **fecha** es un día de verano.
+    Parámetros:
+    - fecha: Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (esMasAntigua_Que_(fecha, ultimoDiaDeVeranoDe_(año(fecha)) && not esMasAntigua_Que_(fecha, primerDiaDeVeranoDe_(año(fecha))))
+}
+
+//Primavera
+function primerDiaDePrimaveraDe_(año){
+    /*
+    Propósito:
+    - indica el primer día de primavera del año **año** en el hemisferio Sur.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 23
+                 , mes <- Septiembre
+                 , año <- año))
+}
+
+function ultimoDiaDePrimaveraDe_(año){
+    /*
+    Propósito:
+    - Indica el último día de verano del año **año** en el hemisferio sur.
+    Parámetros:
+    - año. Número.
+    Precondiciones:
+    - Ningnuna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 21
+                 , mes <- Diciembre
+                 , año <- año))
+}
+
+function esPrimaveraEl_(fecha){
+    /*
+    Propósito:
+    - Indica si la fecha **fecha** es un día de verano.
+    Parámetros:
+    - fecha: Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (esMasAntigua_Que_(fecha, ultimoDiaDePrimaveraDe_(año(fecha)) && not esMasAntigua_Que_(fecha, primerDiaDePrimaveraDe_(año(fecha))))
+}
+
+//Otoño
+function primerDiaDeOtoñoDe_(año){
+    /*
+    Propósito:
+    - indica el primer día de otoño del año **año** en el hemisferio Sur.
+    Parámetros:
+    - año: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 20
+                 , mes <- Marzo
+                 , año <- año))
+}
+
+function ultimoDiaDeOtoñoDe_(año){
+    /*
+    Propósito:
+    - Indica el último día de otoño del año **año** en el hemisferio sur.
+    Parámetros:
+    - año. Número.
+    Precondiciones:
+    - Ningnuna.
+    Tipo:
+    - Fecha.
+    */
+    return (Fecha (dia <- 21
+                 , mes <- Junio
+                 , año <- año))
+}
+
+function esOtoñoEl_(fecha){
+    /*
+    Propósito:
+    - Indica si la fecha **fecha** es un día de otoño.
+    Parámetros:
+    - fecha: Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (esMasAntigua_Que_(fecha, ultimoDiaDeOtoñoDe_(año(fecha)) && not esMasAntigua_Que_(fecha, primerDiaDeOtoñoDe_(año(fecha))))
+}
+
+//9.I
+type Estacion is variant {
+    /*
+    Propósito:
+    - Modelar las estaciones del año.
+    */
+    case Verano     {}
+    case Otoño      {}
+    case Invierno   {}
+    case Primavera  {}
+}
+
+function estacionDe_(fecha){
+    /*
+    Propósito:
+    - Indica la estación de la fecha **fecha**.
+    Parámetros:
+    - fecha: Fecha.
+    Precondiciones:
+    - Ninguna.
+    Tipo: 
+    - Estacion.
+    */
+    return (choose Verano when (esVeranoEl_(fecha))
+                   Otoño when (esOtoñoEl_(fecha))
+                   Invierno when (esInviernoEl_(fecha))
+                   Primavera otherwise)
+}
+
+//9.J
+function cuantosAñosPasaronEntre_Y_(primerFecha, segundaFecha){
+    /*
+    Propósito:
+    - Indica el número de años que hay entre las dos fechas **primerFecha** y **segundaFecha**.
+    Parámetros:
+    - primerFecha: Fecha.
+    - segundaFecha: Fecha.
+    Precondiciones:
+    - **primerFecha** y **segundaFecha** no pueden ser iguales.
+    Tipo:
+    - Número.
+    */
+    return (maximoEntre_Y_(año(primerFecha), año(segundaFecha)) - minimoEntre_Y_(año(primerFecha), año(segundaFecha)))
+}
+
+
+
+
+
 
 
 
