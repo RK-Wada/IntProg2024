@@ -46,7 +46,193 @@ function esSingular_(lista){
     return (not esVacia(lista) && esVacia(resto(lista)))
 }
 
-Ejercicio 4) 
+PARA EL PARCIAL 2
+
+//1
+function singularCon_(elemento){
+    /*
+    Propósito:
+    Indica una lista con únicamente el elemento **elemento**.
+    Parámetros:
+    - elemento: Elemento.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de "elemento".
+    */
+    return ([elemento])
+}
+
+//2
+function segundoDe_(lista){
+    /*
+    Propósito:
+    - Indica el segundo elemento de la lista **lista**.
+    Parámetros:
+    - lista: Lista.
+    Precondiciones:
+    - La lista **lista** debe tener al menos 2 elementos.
+    Tipo:
+    - Elemento.
+    */
+    return (primero(resto(lista)))
+}
+
+//3
+function esSingular_(lista){
+    /*
+    Propósito:
+    - Indica si la lista **lista** es singular, es decir, tiene únicamente un elemento.
+    Parámetros:
+    - lista: Lista.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (not esVacia(lista) && esVacia(resto(lista)))
+}
+
+//4.A
+function primerCartaDeLaMano_(mano){
+    /*
+    Propósito:
+    - Indica la primera carta a jugar de la mano **mano**.
+    Parámetros:
+    - mano: Lista de "Cartas".
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Carta.
+    */
+    return (primero(mano))
+}
+
+//4.B
+function segundaCartaDeLaMano_(mano){
+    /*
+    Propósito:
+    - Indica la segunda carta a jugar de la mano **mano**.
+    Parámetros:
+    - mano: Lista de "Cartas".
+    Precondiciones:
+    - Nignuna. 
+    Tipo:
+    - Carta.
+    */
+    return (primero(resto(mano)))
+}
+
+//4.C
+function tercerCartaDeLaMano_(mano){
+    /*
+    Propósito:
+    - Indica la tercera carta a jugar de la mano **mano**.
+    Parámetros:
+    - mano: Lista de "Cartas".
+    Precondiciones:
+    - Nignuna.
+    Tipo:
+    - Carta.
+    */
+    return (primero(resto(resto(mano))))
+}
+
+//4.D
+function laMano_LuegoDeRobarUnaCartaDe_(mano, mazo){
+    /*
+    Propósito:
+    - Indica la mano resultante luego de robar la primera carta del mazo y agregarla a la mano del jugador.
+    Parámetros:
+    - mano: Lista de "Cartas".
+    - mazo: Lista de "Cartas".
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de "Cartas"
+    */
+    return (mano ++ [primero(mazo)])
+}
+
+//4.E
+function laMano_LuegoDeJugarUnaCarta(mano){
+    /*
+    Propósito:
+    - Indica la mano resultnte luego de jugar la próxima carta de la mano **mano**.
+    Parámetros:
+    - mano: Lista de [Carta]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Carta]
+    */
+    return (resto(mano))
+}
+
+//4.F
+function laMano_LuegoDeJugarLaSegundaCarta(mano){
+    /*
+    Propósito:
+    - Indica la mano resultante luego de jugar la segunda carta de la mano **mano**.
+    Parámetros:
+    - mano: Lista de [Carta]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Carta]
+    */
+    return ([primero(mano)] ++ resto(resto(mano)))
+}
+
+//Ejercicio 5
+//Ejercicio 5.A
+function primerastresCartasDeLaTira_(tira){
+    /*
+    Propósito:
+    - Indica las tres primeras cartas de la tira **tira**.
+    Parámtros:
+    - tira: Lista de [Carta]
+    Precondiciones:
+    - Ningnuna.
+    Tipo:
+    - Lista de [Carta]
+    */
+    return ([primero(tira), segundoDe_(tira), primero(resto(resto(tira)))])
+}
+
+//5.B
+function laMano_TieneJugadaParaAgregarALaTira_(mano, tira){
+    /*
+    Propósito:
+    - Indica si la primera carta que puede jugar el jugador puede ser agregada en la tira. 
+    Parámetros:
+    - mano: Lista de [Carta]
+    - tira: Lista de [Carta]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (palo(primero(mano)) /= palo(primero(tira)) && numero(primero(mano)) < numero(primero(tira)))
+}
+
+//5.C
+function laTira_DespuesDeJugar_(tira, carta){
+    /*
+    Propósito:
+    - Indica la tira que resulta de jugar esa carta en la tira **tira**. 
+    Parámetros:
+    - tira: Lista de [Carta]
+    - carta: Carta.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Carta]
+    */
+    return (choose cons (carta, tira) when (palo(carta) /= palo(primero(tira)) && numero(carta) < numero(primero(tira))))
+                   BOOM otherwise)
+}
+
 
 
 
