@@ -494,7 +494,24 @@ function esSingular_(lista){
 
 -------------------------------------------------------------------------------------------
 
+LISTAS
 
+-------------------------------------------------------------------------------------------
 
+function esSingular_(lista){
+    /*
+    Propósito:
+    - Indica si la lista **lista** es singular, es decir, tiene únicamente un elemento.
+    Parámetros:
+    - lista: Lista.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (not esVacia(lista) && esVacia(resto(lista)))
+}
+
+-------------------------------------------------------------------------------------------
 
 
