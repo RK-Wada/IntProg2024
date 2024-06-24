@@ -514,4 +514,217 @@ function esSingular_(lista){
 
 -------------------------------------------------------------------------------------------
 
+function listaCon_Repetido_Veces(elemento, numero){
+    /*
+    Propósito:
+    - Describe una lista con el elemento **elemento** repetido **numero** de veces dentro.
+    Parámetros:
+    - elemento: Elemento.
+    - numero: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    */
+    listaActual := []
+    repeat(numero){
+        listaActual := listaActual ++ [elemento]
+    }
+    return (listaActual)
+}
+
+-------------------------------------------------------------------------------------------
+
+function listaDesde_Hasta_(primerElemento, segundoElemento){
+    /*
+    Propósito:
+    - Describe la lista que va del **primerElemento** al **segundoElemento**, pasando por cada elemento intermedio.
+    Parámetros:
+    - primerElemento: Elemento.
+    - segundoElemento: Elemento.
+    Precondiciones:
+    - **primerElemento** y **segundoElemento** no pueden ser iguales.
+    - **primerElemento** y **segundoElemento** deben ser del mismo tipo.
+    */
+    elementoActual := primerElemento
+    listaActual := [primerElemento]
+    while (elementoActual /= segundoElemento){
+        elementoActual := siguiente(primerElemento)
+        listaActual := listaActual ++ [elementoActual]
+    }
+    return (listaActual)
+}
+
+-------------------------------------------------------------------------------------------
+
+function longitudDe_(lista){
+    /*
+    Propósito:
+    - Indica la cantidad de elementos dentro de la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre la lista **lista**, acumulando la cantidad de elementos que hay dentro de la misma.
+    */
+    cantidadDeElementosActual := 0
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        listaActual := resto(listaActual)
+        cantidadDeElementosActual := cantidadDeElementosActual + 1
+    }
+    return (cantidadDeElementosActual)
+}
+
+-------------------------------------------------------------------------------------------
+
+function sumatoriaDe_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica la suma de todos los elementos de la lista **listaDeNumeros**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de procesado sobre la lista **listaDeNumeros**, sumando todos los elementos de la misma.
+    */
+    listaActual := listaDeNumeros
+    sumaActual := 0
+    while (not esVacia(listaActual)){
+        sumaActual := sumaActual + primero(listaActual)
+        listaActual := resto(listaActual)
+    }
+    return (sumaActual)
+}
+
+-------------------------------------------------------------------------------------------
+
+function productoriaDe_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica el producto de todos los elementos de la lista **listaDeNumeros**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones: 
+    - Es un recorrido de procesado sobre la lista **listaDeNumeros**, multiplicando todos los elementos de la misma.
+    */
+    listaActual := listaDeNumeros
+    productoActual := primero(listaDeNumeros)
+    while (not esVacia(listaActual)){
+        productoActual := productoActual * primero(listaActual)
+        listaActual := resto(listaActual)
+    }
+    return (productoActual)
+}
+
+-------------------------------------------------------------------------------------------
+
+function opuestasDe_(listaDeDirecciones){
+    /*
+    Propósito:
+    - Describe una lista con las direcciones opuestas de la lista **listaDeDirecciones**.
+    Parámetros:
+    - listaDeDirecciones:Lista de [Direcciones]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Direcciones]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre la lista **listaDeDirecciones**, describiendo el opuesto de cada elemento de la misma.
+    */
+    listaOpuesta := []
+    listaActual := listaDeDirecciones
+    while (not esVacia(listaActual)){
+        listaOpuesta := listaOpuesta ++ opuesto(primero(listaActual))
+        listaActual := resto(listaActual)
+    }
+    return (listaOpuesta)
+}
+
+-------------------------------------------------------------------------------------------
+
+function siguientesDe_(listaDePrimitivos){
+    /*
+    Propósito:
+    - Describe la lista donde cada elemento es el siguiente de los de la lista **listaDePrimitivos**.
+    Parámetros:
+    - listaDePrimitivos: Lista de [Elementos]
+    Precondiciones:
+    - La lista **listaDePrimitivos** debe ser de elementos primitivos, es decir, de colores, direcciones, números o Booleanos.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **listaDePrimitivos**, reemplazando los elementos por sus siguientes.
+    */
+    listaDeSiguientes := []
+    listaActual := listaDePrimitivos
+    while (not esVacia(listaActual)){
+        listaDeSiguientes := listaDeSiguientes ++ siguiente(primero(listaActual))
+        listaActual := resto(listaActual)
+    }
+    return (listaDeSiguientes)
+}
+
+-------------------------------------------------------------------------------------------
+
+function reversoDe_(lista){
+    /*
+    Propósito:
+    - Describe el reverso de la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    Precondiciones:
+    - Nignuna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **lista**, cambiando el orden de los elementos de la misma, poniendo la lista en reversa.
+    */
+    listaReversa := []
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        listaReversa := [primero(listaActual)] ++ listaReversa
+        listaActual := resto(listaActual)
+    }
+    return (listaReversa)
+}
+
+-------------------------------------------------------------------------------------------
+
+function elementosDe_SinAparicionesDe_(lista, elemento){
+    /*
+    Propósito:
+    - Describe una lista con todos los elementos de la lista **lista** que no sean **elemento**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **lista**, removiendo todos los elementos **elementos** de la misma.
+    */
+    listaRemovida := []
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        if (primero(listaActual) /= elemento) then {
+            listaRemovida := listaRemovida ++ [primero(listaActual)]
+        }
+        listaActual := resto(listaActual)
+    }
+    return (listaRemovida)
+}
+
+-------------------------------------------------------------------------------------------
 
