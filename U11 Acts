@@ -943,3 +943,71 @@ function valor_(palo){
                    1 otherwise)
 }
 
+//28
+function elementosEn_Hasta_(lista, indice){
+    /*
+    Propósito:
+    - Describe una lista de todos los elementos en la lista **lista** antes del **indice**
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - indice: Elemento.
+    Precondiciones:
+    - **indice** debe ser del mismo tipo que los elementos dentro de la lista **lista**.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de acumulación sobre los elementos de la lista **lista**, acumulando los elementos que se encuentran antes del elemento **indice**.
+    */
+    listaActual := lista
+    elementoActual := 1
+    listaPrevia := []
+    while (not esVacia(listaActual) && not (elementoActual == indice)){
+        listaPrevia := listaPrevia ++ primero(listaActual)
+        listaActual := resto(listaActual)
+        elementoActual := elementoActual + 1
+    }
+    return (listaPrevia)
+}
+
+//29
+function elementosEn_Desde_(lista, indice){
+    /*
+    Propósito:
+    - Describe una lista de elementos con todos aquellos elementos de la lista **lista** que se encuentren luego del **indice**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - indice: Elemento
+    Precondiciones:
+    - **indice** debe ser del mismo tipo que los elementos dentro de la lista **lista**.
+    Observaciones:
+    - Es un recorrido de acumulación sobre los elementos de la lista **lista**, acumulando los elementos que se encuentren luego del elemento **indice**.
+    */
+    listaActual := lista
+    elementoActual := 1
+    listaPosterior := []
+    while (not esVacia(listaActual)) {
+        if (primero(listaActual) > indice) then {
+            listaPosterior := listaPosterior ++ primero(listaActual)
+        }
+        listaActual := resto(listaActual)
+    }
+    return (listaPosterior)
+}
+
+//30
+function elementosEn_SinPrimeraAparicionDe_(lista, elemento){
+    /*
+    Propósito:
+    - Describe una lista sin la primera aparición del elemento **elemento** dentro de la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento.
+    Precondiciones:
+    - **indice** debe ser del mismo tipo que los elementos dentro de la lista **lista**.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **lista**, eliminando la primera aparición del elemento **elemento**.
+    */
+    
+}
