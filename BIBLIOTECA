@@ -728,3 +728,55 @@ function elementosDe_SinAparicionesDe_(lista, elemento){
 
 -------------------------------------------------------------------------------------------
 
+function contiene_A_(lista, elemento){
+    /*
+    Propósito:
+    - Indica si el elemento **elemento** se encuentra en la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento
+    Precondiciones:
+    - **elemento** debe ser del mismo tipo que los elementos dentro de **lista**.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de la lista **lista**, búscando el elemento **elemento**, sin saber si está.
+    */
+    listaActual := lista
+    contieneONo := False
+    while (not esVacia(listaActual)){
+        if (primero(listaActual) == elemento) then {
+            contieneONo := True
+        }
+        listaActual := resto(listaActual)
+    }
+    return (contieneONo)
+}
+
+-------------------------------------------------------------------------------------------
+
+function indiceEn_De_(lista, elemento){
+    /*
+    Propósito:
+    - Indica en qué ubicación de la lista **lista** se encuentra el elemento **elemento**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento.
+    Precondiciones:
+    - **elemento** debe ser del mismo tipo que los elementos dentro de la lista **lista**.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de la lista **lista**, buscando el elemento **elemento**, sabiendo que está.
+    */
+    puestoActual := 1
+    listaActual := lista
+    while (not esVacia(listaActual) && puestoActual /= elemento){
+        listaActual := resto(listaActual)
+        puestoActual := puestoActual + 1
+    }
+    return (puestoActual)
+}
+
+-------------------------------------------------------------------------------------------
+
