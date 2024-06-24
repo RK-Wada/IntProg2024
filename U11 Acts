@@ -730,3 +730,109 @@ function esFigura_(carta){
     return (numero(carta) == 10 || numero(carta) == 11 || numero(carta) == 12)
 }
 
+//21
+function contiene_A_(lista, elemento){
+    /*
+    Propósito:
+    - Indica si el elemento **elemento** se encuentra en la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento
+    Precondiciones:
+    - **elemento** debe ser del mismo tipo que los elementos dentro de **lista**.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de la lista **lista**, búscando el elemento **elemento**, sin saber si está.
+    */
+    listaActual := lista
+    contieneONo := False
+    while (not esVacia(listaActual)){
+        if (primero(listaActual) == elemento) then {
+            contieneONo := True
+        }
+        listaActual := resto(listaActual)
+    }
+    return (contieneONo)
+}
+
+//22
+function indiceEn_De_(lista, elemento){
+    /*
+    Propósito:
+    - Indica en qué ubicación de la lista **lista** se encuentra el elemento **elemento**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento.
+    Precondiciones:
+    - **elemento** debe ser del mismo tipo que los elementos dentro de la lista **lista**.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de la lista **lista**, buscando el elemento **elemento**, sabiendo que está.
+    */
+    puestoActual := 1
+    listaActual := lista
+    while (not esVacia(listaActual) && puestoActual /= elemento){
+        listaActual := resto(listaActual)
+        puestoActual := puestoActual + 1
+    }
+    return (puestoActual)
+}
+
+//23
+function hayAlgunoDe_Entre_Y_(listaDeNumeros, primerNumero, segundoNumero){
+    /*
+    Propósito:
+    - Indica si algún número de la lista **lista** se encuentra entre los números **primerNumero** y **segundoNumero**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    - primerNumero: Número.
+    - segundoNumero: Número.
+    Precondiciones:
+    - **primerNumero** y **segundoNumero** no deben ser iguales.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de la lista **lista**.
+    */
+    listaActual := lista
+    numeroActual := primero(lista)
+    while (not esVacia(listaActual) && not(estaEnMedio_De_Y_(numeroActual, primerNumero, segundoNumero)){
+        listaActual := resto(listaActual)
+        numeroActual := primero(listaActual)
+    }
+    return (estaEnMedio_De_Y_(numeroActual, primerNumero, segundoNumero))
+}
+
+//Posible 23
+function hayAlgunoDe_Entre_Y_(listaDeNumeros, primerNumero, segundoNumero){
+    /**/
+    listaActual := lista
+    while (not esVacia(listaActual) && not (primero(listaActual) > primerNumero) && not (primero(listaActual) < segundoNumero)){
+        listaActual := resto(listaActual)
+    } 
+    return (primero(listaActual) > primerNumero && primero(listaActual) < segundoNumero)
+}
+
+//24
+function hayAlgunAsEn_(listaDeCartas){
+    /*
+    Propósito:
+    - Indica si en la lista **listaDeCartas** hay algún as, es decir, una carta con número 1.
+    Parámetros:
+    - listaDeCartas: Lista de [Cartas]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de la lista **listaDeCartas**, buscando alguna carta con el número 1.
+    */
+    listaActual := listaDeCartas
+    while (not esVacia(listaActual) && numero(primero(listaActual)) /= 1){
+        listaActual := resto(listaActual)
+    }
+    return (numero(primero(listaActual)) == 1)
+}
+
