@@ -836,3 +836,110 @@ function hayAlgunAsEn_(listaDeCartas){
     return (numero(primero(listaActual)) == 1)
 }
 
+//25
+function minimoEn_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica el número más chico en la lista **lista**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de máximos y mínimos sobre los elementos de la lista **listaDeNumeros**, buscando el número más chico.
+    */
+    listaActual := listaDeNumeros
+    numeroMasChico := primero(listaActual)
+    while (not esVacia(listaActual)) {
+        listaActual := resto(listaActual)
+        numeroMasChico := minimoEntre_Y_(primero(listaActual), numeroMasChico)
+    }
+    return (numeroMasChico)
+}
+
+//26
+function maximoEn_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica el número más grande en la lista **lista**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de máximos y mínimos sobre los elementos de la lista **listaDeNumeros**, buscando el número más grande de la misma.
+    */
+    listaActual := listaDeNumeros
+    numeroMasGrande := primero(listaActual)
+    while (not esVacia(listaActual)) {
+        listaActual := resto(listaActual)
+        numeroMasGrande := maximoEntre_Y_(primero(listaActual), numeroMasChico)
+    }
+    return (numeroMasGrande)
+}
+
+//27
+function laMejorCartaEn_ParaTira_(listaDeCartas, tira){
+    /*
+    Propósito:
+    - Indica la mejor carta de **listaDeCartas** para sumar a la tira **tira**.
+    Parámetros:
+    - listaDeCartas: Lista de [Cartas]
+    - tira: Lista de [Cartas]
+    Precondiciones:
+    - La primera carta de **listaDeCartas** debe ser apta .
+    Tipo:
+    - Carta
+    Observaciones: 
+    - Es un recorrido de máximos y mínimos, bucando la mejor carta para sumar a la tira **tira**.
+    */
+    listaActual := listaDeCartas
+    if (numero(primero(listaActual)) < numero(primero(tira)) && palo(primero(listaActual)) /= palo(primero(tira))) then {
+        mejorCartaHastaAhora := primero(listaActual)
+    }
+    while (not esVacia(listaActual)) {
+        listaActual := resto(listaActual)
+        if (numero(primero(listaActual)) < numero(primero(tira)) && palo(primero(listaActual)) /= palo(primero(tira))) then {
+            mejorCartaHastaAhora := mejorEntre_Y_(mejorCartaHastaAhora, primero(listaActual)
+        }
+    }
+    return (mejorCartaHastaAhora)
+}
+
+function mejorEntre_Y_(primerCarta, segundaCarta){
+    /*
+    Propósito:
+    - Indica la mejor carta entre **primerCarta** y **segundaCarta**.
+    Parámetros:
+    - primerCarta: Carta
+    - segundaCarta: Carta
+    Precondiciones:
+    - **primerCarta** y **segundaCarta** deben ser del mismo tipo.
+    Tipo:
+    - Carta.
+    */
+    return (choose primerCarta when (valor_(palo(primerCarta)) > valor_(palo(segundaCarta))
+                   segundaCarta otherwise)
+}
+
+function valor_(palo){
+    /*
+    Propósito:
+    - Indica el valor del palo **palo**.
+    Parámetros:
+    - palo: String
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    */
+    return (choose 4 when (palo == Oro)
+                   3 when (palo == Copas)
+                   2 when (palo == Espadas)
+                   1 otherwise)
+}
+
