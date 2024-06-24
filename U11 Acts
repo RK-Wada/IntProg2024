@@ -233,7 +233,500 @@ function laTira_DespuesDeJugar_(tira, carta){
                    BOOM otherwise)
 }
 
+//Ejercicio 2.A
+function sigueRectaEn_(pista){
+    /*
+    Propósito:
+    - Indica si el siguiente tramo es una recta.
+    Parámetros:
+    - pista: Lista de [Direcciones]
+    Precondiciones:
+    - Debe existir un siguiente tramo en la pista **pista**.
+    Tipo:
+    - Booleano.
+    */
+    return (primero(pista) == primero(resto(pista)))
+}
 
+//2.B
+function sigueCurvaADerechaEn_(pista){
+    /*
+    Propósito:
+    - Indica si el siguiente tramo es una curva a la derecha.
+    Parámetros:
+    - pista: Lista de [Direcciones]
+    Precondiciones:
+    - Debe existir un siguiente tramo en la pista **pista**.
+    Tipo:
+    - Booleano.
+    */
+    return (primero(resto(pista)) == siguiente(primero(pista)))
+}
 
+//2.C
+function sigueCurvaAIzquierdaEn_(pista){
+    /*
+    Propósito:
+    - Indica si el siguiente tramo es una curva a la izquierda.
+    Parámetros:
+    - pista: Lista de [Direcciones]
+    Precondiciones:
+    - Debe existir un siguiente tramo en la pista **pista**.
+    Tipo:
+    - Booleano.
+    */
+    return (primero(resto(pista)) == previo(primero(pista)))
+}
 
+//2.D
+function haySiguienteTramoEn_(pista){
+    /*
+    Propósito:
+    - Indica si la pista **pista** tiene un siguiente tramo.
+    Parámetros:
+    - pista: Lista de [Direcciones]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (not esVacia(resto(resto(pista))))
+}
+
+//2.E
+function sigueUnaCurvaEn_(pista){
+    /*
+    Propósito:
+    - Indica si el siguiente tramo es una curva.
+    Parámetros:
+    - pista: Lista de [Direcciones]
+    Precondiciones:
+    - Debe existir un siguiente tramo en la pista **pista**.
+    Tipo:
+    - Booleano.
+    */
+    return (sigueCurvaADerechaEn_(pista) || sigueCurvaAIzquierdaEn_(pista))
+}
+
+//2.F
+function siguienteTramoEn_EsValido(pista){
+    /*
+    Propósito:
+    - Indica si el siguiente tramo en la pista **pista** es válido, es decir, es una recta o una curva.
+    Parámetros:
+    - pista: Lista de [Direcciones]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (sigueRectaEn_(pista) || sigueUnaCurvaEn_(pista))
+}
+
+//Ejercicio 6
+function listaCon_Repetido_Veces(elemento, numero){
+    /*
+    Propósito:
+    - Describe una lista con el elemento **elemento** repetido **numero** de veces dentro.
+    Parámetros:
+    - elemento: Elemento.
+    - numero: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    */
+    listaActual := []
+    repeat(numero){
+        listaActual := listaActual ++ [elemento]
+    }
+    return (listaActual)
+}
+
+//7
+function listaDesde_Hasta_(primerElemento, segundoElemento){
+    /*
+    Propósito:
+    - Describe la lista que va del **primerElemento** al **segundoElemento**, pasando por cada elemento intermedio.
+    Parámetros:
+    - primerElemento: Elemento.
+    - segundoElemento: Elemento.
+    Precondiciones:
+    - **primerElemento** y **segundoElemento** no pueden ser iguales.
+    - **primerElemento** y **segundoElemento** deben ser del mismo tipo.
+    */
+    elementoActual := primerElemento
+    listaActual := [primerElemento]
+    while (elementoActual /= segundoElemento){
+        elementoActual := siguiente(primerElemento)
+        listaActual := listaActual ++ [elementoActual]
+    }
+    return (listaActual)
+}
+
+//8
+function longitudDe_(lista){
+    /*
+    Propósito:
+    - Indica la cantidad de elementos dentro de la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre la lista **lista**, acumulando la cantidad de elementos que hay dentro de la misma.
+    */
+    cantidadDeElementosActual := 0
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        listaActual := resto(listaActual)
+        cantidadDeElementosActual := cantidadDeElementosActual + 1
+    }
+    return (cantidadDeElementosActual)
+}
+
+//9
+function sumatoriaDe_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica la suma de todos los elementos de la lista **listaDeNumeros**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de procesado sobre la lista **listaDeNumeros**, sumando todos los elementos de la misma.
+    */
+    listaActual := listaDeNumeros
+    sumaActual := 0
+    while (not esVacia(listaActual)){
+        sumaActual := sumaActual + primero(listaActual)
+        listaActual := resto(listaActual)
+    }
+    return (sumaActual)
+}
+
+//10
+function productoriaDe_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica el producto de todos los elementos de la lista **listaDeNumeros**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones: 
+    - Es un recorrido de procesado sobre la lista **listaDeNumeros**, multiplicando todos los elementos de la misma.
+    */
+    listaActual := listaDeNumeros
+    productoActual := primero(listaDeNumeros)
+    while (not esVacia(listaActual)){
+        productoActual := productoActual * primero(listaActual)
+        listaActual := resto(listaActual)
+    }
+    return (productoActual)
+}
+
+//11 
+function puntosEn_(mano){
+    /*
+    Propósito:
+    - Indica la cantidad de puntos que el jugador tiene en la mano **mano**. 
+    Parámetros:
+    - mano: Lista de [Cartas]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre las Cartas de la mano **mano**. Acumulando los valores de las cartas.
+    */
+    puntosActuales := 0
+    listaActual := mano
+    while (not esVacia(listaActual)){
+        puntosActuales := puntajeCarta_(primero(listaActual))
+        listaActual := resto(listaActual)
+    }
+    return (puntosActuales)
+}
+
+function puntajeCarta_(carta){
+    /*
+    Propósito:
+    - Indica el puntaje de la carta **carta**.
+    Parámetros:
+    - carta: Carta.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    */
+    return (choose 20 when (esNegra(carta) == True)
+                   numero(carta) otherwise)
+}
+
+//12
+function elementosDe_AumentadosEn_(listaDeNumeros, cantidadAAumentar){
+    /*
+    Propósito:
+    - Describe la lista en dónde cada elemento de la lista **listaDeNumeros** fue aumentado **cantidadAAumentar**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    - cantidadAAumentar: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Numeros]
+    Observaciones:
+    - EEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+    */
+    listaAumentada := []
+    listaActual := listaDeNumeros
+    while (not esVacia(listaActual)){
+        listaAumentada := listaAumentada ++ [primero(listaActual) + cantidadAAumentar]
+        listaActual := resto(listaActual)
+    }
+    return (listaAumentada)
+}
+
+//13
+function opuestasDe_(listaDeDirecciones){
+    /*
+    Propósito:
+    - Describe una lista con las direcciones opuestas de la lista **listaDeDirecciones**.
+    Parámetros:
+    - listaDeDirecciones:Lista de [Direcciones]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Direcciones]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre la lista **listaDeDirecciones**, describiendo el opuesto de cada elemento de la misma.
+    */
+    listaOpuesta := []
+    listaActual := listaDeDirecciones
+    while (not esVacia(listaActual)){
+        listaOpuesta := listaOpuesta ++ [opuesto(primero(listaActual))]
+        listaActual := resto(listaActual)
+    }
+    return (listaOpuesta)
+}
+
+//14
+function siguientesDe_(listaDePrimitivos){
+    /*
+    Propósito:
+    - Describe la lista donde cada elemento es el siguiente de los de la lista **listaDePrimitivos**.
+    Parámetros:
+    - listaDePrimitivos: Lista de [Elementos]
+    Precondiciones:
+    - La lista **listaDePrimitivos** debe ser de elementos primitivos, es decir, de colores, direcciones, números o Booleanos.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **listaDePrimitivos**, reemplazando los elementos por sus siguientes.
+    */
+    listaDeSiguientes := []
+    listaActual := listaDePrimitivos
+    while (not esVacia(listaActual)){
+        listaDeSiguientes := listaDeSiguientes ++ [siguiente(primero(listaActual))]
+        listaActual := resto(listaActual)
+    }
+    return (listaDeSiguientes)
+}
+
+//15
+function transformadasTodasEnOro_(lista){
+    /*
+    Propósito:
+    - Describe la lista de cartas en dónde cada una conserva el valor que tenía en **lista** pero se cambia el tipo de palo por "Oro".
+    Parámetros:
+    - lista: Lista de [Cartas]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Cartas]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre las cartas de la lista **lista**, cambiando el palo de cada carta dentro de la misma por "Oro".
+    */
+    listaDeOro := []
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        listaDeOro := listaDeOro ++ [convertirEnOro_(primero(lista))]
+        listaActual := resto(listaActual)
+    }
+    return (listaDeOro)
+}
+
+function convertirEnOro_(carta){
+    /*
+    Propósito:
+    - Indica la carta **carta** con el palo cambiado a "Oro".
+    Parámetros:
+    - carta: Carta
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Carta.
+    */
+    return (Carta (carta | palo <- Oros))
+}
+
+//16
+function reversoDe_(lista){
+    /*
+    Propósito:
+    - Describe el reverso de la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    Precondiciones:
+    - Nignuna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **lista**, cambiando el orden de los elementos de la misma, poniendo la lista en reversa.
+    */
+    listaReversa := []
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        listaReversa := [primero(listaActual)] ++ listaReversa
+        listaActual := resto(listaActual)
+    }
+    return (listaReversa)
+}
+
+//17
+function paresDe_(listaDeNumeros){
+    /*
+    Propósito:
+    - Describe una lista solo con los números pares de la lista **listaDeNumeros**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Numeros]
+    Observaciones:
+    - Es un recorrido de acumulación sobre los números de la lista **listaDeNumeros**, acumulando los números pares.
+    */
+    listaDePares := []
+    listaActual := listaDeNumeros
+    while (not esVacia(listaActual)){
+        if esPar_(primero(listaActual)) then {
+            listaDePares := listaDePares ++ primero(listaActual)
+        }
+        listaActual := resto(listaActual)
+    }
+    return (listaDePares)
+}
+
+function esPar_(numero){
+    /*
+    Propósito:
+    - Indica si el número **numero** es par.
+    Parámetros:
+    - numero: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return ((numero mod 2) == 0) 
+}
+
+//18
+function imparesDe_(listaDeNumeros){
+    /*
+    Propósito:
+    - Describe una lista solo con los números impares de la lista **listaDeNumeros**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Numeros]
+    Observaciones:
+    - Es un recorrido de acumulación sobre los números de la lista **listaDeNumeros**, acumulando los números impares.
+    */
+    listaDeImpares := []
+    listaActual := listaDeNumeros
+    while (not esVacia(listaActual)){
+        if not esPar_(primero(listaActual)) then {
+            listaDeImpares := listaDeImpares ++ primero(listaActual)
+        }
+        listaActual := resto(listaActual)
+    }
+    return (listaDeImpares)
+}
+
+//19
+function elementosDe_SinAparicionesDe_(lista, elemento){
+    /*
+    Propósito:
+    - Describe una lista con todos los elementos de la lista **lista** que no sean **elemento**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **lista**, removiendo todos los elementos **elementos** de la misma.
+    */
+    listaRemovida := []
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        if (primero(listaActual) /= elemento) then {
+            listaRemovida := listaRemovida ++ [primero(listaActual)]
+        }
+        listaActual := resto(listaActual)
+    }
+    return (listaRemovida)
+}
+
+//20
+function soloLasFigurasDe_(listaDeCartas){
+    /*
+    Propósito:
+    - Describe una lista con solo las cartas de **listaDeCartas** que son figuras.
+    Parámetros:
+    - listaDeCartas: Lista de [Cartas]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Cartas]
+    Observaciones:
+    - Es un recorrido de acumulación sobre las Cartas de la lista **listaDeCartas**, acumulando las cartas que sean figuras.
+    */
+    listaDeFiguras := []
+    listaActual := listaDeCartas
+    while (not esVacia(listaActual)){
+        if (esFigura_(primero(listaActual))) then {
+            listaDeFiguras := listaDeFiguras ++ [primero(listaActual)]
+        }
+        listaActual := resto(listaActual)
+    }
+    return(listaDeFiguras)
+}
+
+function esFigura_(carta){
+    /*
+    Propósito:
+    - Indica si la carta **carta** es una figura, es decir, su número es 10, 11 o 12.
+    Parámetros:
+    - carta: Carta.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    */
+    return (numero(carta) == 10 || numero(carta) == 11 || numero(carta) == 12)
+}
 
