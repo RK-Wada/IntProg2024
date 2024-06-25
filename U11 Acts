@@ -1272,5 +1272,144 @@ function lista_ordenada(listaDeNumeros){
     Observaciones:
     - Es un recorrido de transformación sobre los elementos de la lista, ordenando los elementos dentro de la misma de menor a mayor.
     */
-    
+    listaActual := listaDeNumeros
+    listaOrdenada := []
+    while (not esVacia(listaActual){
+        listaOrdenada := listaOrdenada ++ minimoEn_(listaActual)
+        listaActual := sinElMinimoElemento_(listaActual)
+    }
+    return (listaOrdenada)
 }
+
+//40 es igual que el 31 y 39.b
+
+//41
+function segmentoInicialDeLargo_De_(numeroCantidad, listaDeElementos){
+    /*
+    Propósito:
+    - Describe la lista que se obtiene de quedarse únicamente con esa cantidad de elementos de la lista **listaDeElementos**, comenzando por el primero.
+    Parámetros:
+    - numeroCantidad: Número.
+    - listaDeElementos: Lista de [Elementos].
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de filtrado sobre los elementos de la lista **listaDeElementos**, seleccionando únicamente los elementos dentro de la primera cantidad **numeroCantidad**.
+    */
+    listaActual := listaDeElementos
+    listaNueva := []
+    elementoActual := 0
+    while (not esVacia(listaActual) && elementoActual <=){
+        listaNueva := listaNueva ++ [primero(listaActual)]
+        listaActual := resto(listaActual)
+        elementoActual := elementoActual + 1
+    }
+    return (listaNueva)
+}
+
+//42
+function lista_AgrupadosDeA_(listaDeElementos, numeroCantidad){
+    /*
+    Propósito:
+    - Describe la lista de listas que agrupa los elementos de la lista **listaDeElementos** en grupos, donde cada grupo tiene exactamente la cantidad de elementos indicada en **numeroCantidad**, excepto el último grupo, que puede tener menos elementos.
+    Parámetros:
+    - listaDeElementos: Lista de [Elementos]
+    - numeroCantidad: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de listas de [Elementos]
+    Observaciones:
+    - Es un recorrido de transformación sobre la lista **listaDeElementos**, agrupando los elementos dentro de dicha lista en grupos en base a **numeroCantidad**.
+    */
+    listaNueva := []
+    listaActual := listaDeElementos
+    while (not esVacia(listaActual)){
+        listaNueva := listaNueva ++ segmentoInicialDeLargo_De_(numeroCantidad, listaActual)
+        listaActual := elementosEn_Desde_(listaActual, numeroCantidad)
+    }
+    return(listaNueva)
+}
+
+//43
+function lista_Desagrupada(lista){
+    /*
+    Propósito:
+    - Describe una lista que contiene cada uno de los elementos de las listas internas de la lista **lista**.
+    Parámetros:
+    - lista: Lista de listas de [Elementos]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de acumulación sobre los elementos de la lista **lista**, acumulando los elementos que se encuentran dentro de cada lista.
+    */
+    listaDesagrupada := []
+    listaActual := lista
+    while (not esVacia(listaActual)){
+        listaDesagrupada := listaDesagrupada ++ primero(lista)
+        listaActual := resto(lista)
+    }
+    return (listaDesagrupada)
+}
+
+//44
+function laLista_SinLosPrimeros_(lista, numeroCantidad){
+    /*
+    Propósito:
+    - Describe la lista que se obtiene de quedarse con todos los elementos de **lista** excepto el segmento inicial del largo **numeroCantidad**.
+    Parámetros:
+    - lista: Lista de **elementos**.
+    - numeroCantidad: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - [Elementos]
+    Observaciones:
+    - Es un recorrido de filtrado sobre la lista **lista**, quitando los elementos hasta el elemento **numeroCantidad**.
+    */
+    listaActual := lista
+    nuevaLista := []
+    elementoActual := 0
+    while (not esVacia(listaActual)){
+        elementoActual := elementoActual + 1
+        nuevaLista := nuevaLista ++ singular_Si_(primero(listaActual), elementoActual > numeroCantidad))
+        listaActual := resto(listaActual)
+    }
+    return(nuevaLista)
+}
+
+//45
+function sinInternos_(lista){
+    /*
+    Propósito:
+    - Describe la lista **lista** sin los números internos.
+    Parámetros:
+    - lista: [Numeros]
+    Precondiciones:
+    - La lista **lista** debe tener al menos 2 elementos dentro.
+    Tipo:
+    - [elementos]
+    Observaciones:
+    - Es un recorrido de filtrado sobre la lista **lista**, quitando los elementos "internos" de la misma.
+    */
+    listaNueva := [primero(lista)]
+    listaActual := resto(lista)
+    elementoActual := primero(listaActual)
+    elementoAnterior := primero(lista)
+    while (not esVacia(listaActual)){
+        if (elementoActual /= elementoAnterior) then {
+            listaNueva := listaNueva ++ [elementoActual]
+        }
+        listaActual := resto(listaActual)
+        elementoAnterior := elementoActual
+        elementoActual := primero(listaActual)
+    }
+    return (listaNueva)
+}
+
+
+
