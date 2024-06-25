@@ -1009,5 +1009,268 @@ function elementosEn_SinPrimeraAparicionDe_(lista, elemento){
     Observaciones:
     - Es un recorrido de procesamiento sobre los elementos de la lista **lista**, eliminando la primera aparición del elemento **elemento**.
     */
+    listaNueva := []
+    listaActual := lista
+    primeraAparicionElemento := 1
+    while (not esVacia(listaActual) && not primero(listaActual) == elemento){
+        listaActual := resto(listaActual)
+        primeraAparicionElemento := primeraAparicionElemento + 1
+    }
+    return(elementosEn_Hasta_(lista, primeraAparicionElemento) ++ elementosEn_Desde_(lista, primeraAparicionElemento))
+}
+
+//31
+function sinDuplicados_(lista){
+    /*
+    Propósito:
+    - Describe una lista con los elementos de la lista **lista** pero sin duplicados.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de acumulación sobre los elementos de la lista **lista**. Acumulando los elementos que no se encuentren duplicados.
+    */
+    listaActual := lista
+    listaNueva := []
+    while (not esVacia(listaActual)){
+        listaNueva := listaNueva ++ singular_Si_(primero(listaActual), not contiene_A_(listaNueva, primero(listaActual)))
+        listaActual := resto(listaActual)
+    }
+    return(listaNueva)
+}
+
+//32.B
+function laLista_Clonada_Veces(lista, numeroClonacion){
+    /*
+    Propósito:
+    - Describe la lista resultante de clonar la lista **lista** tantas veces como se indique en **numeroClonacion**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - numeroClonacion: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    */
+    listaNueva := []
+    listaActual := 0
+    while (listaActual /= numeroClonacion){
+        listaNueva := listaNueva ++ lista
+        listaActual := listaActual + 1
+    }
+    return (listaNueva)
+}
+
+//32.C
+function losElementosDe_Clonados_Veces(lista, numeroClonacion){
+    /*
+    Propósito:
+    - Describe una lista que contiene los elementos dados en el orden de la lista **lista**, pero repetidos cada uno la cantidad de veces **numeroClonacion**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - numeroClonacion: Número.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    */
+    listaNueva := []
+    foreach elemento in lista {
+        listaNueva := listaNueva ++ listaCon_Repetido_Veces(elemento, numeroClonacion)
+    }
+    return (listaNueva)
+}
+
+//33
+function lista_HomologadaPorDebajoDe_A_(listaDeNumeros, umbral, default){
+    /*
+    Propósito:
+    - Describe una lista de números que está basada en la lista **listaDeNumeros** y que se incluyen los números que son mayores o iguales al **umbral** permaneciendo igual y los que son menores son reemplazados por el valor default.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    - umbral: Número.
+    - default: Número.
+    Precondiciones:
+    - **umbral** y **default** deben ser del tipo número.
+    Tipo:
+    - Lista de [Numeros]
+    Observaciones:
+    */
+    listaNueva := []
+    foreach numero in listaDeNumeros {
+        if (numero >= umbral) then {
+            listaNueva := listaNueva ++ [numero]
+        }
+        else {
+            listaNueva := listaNueva ++ [default]
+        }
+    }
+    return (listaNueva)
+}
+
+//34
+function sinDuplicados_(lista){
+    /*
+    Propósito:
+    - Describe una lista con los elementos de la lista **lista** pero sin duplicados, conservando la primera aparición de los elementos de la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre la lista **lista**, eliminando los duplicados luego de la primera aparición de cada elemento.
+    */
+    listaNueva := []
+    foreach elemento in lista {
+        listaNueva := listaNueva ++ singular_Si_(elemento, contiene_A_(listaNueva, elemento))
+    }
+    return (listaNueva)
+}
+
+//35.A
+function interseccionDe_Con_(primerLista, segundaLista){
+    /*
+    Propósito:
+    - Describe la lista de todos los elementos que aparecen en ambas lista **primerLista** y **segundaLista**.
+    Parámetros:
+    - primerLista: Lista de [Elementos]
+    - segundaLista: Lista de [Elementos]
+    Precondiciones:
+    - **primerLista** y **segundaLista** deben ser del mismo tipo. 
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de filtrado sobre las listas **primerLista** y **segundaLista**, filtrando los elementos que no se encuentren en ambas listas.
+    */
+    nuevaLista := []
+    foreach elemento in primerLista {
+        nuevaLista := nuevaLista ++ singular_Si_(elemento, contiene_A_(segundaLista, elemento))
+    }
+    return (sinDuplicados_(nuevaLista)
+}
+
+//35.B
+function unionDe_Con_(primerLista, segundaLista){
+    /*
+    Propósito:
+    - Describe una lista resultante de unir las listas **primerLista** y **segundaLista**, sin elementos repetidos.
+    Parámetros:
+    - primerLista: Lista de [Elementos]
+    - segundaLista: Lista de [Elementos]
+    Precondiciones:
+    - **primerLista** y **segundaLista** deben ser del mismo tipo.
+    Tipo:
+    - Lista de [Elementos]
+    */
+    return (sinDuplicados_(primerLista ++ segundaLista))
+}
+
+//36
+function lista_EstaIncluidaEn_(primerLista, segundaLista){
+    /*
+    Propósito:
+    - Describe si todos los elementos de la lista **primerLista** se encuentran contenidos en la lista **segundaLista**.
+    Parámetros:
+    - primerLista: Lista de [Elementos]
+    - segundaLista: Lista de [Elementos]
+    Precondiciones:
+    - **primerLista** y **segundaLista** deben ser del mismo tipo.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de las listas **primerLista** y **segundaLista**, buscando si algún elemento de la lista **primerLista** no se encuentra en la lista **segundaLista**.
+    */
+    listaDeNoIncluidos := []
+    foreach elemento in primerLista {
+        listaDeNoIncluidos := listaDeNoIncluidos ++ singular_Si_(elemento, contiene_A_(segundaLista, elemento))
+    }
+    return (esVacia(listaDeNoIncluidos))
+}
+
+//37
+function estaOrdenada_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica si la lista **listaDeNumeros** está ordenada de menor a mayor, es decir, cada elemento es menor o igual al que le sigue.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los elementos de la lista **listaDeNumeros**, buscando algún elemento que no cumpla con el orden.
+    */
+    listaActual := listaDeNumeros
+    while (not esVacia(listaActual) && primero(listaActual) <= primero(resto(listaActual))){
+        listaActual := resto(listaActual) 
+    }
+    return (primero(listaActual) <= primero(resto(listaActual)))
+}
+
+//38
+//Es igual al 30.
+
+//39.A
+function minimoElementoDe_(listaDeNumeros){
+    /*
+    Propósito:
+    - Indica el elemento más chico que se encuetra en la lista **listaDeNumeros**.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Debe haber al menos un elemento que sea más chico que los demás.
+    - La lista **listaDeNumeros** no debe ser vacía.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de máximos y mínimos sobre los elementos de la lista **listaDeNumeros**, buscando el elemento más chico de la misma.
+    */
+    listaActual := listaDeNumeros
+    numeroMasChico := primero(listaActual)
+    while (not esVacia(listaActual)){
+        listaActual := resto(listaActual)
+        numeroMasChico := minimoEntre_Y_(numeroMasChico, primero(listaActual)
+    }
+    return (numeroMasChico)
+}
+
+//39.B
+function sinElMinimoElemento_(listaDeNumeros){
+    /*
+    Propósito:
+    - Describe la lista que se obtiene de eliminar una única vez el elemento más chico.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Debe haber al menos un elemento que sea más chico que los demás.
+    - La lista **listaDeNumeros** no debe ser vacía.
+    Tipo:
+    - Lista de [Numeros]
+    Observaciones:
+    - Es un recorrido de filtrado sobre los elementos de la lista **listaDeNumeros**, quitando una vez el elemento más chico.
+    */
+    return (elementosEn_SinPrimeraAparicionDe_(listaDeNumeros, minimoElementoDe_(listaDeNumeros))
+}
+
+//39.C
+function lista_ordenada(listaDeNumeros){
+    /*
+    Propósito:
+    - Describe la lista con los mismos elementos que la lista **listaDeNumeros**, pero ordenados de menor a mayor.
+    Parámetros:
+    - listaDeNumeros: Lista de [Numeros]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Numeros]
+    Observaciones:
+    - Es un recorrido de transformación sobre los elementos de la lista, ordenando los elementos dentro de la misma de menor a mayor.
+    */
     
 }
