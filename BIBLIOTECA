@@ -881,4 +881,71 @@ function elementosEn_Desde_(lista, indice){
 
 -------------------------------------------------------------------------------------------
 
+function elementosEn_SinPrimeraAparicionDe_(lista, elemento){
+    /*
+    Propósito:
+    - Describe una lista sin la primera aparición del elemento **elemento** dentro de la lista **lista**.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    - elemento: Elemento.
+    Precondiciones:
+    - **indice** debe ser del mismo tipo que los elementos dentro de la lista **lista**.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los elementos de la lista **lista**, eliminando la primera aparición del elemento **elemento**.
+    */
+    listaNueva := []
+    listaActual := lista
+    primeraAparicionElemento := 1
+    while (not esVacia(listaActual) && not primero(listaActual) == elemento){
+        listaActual := resto(listaActual)
+        primeraAparicionElemento := primeraAparicionElemento + 1
+    }
+    return(elementosEn_Hasta_(lista, primeraAparicionElemento) ++ elementosEn_Desde_(lista, primeraAparicionElemento))
+}
+
+-------------------------------------------------------------------------------------------
+
+function sinDuplicados_(lista){
+    /*
+    Propósito:
+    - Describe una lista con los elementos de la lista **lista** pero sin duplicados.
+    Parámetros:
+    - lista: Lista de [Elementos]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elementos]
+    Observaciones:
+    - Es un recorrido de acumulación sobre los elementos de la lista **lista**. Acumulando los elementos que no se encuentren duplicados.
+    */
+    listaActual := lista
+    listaNueva := []
+    while (not esVacia(listaActual)){
+        listaNueva := listaNueva ++ singular_Si_(primero(listaActual), not contiene_A_(listaNueva, primero(listaActual)))
+        listaActual := resto(listaActual)
+    }
+    return(listaNueva)
+}
+
+-------------------------------------------------------------------------------------------
+
+function singular_Si_(elemento, condicion){
+    /*
+    Propósito:
+    - describe una lista con el elemento **elemento** si cumple la condición **condicion**.
+    Parámetros:
+    - elemento: Elemento
+    - condicion: Booleano.
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Lista de [Elemento].
+    */
+    return (choose [elemento] when (condicion)
+                   [] otherwise)
+}
+
+-------------------------------------------------------------------------------------------
 
