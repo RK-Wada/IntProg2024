@@ -1,0 +1,16 @@
+// Juegos Olímpicos
+
+Esquematización del problema 1:
+juegoOlimpico -> delegaciones  -> la que tiene más medallas de cada medalla (min/max)
+                                -> medallas de cada delegacion (acumulacion)
+                                -> atletas 
+                                -> medallas de cada atleta de cada medalla (acumulacion)
+ -> Pais
+
+//Punto 1
+
+function paisLiderDelMedalleroEn_(juegoOlimpico) {
+  /*
+  Propósito:
+  - 
+  */
