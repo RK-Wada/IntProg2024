@@ -1,0 +1,388 @@
+//GOBSMART
+
+type Producto is record{
+    /* PROP: modelar productos
+    INV.REP.: 
+    - precio > 0 */
+    field nombre // String
+    field marca // String
+    field precio // Número
+}
+
+type Cliente is record {
+    /* PROP: modelar clientes */
+    field dni // String
+    field tipoDePago // TipoDePago
+    field productos // [Producto]
+}
+
+type Caja is record {
+    /* PROP: modelar cajas
+    INV.REP.: 
+    - número > 0
+    - facturado >= 0 */
+    field número // Número
+    field clientesEsperando // [Cliente]
+    field aceptaPagos // [TipoDePago]
+    field esRápida // Bool
+    field facturado // Número
+}
+
+type TipoDePago is variant {
+    /* PROP: modelar Tipos de pago aceptados */
+    case Tarjeta {}
+    case MartPago {}
+    case Efectivo {}
+}
+
+//Funciones
+//a
+function cantidadDeClientesEsperandoEn_(caja){
+    /*
+    Propósito:
+    - Indica la cantidad de clientes que están esperando en la caja **caja**.
+    Parámetros:
+    - caja: Caja
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre la lista "clientesEsperando" de **caja**.
+    */
+    cantidadClientesEsperando := 0
+    cajaActual := clientesEsperando(caja)
+    while (not esVacia(cajaActual)) {
+        cantidadClientesEsperando := cantidadClientesEsperando + 1
+        cajaActual := resto(cajaActual)
+    }
+    return (cantidadClientesEsperando)
+}
+
+//b
+function cajaMenosOcupadaDe_(listaDeCajas){
+    /*
+    Propósito:
+    - Describe la caja de **listaDeCajas** con menos clientes esperando.
+    Parámetros:
+    - listaDeCajas: [Caja]
+    Precondiciones:
+    - La lista **listaDeCajas** debe tener al menos una caja dentro.
+    Tipo:
+    - Caja.
+    Observaciones:
+    - Es un recorrido de máximos y mínimos sobre las cajas dentro de la lista **listaDeCajas**, buscando la caja con menos clientes esperando.
+    */
+    cajaConMenosClientesActual := primero(listaDeCajas)
+    listaActual := resto(listaDeCajas)
+    while (not esVacia(listaActual)){
+        cajaConMenosClientesActual := cajaConMenosClientesEsperandoEntre_Y_(cajaConMenosClientesActual, primero(listaActual))
+        listaActual := resto(listaActual)
+    }
+    return (cajaConMenosClientesActual)
+}
+
+function cajaConMenosClientesEsperandoEntre_Y_(primerCaja, segundaCaja){
+    /*
+    Propósito:
+    - Indica la caja que tenga menos clientes esperando entre las cajas **primerCaja** y **segundaCaja**. Si las cajas dadas tienen la misma cantidad de clientes esperando, entonces devuelve la caja **primerCaja**.
+    Parámetros:
+    - primerCaja: Caja
+    - segundaCaja: Caja
+    Precondiciones:
+    - **primerCaja** y **segundaCaja** no pueden ser la misma caja.
+    Tipo:
+    - Caja
+    Observaciones:
+    - Ninguna.
+    */
+    return (choose primerCaja when (cantidadDeClientesEsperandoEn_(primerCaja) >= cantidadDeClientesEsperandoEn_(segundaCaja))
+                   segundaCaja otherwise)
+}
+
+//c
+function gobsMart_conIngresoDe_aCaja_(listaDeCajas, cliente, numeroDeCaja){
+    /*
+    Propósito:
+    - Describe la lista **listaDeCajas** pero actualizando la caja del número **numeroDeCaja**, para registrar que el cliente **cliente** ingresó en la misma.
+    Parámetros:
+    - listaDeCajas: [Caja]
+    - cliente: Cliente
+    - numeroDeCaja: Número
+    Precondiciones:
+    - **numeroDeCaja** debe pertenecer a una de las cajas dentro de la lista **listaDeCajas**.
+    - El cliente **cliente** no debe estar dentro de la lista "clientesEsperando" de la caja con el número **numeroDeCaja**.
+    Tipo:
+    - [Caja]
+    Observaciones:
+    - El cliente **cliente** debe agregarse al final de la lista "clientesEsperando" de la caja perteneciente al número de caja **numeroDeCaja**.
+    */
+    listaNueva := []
+    foreach caja in listaDeCajas {
+        if numeroCaja /= numero(caja) then {
+            listaNueva := listaNueva ++ [caja]
+        }
+        else {
+            listaNueva := listaNueva ++ [agregarCliente_ACaja_(cliente, caja)]
+        }
+    }
+    return (listaNueva)
+}
+
+function agregarCliente_ACaja_(cliente, caja){
+    /*
+    Propósito:
+    - Agrega el cliente **cliente** a la lista "clientesEsperando" de la caja **caja**, poniendolo en el último puesto de dicha lista.
+    Parámetros:
+    - cliente: Cliente
+    - caja: Caja
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Caja
+    Observaciones:
+    - Ninguna.
+    */
+    return (Caja (caja | clientesEsperando <- clientesEsperando ++ [cliente]))
+}
+
+//d
+function gobsMart_conIngresosDe_(listaDeCajas, listaDeClientes){
+    /*
+    Propósito:
+    - Describe una lista de cajas actualizada, donde cada cliente de la lista **listaDeClientes** ingresó a una caja que acepta el medio de pago que posee y que esté menos ocupada en el momento que ingresa.
+    Parámetros:
+    - listaDeCajas: [Caja]
+    - listaDeClientes: [Cliente]
+    Precondiciones:
+    - Debe haber al menos una caja en **listaDeCajas** que acepte el medio de pago de cada uno de los clientes en **listaDeClientes**.
+    Tipo:
+    - [Caja]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre la lista **listaDeClientes**, agregando los clientes de la lista **listaDeClientes** a las cajas de la lista **listaDeCajas**.
+    */
+    listaNueva := listaDeCajas
+    listaActualClientes := listaDeClientes
+    while (not esVacia(listaActualClientes)){
+        listaNueva := lista_ActualizadaConCliente_(listaNueva, primero(listaActualClientes))
+        listaActualClientes := resto(listaDeClientes)
+    }
+    return (listaNueva)
+}
+
+function lista_ActualizadaConCliente_(listaDeCajas, cliente){
+    /*
+    Propósito:
+    - Describe la lista **listaDeCajas** con el cliente **cliente** agregado a la lista de "clientesEsperando" de la caja más optima dentro de la lista **listaDeCajas**
+    Parámetros:
+    - listaDeCajas: [Caja]
+    - cliente: Cliente
+    Precondiciones:
+    - Debe haber al menos una caja dentro de la lista **listaDeCajas** que acepte el tipo de pago del cliente **cliente**.
+    Tipo:
+    - [Caja]
+    */
+    return (gobsMart_conIngresoDe_aCaja_(listaDeCajas, cliente, numero(cajaMenosOcupadaDe_(lasCajasConPago_De_(tipoDePago(cliente))))))
+}
+
+function lasCajasConPago_De_(tipoDePago, listaDeCajas){
+    /*
+    Propósito:
+    - Describe la lista de cajas que acepten el pago **tipoDePago** de la lista **listaDeCajas**.
+    Parámetros:
+    - tipoDePago: TipoDePago
+    - listaDeCajas: [Caja]
+    Precondiciones:
+    - Debe haber al menos una caja dentro de la lista **listaDeCajas** que acepte el tipo de pago **tipoDePago**.
+    Tipo:
+    - [Caja]
+    Observaciones:
+    - Es un recorrido de filtrado sobre las cajas de la lista **listaDeCajas**. Filtrando las cajas que poseean el tipo de pago **tipoDePago** en su lista de "aceptaPago".
+    */
+    nuevaLista := []
+    foreach caja in listaDeCajas {
+        if contiene_A_(aceptaPago(caja), tipoDePago) then {
+            nuevaLista := nuevaLista ++ [caja]
+        }
+    }
+    return (nuevaLista)
+}
+
+function cajaMenosOcupadaDe_(listaDeCajas){
+    /*
+    Propósito:
+    - Describe la caja de **listaDeCajas** con menos clientes esperando.
+    Parámetros:
+    - listaDeCajas: [Caja]
+    Precondiciones:
+    - La lista **listaDeCajas** debe tener al menos una caja dentro.
+    Tipo:
+    - Caja.
+    Observaciones:
+    - Es un recorrido de máximos y mínimos sobre las cajas dentro de la lista **listaDeCajas**, buscando la caja con menos clientes esperando.
+    */
+    cajaConMenosClientesActual := primero(listaDeCajas)
+    listaActual := resto(listaDeCajas)
+    while (not esVacia(listaActual)){
+        cajaConMenosClientesActual := cajaConMenosClientesEsperandoEntre_Y_(cajaConMenosClientesActual, primero(listaActual))
+        listaActual := resto(listaActual)
+    }
+    return (cajaConMenosClientesActual)
+}
+
+function cajaConMenosClientesEsperandoEntre_Y_(primerCaja, segundaCaja){
+    /*
+    Propósito:
+    - Indica la caja que tenga menos clientes esperando entre las cajas **primerCaja** y **segundaCaja**. Si las cajas dadas tienen la misma cantidad de clientes esperando, entonces devuelve la caja **primerCaja**.
+    Parámetros:
+    - primerCaja: Caja
+    - segundaCaja: Caja
+    Precondiciones:
+    - **primerCaja** y **segundaCaja** no pueden ser la misma caja.
+    Tipo:
+    - Caja
+    Observaciones:
+    - Ninguna.
+    */
+    return (choose primerCaja when (cantidadDeClientesEsperandoEn_(primerCaja) >= cantidadDeClientesEsperandoEn_(segundaCaja))
+                   segundaCaja otherwise)
+}
+
+//e
+function caja_conPrimeroFacturado(caja){
+    /*
+    Propósito:
+    - Describe la caja resultante de facturar al primero de los clientes de la caja **caja**.
+    Parámetros:
+    - caja: Caja
+    Precondiciones:
+    - **caja** debe tener al menos un cliente en la lista "clientesEsperando".
+    Tipo:
+    - Caja
+    */
+    clienteACobrar := primero(clientesEsperando(caja))
+    
+    return (Caja (caja | facturado <- facturado(caja) + precioTotalProductosDe_(primero(clientesEsperando(caja)))
+                       , clientesEsperando <- resto(clientesEsperando(caja))))
+}
+
+function precioTotalProductosDe_(cliente){
+    /*
+    Propósito:
+    - Indica el precio total de la sumatoria de los precios de todos los productos del cliente **cliente**.
+    Parámetros:
+    - cliente: Cliente
+    Precondiciones:
+    - El cliente **cliente** debe tener al menos un producto en la lista "productos".
+    Tipo:
+    - Número.
+    Observaciones:
+    - Es un recorrido de acumulación sobre los productos de la lista "productos" del cliente **cliente**. Acumulando y sumando los valores de los precios de cada producto dentro de la lista "productos" de **cliente**.
+    */
+    totalActual := 0
+    listaActual := productos(cliente)
+    while (not esVacia(listaActual)) {
+        totalActual := totalActual + precio(primero(listaActual))
+        listaActual := resto(listaActual)
+    }
+    return (totalActual)
+}
+
+//f
+function gobsMart_ConCliente_CambiaACaja_(listaDeCajas, dniCliente, numeroDeCaja){
+    /*
+    Propósito:
+    - Describe la lista **listaDeCajas** actualizada, donde el cliente con el dni **dniCliente** se cambió a la caja con el número **numeroDeCaja**.
+    Parámetros:
+    - listaDeCajas: [Caja]
+    - dniCliente: String
+    - numeroDeCaja: Número
+    Precondiciones:
+    - Debe existir un cliente en alguna caja de **listaDeCajas** con el dni **dniCliente**.
+    - Debe existir una caja en **listaDeCajas** con el número **numeroDeCaja**.
+    Tipo:
+    - [Caja]
+    Observaciones:
+    - 
+    */
+    nuevaLista := []
+    foreach caja in listaDeCajas {
+        if contiene_A_(dniDeTodosLosClientesDe_(caja), dniCliente) then {
+            nuevaLista := nuevaLista ++ [caja_ActualizadaSinClienteCon_(caja, dniCliente)]
+        }
+        else {
+            nuevaLista := nuevaLista ++ [caja]
+        }
+    }
+    return (gobsMart_conIngresoDe_aCaja_(nuevaLista, perfilDelClienteConDni_(dniCliente), numeroDeCaja))
+}
+
+function dniDeTodosLosClientesDe_(caja){
+    /*
+    Propósito:
+    - Describe una lista con los dni de todos los clientes de la caja **caja**.
+    Parámetros:
+    - caja: Caja
+    Precondiciones:
+    - Debe haber al menos un cliente en la lista "clientesEsperando" de la caja **caja**.
+    Tipo:
+    - [String]
+    Observaciones: 
+    - Es un recorrido de acumulación sobre los clientes de la caja **caja**, acumulando los dni de los mismos.
+    */
+    nuevaLista := []
+    listaActual := clientesEsperando(caja)
+    while (not esVacia(listaActual)){
+        nuevaLista := nuevaLista ++ [dni(primero(listaActual))]
+        listaActual := resto(listaActual)
+    }
+    return (nuevaLista)
+}
+
+function caja_ActualizadaSinClienteCon_(caja, dniCliente){
+    /*
+    Propósito:
+    - Describe la caja **caja** sin el cliente con el dni **dniCliente**.
+    Parámetros:
+    - caja: Caja
+    - dniCliente: String
+    Precondiciones:
+    - El cliente con el dni **dniCliente** no puede estar dos veces en la lista "clientesEsperando" de la caja **caja**.
+    Tipo:
+    - Caja
+    Observaciones:
+    - Ninguna.
+    */
+    return (Caja (caja | clientesEsperando <- elementosDe_SinAparicionesDe_(clientesEsperando(caja), perfilDelClienteConDni_En_(dniCliente, caja))))
+}
+
+function perfilDelClienteConDni_(dniCliente){
+    /*
+    Propósito:
+    - Describe el perfil del cliente con el dni **dniCliente**.
+    Parámetros:
+    - dniCliente: String
+    Precondiciones:
+    - Debe de haber un cliente dentro de la lista [Cliente] con el dni **dniCliente**.
+    - Solo debe haber un cliente dentro de la lista [Cliente] que tenga el dni **dniCliente**.
+    Tipo:
+    - Cliente
+    Observaciones:
+    - Es un recorrido de búsqueda sobre los clientes de la lista [Cliente], buscando el cliente con el dni **dniCliente**.
+    */
+    listaActual := [Cliente]
+    while (not esVacia(listaActual) && dni(primero(listaActual)) /= dniCliente) {
+        listaActual := resto(listaActual)
+    }
+    return (primero(listaActual))
+}
+
+
+
+
+
+
+
+
+
+
