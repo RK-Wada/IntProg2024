@@ -377,7 +377,173 @@ function perfilDelClienteConDni_(dniCliente){
     return (primero(listaActual))
 }
 
+//g
+function fila_ConAumentoDePrecioAMarolio(listaDeClientes){
+    /*
+    Propósito:
+    - Describe la lista de clientes **listaDeClientes** en donde se aumente 10 pesos al valor de todos los productos de la marca "Marolio" que tenga cada cliente.
+    Parámetros:
+    - listaDeClientes: [Cliente]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - [Cliente]
+    Observaciones:
+    - Ninguna.
+    */
+    listaNueva := []
+    foreach cliente in listaDeClientes {
+        listaNueva := listaNueva ++ [aumentarPreciosDeMarolioCliente_(cliente)]
+    }
+    return (listaNueva)
+}
 
+function aumentarPreciosDeMarolioCliente_(cliente){
+    /*
+    Propósito:
+    - Describe el cliente **cliente**, con los productos "Marolio" con el precio actualizado 10 pesos más caro cada producto.
+    Parámetros:
+    - cliente: Cliente
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Cliente
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los productos de la lista [Producto] del cliente **cliente**. Procesando si es un producto marca "Marolio" y, en caso de que lo sea, subirle el precio 10 pesos.
+    */
+    nuevaLista := []
+    foreach producto in productos(cliente) {
+        if marca(producto) == 'Marolio' then {
+            nuevaLista := nuevaLista ++ [producto_Actualizado(producto)]
+        }
+        else {
+            nuevaLista := nuevaLista ++ [producto]
+        }
+    }
+    return (Cliente (cliente | productos <- nuevaLista)
+}
+
+function producto_Actualizado(producto){
+    /*
+    Propósito:
+    - Describe el producto **producto** con el precio con aumento en 10 pesos.
+    Parámetros:
+    - producto: Producto
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Producto
+    */
+    return (Producto (producto | precio <- precio(producto) + 10))
+}
+
+
+
+//POKEMONES 
+//1.a
+function es_MasFuerteQue_(primerPokemon, segundoPokemon){
+    /*
+    Propósito:
+    - Indica si el pokemon **primerPokemon** tiene más fuerza que el pokemon **segundoPokemon**.
+    Parámetros:
+    - primerPokemon: Pokemon
+    - segundoPokemon: Pokemon
+    Precondiciones:
+    - **primerPokemon** y **segundoPokemon** no pueden ser el mismo pokemon.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Ninguna.
+    */
+    return (choose True when (fuerza(primerPokemon) > fuerza(segundoPokemon))
+                   False otherwise)
+}
+
+//1.b 
+function esDeMayorNivel_Que_(primerPokemon, segundoPokemon){
+    /*
+    Propósito:
+    - Indica si el pokemon **primerPokemon** tiene más nivel que el pokemon **segundoPokemon**.
+    Parámetros:
+    - primerPokemon: Pokemon
+    - segundoPokemon: Pokemon
+    Precondiciones:
+    - **primerPokemon** y **segundoPokemon** no pueden ser el mismo pokemon.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Ninguna.
+    */
+    return (choose True when (nivel(primerPokemon) > nivel(segundoPokemon))
+                   False otheerwise)
+}
+
+//1.c
+function pokemon_PotenciadoEn_(pokemon, numeroPotenciacion){
+    /*
+    Propósito:
+    - Describe el pokemon **pokemon** con la fuerza y el nivel multiplicados por el número **numeroPotenciacion**.
+    Parámetros:
+    - pokemon: Pokemon
+    - numeroPotenciacion: Número
+    Precondiciones:
+    - **numeroPotenciacion** no puede ser 0.
+    Tipo:
+    - Pokemon
+    */
+    return(Pokemon (pokemon | fuerza <- fuerza(pokemon) * numeroPotenciacion
+                            , nivel <- nivel(pokemon) * numeroPotenciacion))
+}
+
+//1.d
+function pokemon_ConValoresDuplicados(pokemon){
+    /*
+    Porpósito:
+    - Describe el pokemon **pokemon** con la fuerza y el nivel duplicados.
+    Parámetros:
+    - pokemon: Pokemon
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Pokemon
+    */
+    return (Pokemon (pokemon | fuerza <- fuerza(pokemon) * 2
+                             , nivel <- nivel(pokemon) * 2))
+}
+
+//1.e
+function pokemon_PotenciadoEn_SiEsDeTipo_(pokemon, factor, tipo){
+    /*
+    Propósito:
+    - Describe el pokemon **pokemon** potenciado con **factor** si es del tipo **tipo**, si no, devuelve el mismo pokemon **pokemon**.
+    Parámetros:
+    - pokemon: Pokemon
+    - factor: Número
+    - tipo: TipoDePokemon
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Pokemon
+    */
+    return (choose pokemon_PotenciadoEn_(pokemon, factor) when (tipo(pokemon) == tipo)
+                   pokemon otherwise)
+}
+
+//1.f
+function pokemon_Derrotado(pokemon){
+    /*
+    Porpósito:
+    - Describe el pokemon **pokemon** con su fuerza en 0 y el campo "estaSaludable" en 'falso'.
+    Parámetros:
+    - pokemon: Pokemon
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Pokemon
+    */
+    return (Pokemon (pokemon | fuerza <- 0
+                             , estáSaludable <- 'False'))
+}
 
 
 
