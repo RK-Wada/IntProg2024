@@ -545,6 +545,105 @@ function pokemon_Derrotado(pokemon){
                              , estáSaludable <- 'False'))
 }
 
+//2.a
+function pokemonDe_Entrenados_(listaDePokemon, numeroPotenciacion){
+    /*
+    Propósito:
+    - Describe la lista **listaDePokemon** con cada pokemon potenciado en base al número **numeroPotenciacion**.
+    Parámetros:
+    - listaDePokemon: [Pokemon]
+    - numeroPotenciacion: Número.
+    Precondiciones:
+    - Debe haber al menos un pokemon en la lista **listaDePokemon**.
+    Tipo:
+    - [Pokemon]
+    Observaciones: 
+    - Es un recorrido de procesamiento sobre los pokemones de la lista **listaDePokemon**, potenciando todos los pokemones en base a **numeroPotenciacion**.
+    */
+    nuevaLista := []
+    foreach pokemon in listaDePokemon {
+        nuevaLista := nuevaLista ++ [pokemon_PotenciadoEn_(pokemon, numeroPotenciacion)]
+    }
+    return (nuevaLista)
+}
+
+
+//2.b
+function pokemonDe_DelTipo_(listaDePokemon, tipoDePokemon){
+    /*
+    Propósito:
+    - Describe una lista con los pokemones de la lista **listaDePokemones** que son del tipo **tipoPokemon**.
+    Parámetros:
+    - listaDePokemon: [Pokemon]
+    - tipoDePokemon: TipoDePokemon
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - [Pokemon]
+    Observaciones:
+    - Es un recorrido de filtrado sobre los pokemones de la lista **listaDePokemon**.
+    */
+    listaNueva := []
+    foreach pokemon in listaDePokemon {
+        listaNueva := listaNueva ++ singular_Si_(pokemon, tipo(pokemon) == tipoDePokemon)
+    }
+}
+
+//2.c
+function elMasFuerteDe_(listaDePokemon){
+    /*
+    Propósito:
+    - Describe el pokemon con el nivel más alto de la lista **listaDePokemon**.
+    Parámetros:
+    - listaDePokemon: [Pokemon]
+    Precondiciones:
+    - Debe haber al menos dos pokemones en la lista **listaDePokemon**.
+    Tipo:
+    - Pokemon
+    Observaciones:
+    - Es un recorrido de máximos y mínimos sobre los pokemones de la lista **listaDePokemon**, buscando el pokemon con nivel más alto.
+    - En caso de haber 2 o más pokemones con el mismo nivel más alto, devuelve al primer pokemon que aparece en la lista.
+    */
+    pokemonMasFuerteActual := primero(listaDePokemon)
+    foreach pokemon in resto(listaDePokemon) {
+        if (nivel(pokemon) > nivel(pokemonMasFuerteActual)) then {
+            pokemonMasFuerteActual := pokemon
+        }
+    }
+    return (pokemonMasFuerteActual)
+}
+
+//2.d
+function pokemonDe_DelTipo_Duplicados(listaDePokemon, tipoPokemon){
+    /*
+    Propósito:
+    - Describe la lista de pokemon **listaDePokemon** con los pokemones del tipo **tipoPokemon** duplicados, en la misma posición que tienen dentro de la lista **listaDePokemon**.
+    Parámetros:
+    - listaDePokemon: [Pokemon]
+    - tipoPokemon: TipoDePokemon
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - [Pokemon]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los pokemon de la lista **listaDePokemon**, duplicando los pokemones que sean del tipo **tipoPokemon** dentro de la lista.
+    */
+    listaNueva := []
+    foreach pokemon in listaDePokemon {
+        if (tipo(pokemon) == tipoPokemon) then {
+            listaNueva := listaNueva ++ [pokemon, pokemon]
+        }
+        else {
+            listaNueva := listaNueva ++ [pokemon]
+        }
+    }
+    return (listaNueva)
+}
+
+//2.e
+//Es igual al C
+
+
 
 
 
