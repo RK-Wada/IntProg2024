@@ -175,3 +175,49 @@ function hayCompraEn_Con_De_(local, dineroDisponible, marca){
     }
     return (puedeComprar)
 }
+
+//Posible 3
+//Ejercicio 3
+function puedoComprarAlgoEn_DeMarca_Con_(cadenaDeVentas, marca, dineroDisponible){
+    /*
+    Propósito:
+    - Indica si existe una computadora en **cadenaDeVentas** de la marca **marca** que el comprador pueda comprarse teniendo **dineroDisponible**.
+    Parámetros:
+    - cadenaDeVentas: 
+    - marca: 
+    - dineroDisponible:
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre [Local] de **cadenaDeVentas**, buscando las computadoras que son de la marca **marca** y que valen **dineroDisponible** o menos.
+    */
+    listaActual := locales(cadenaDeVentas)
+    while (not esVacia(listaActual) && not hayCompraEn_Con_De_(primero(listaActual), dineroDisponible, marca)){
+        listaActual := resto(listaActual)
+    }
+    return (not esVacia(listaActual) && hayCompraEn_Con_De_(primero(listaActual), dineroDisponible, marca))
+}
+
+function hayCompraEn_Con_De_(local, dineroDisponible, marca){
+    /*
+    Propósito:
+    - Indica si hay alguna computadora disponible en el local **local** que salga **dineroDisponible** o menos y que sea de la marca **marca**.
+    Parámetros:
+    - local: Local
+    - dineroDisponible: Número
+    - marca: Marca
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre [compu]
+    */
+    listaActual := perfilDeComputadorasDe_(computadorasEnStock)
+    while ((not esVacia(listaActual)) && (marca(primero(listaActual)) /= marca) && (precio(primero(listaActual)) > dineroDisponible)){
+        listaActual := resto(listaActual)
+    }
+    return ((not esVacia(listaActual)) && (marca(primero(listaActual)) == marca) && (precio(primero(listaActual)) <= dineroDisponible))
+}
