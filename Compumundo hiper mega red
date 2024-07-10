@@ -1,0 +1,177 @@
+//Ejercicio 1
+function marcasEn_QuePuedenEncontrarseEn_(cadenasDeVentas, localidad){
+    /*
+    Propósito:
+    - Describe la lista de marcas de computadoras en **cadenasDeVentas** que se pueden encontrar en la localidad **localidad**.
+    Parámetros:
+    - cadenasDeVentas: CadenaDeVenta
+    - localidad: String
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - [Marca]
+    Observaciones:
+    - Es un recorrido de acumulación sobre la lista **cadenaDeVentas**, acumulando las marcas de computadoras que se pueden encontrar en la localidad **localidad**.
+    */
+    listaNueva := []
+    foreach local in locales(cadenasDeVentas) {
+        listaNueva := listaNueva ++ [marcasDe_SiEn_(local, localidad)]
+    }
+    return(listaNueva)
+}
+
+function marcasDe_SiEn_(local, localidad){
+    /*
+    Propósito:
+    - Describe una lista con las marcas de computadorasEnStock del local **local** si este es de la localidad **localidad**.
+    Parámetros:
+    - local: Local
+    - localidad: String
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - [Marca]
+    Observaciones:
+    - Es un recorrido de acumulación sobre las "computadorasEnStock" que tiene el local **local** en caso de que se encuentre en **localidad**. Acumulando las marcas de cada computadora.
+    */
+    nuevaListaMarcas := []
+    foreach computadora in perfilDeComputadorasDe_(computadorasEnStock(local)) {
+        nuevaListaMarcas := nuevaListaMarcas ++ [singular_Si_(marca(perfilDeComputadora_(computadora), localidad(local) == localidad))]
+    }
+    return (nuevaListaMarcas)
+}
+
+function perfilDeComputadorasDe_(listaDeCodigosDeComputadoras){
+    /*
+    Propósito:
+    - Describe una lista con los perfiles de las computadoras de los códigos en **listaDeCodigosDeComputadoras**.
+    Parámetros:
+    - listaDeCodigosDeComputadoras: [Número]
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - [Computadora]
+    Observaciones:
+    - Es un recorrido de procesamiento sobre los códigos de la lista **listaDeCodigosDeComputadoras**, agregando los perfiles de cada código de la lista **listaDeCodigosDeComputadoras**.
+    */
+    nuevaLista := []
+    foreach codigo in listaDeCodigosDeComputadoras {
+        nuevaLista := nuevaLista ++ [perfilDeComputadora_(codigo)]
+    }
+    return (nuevaLista)
+}
+
+function perfilDeComputadora_(codigoDeComputadora){
+    /*
+    Propósito:
+    - Describe el perfil de la computadora con el código **codigoDeComputadora**.
+    Parámetros:
+    - codigoDeComputadora: Número
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Computadora
+    Observaciones:
+    - Es un recorrido de búsqueda sobre [Computadora], buscando el perfil de la computadora con el código **codigoDeComputadora**.
+    */
+    listaActual := [Computadora]
+    while (codigoDeVenta(primero(listaActual)) /= codigoDeComputadora) {
+        listaActual := resto(listaActual)
+    }
+    return (primero(listaActual))
+}
+
+//Ejercicio 2
+function stockTotalEn_DeComputadorasConAlMenos_(cadenaDeVentas, minimoDeRam){
+    /*
+    Propósito:
+    - Indica cuantas computadoras hay en la cadena **cadenaDeVentas** que tienen mínimo **minimoDeRam** de "memoria".
+    Parámetros:
+    - cadenaDeVentas: CadenaDeVenta
+    - minimoDeRam: Número
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número
+    Observaciones:
+    Es un recorrido de acumulación sobre [locales] de **cadenaDeVentas**, acumulando la cantidad de computadoras que tiene **cadenaDeVentas** con mínimo **minimoDeRam** de "memoria"
+    */
+    contadorDeComputadoras := 0
+    foreach local in locales(cadenaDeVentas) {
+        contadorDeComputadoras := contadorDeComputadoras + cantidadDeComputadorasEn_ConMinimo_DeRam(local, minimoDeRam)
+    }
+    return (contadorDeComputadoras) 
+}
+
+function cantidadDeComputadorasEn_ConMinimo_DeRam(local, minimoDeRam){
+    /*
+    Propósito:
+    - Indica la cantidad de computadoras en **local** que tienen mínimo **minimoDeRam** de "memoria".
+    Parámetros:
+    - local: Local
+    - minimoDeRam: Número
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Número
+    Observaciones:
+    - Es un recorrido de acumulación sobre las computadoras en [computadorasEnStock] del local **local**, acumulando aquellas que tienen más de **minimoDeRam** de "memoria."
+    */
+    contadorComputadorasEnLocal := 0
+    foreach computadora in computadorasEnStock(local){
+        contadorComputadorasEnLocal := contadorComputadorasEnLocal + unoSi_CeroSiNo(memoria(perfilDeComputadora_(computadora)) >= minimoDeRam)
+    }
+    return (contadorComputadorasEnLocal)
+}
+
+//Ejercicio 3
+function puedoComprarAlgoEn_DeMarca_Con_(cadenaDeVentas, marca, dineroDisponible){
+    /*
+    Propósito:
+    - Indica si existe una computadora en **cadenaDeVentas** de la marca **marca** que el comprador pueda comprarse teniendo **dineroDisponible**.
+    Parámetros:
+    - cadenaDeVentas: 
+    - marca: 
+    - dineroDisponible:
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre [Local] de **cadenaDeVentas**, buscando las computadoras que son de la marca **marca** y que valen **dineroDisponible** o menos.
+    */
+    puedeComprar := 'False'
+    listaActual := locales(cadenaDeVentas)
+    while (not esVacia(listaActual)){
+        if (hayCompraEn_Con_De_(primero(listaActual), dineroDisponible, marca)) then {
+            puedeComprar := 'True'
+        }
+        listaActual := resto(listaActual)
+    }
+    return (puedeComprar)
+}
+
+function hayCompraEn_Con_De_(local, dineroDisponible, marca){
+    /*
+    Propósito:
+    - Indica si hay alguna computadora disponible en el local **local** que salga **dineroDisponible** o menos y que sea de la marca **marca**.
+    Parámetros:
+    - local: Local
+    - dineroDisponible: Número
+    - marca: Marca
+    Precondiciones:
+    - Ninguna.
+    Tipo:
+    - Booleano.
+    Observaciones:
+    - Es un recorrido de búsqueda sobre [compu]
+    */
+    puedeComprar := 'False'
+    listaActual := perfilDeComputadorasDe_(computadorasEnStock)
+    while (not esVacia(listaActual)){
+        if (marca(primero(listaActual)) == marca && precio(primero(listaActual)) <= dineroDisponible) then {
+            puedeComprar := 'True'
+        }
+    }
+    return (puedeComprar)
+}
